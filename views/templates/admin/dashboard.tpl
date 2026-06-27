@@ -80,9 +80,11 @@
                                 Generar landing
                             </a>
                         {else}
-                            <span class="btn btn-default disabled">
-                                Landing creada
-                            </span>
+                            <a class="btn btn-default"
+                               href="{$link->getAdminLink('AdminBrandSeoEdit')|escape:'html':'UTF-8'}&id_brandseo_landing={$b.id_brandseo_landing|intval}">
+                                <i class="icon-pencil"></i>
+                                Editar
+                            </a>
                         {/if}
                     </td>
                 </tr>
