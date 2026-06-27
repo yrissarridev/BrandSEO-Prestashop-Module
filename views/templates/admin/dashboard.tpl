@@ -14,6 +14,40 @@
     </p>
 </div>
 
+<div class="row">
+    <div class="col-lg-3">
+        <div class="panel">
+            <h3>Brands</h3>
+            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.brands_total|intval}</p>
+            <p class="help-block">Marcas detectadas</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="panel">
+            <h3>Sin landing</h3>
+            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.without_landing|intval}</p>
+            <p class="help-block">Pendientes de crear</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="panel">
+            <h3>Borradores</h3>
+            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.draft|intval}</p>
+            <p class="help-block">Creadas pero no publicadas</p>
+        </div>
+    </div>
+
+    <div class="col-lg-3">
+        <div class="panel">
+            <h3>Publicadas</h3>
+            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.published|intval}</p>
+            <p class="help-block">Landings activas</p>
+        </div>
+    </div>
+</div>
+
 <div class="panel">
     <h3>Brands / Fabricantes</h3>
 

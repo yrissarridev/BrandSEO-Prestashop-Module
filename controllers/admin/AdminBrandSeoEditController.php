@@ -15,12 +15,15 @@ class AdminBrandSeoEditController extends ModuleAdminController
         parent::initContent();
 
         $idLanding = (int) Tools::getValue('id_brandseo_landing');
+
+        if (!$idLanding) {
+            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBrandSeo'));
+        }
+
         $landing = new BrandSeoLanding($idLanding);
 
         if (!Validate::isLoadedObject($landing)) {
-            $this->errors[] = 'Landing no encontrada.';
-            $this->redirect_after = $this->context->link->getAdminLink('AdminBrandSeo');
-            return;
+            Tools::redirectAdmin($this->context->link->getAdminLink('AdminBrandSeo'));
         }
 
         if (Tools::isSubmit('submitBrandSeoLanding')) {
@@ -36,7 +39,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'id_lang' => $idLang,
             'languages' => Language::getLanguages(true),
             'back_url' => $this->context->link->getAdminLink('AdminBrandSeo'),
-            'current_url' => self::$currentIndex.'&token='.$this->token.'&id_brandseo_landing='.(int)$landing->id,
+            'current_url' => self::$currentIndex.'&token='.$this->token.'&id_brandseo_landing='.(int) $landing->id,
         ));
 
         $this->content = $this->context->smarty->fetch(

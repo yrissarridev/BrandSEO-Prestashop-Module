@@ -1,6 +1,6 @@
 <?php
 
-require_once _PS_MODULE_DIR_.'brandseo/repositories/BrandSeoBrandRepository.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoDashboardService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoLandingGenerator.php';
 
 class AdminBrandSeoController extends ModuleAdminController
@@ -19,12 +19,13 @@ class AdminBrandSeoController extends ModuleAdminController
             $this->processGenerateLanding((int) Tools::getValue('id_manufacturer'));
         }
 
-        $repository = new BrandSeoBrandRepository();
-        $brands = $repository->getDashboardBrands();
+        $dashboardService = new BrandSeoDashboardService();
+        $dashboard = $dashboardService->getDashboard();
 
         $this->context->smarty->assign(array(
             'module_version' => $this->module->version,
-            'brands' => $brands,
+            'brands' => $dashboard['brands'],
+            'stats' => $dashboard['stats'],
             'current_url' => self::$currentIndex.'&token='.$this->token,
         ));
 
