@@ -31,7 +31,7 @@ class BrandSeoLandingGenerator
         $landing->noindex = 1;
         $landing->redirect_enabled = 0;
 
-        foreach (Language::getLanguages(false) as $lang) {
+        foreach (Language::getLanguages(true) as $lang) {
             $idLang = (int) $lang['id_lang'];
 
             $landing->title[$idLang] = $manufacturer->name;

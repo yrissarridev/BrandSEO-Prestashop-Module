@@ -115,7 +115,7 @@ class Brandseo extends Module
         $tab->module = $this->name;
         $tab->id_parent = $idParent;
 
-        foreach (Language::getLanguages(false) as $lang) {
+        foreach (Language::getLanguages(true) as $lang) {
             $tab->name[(int) $lang['id_lang']] = 'BrandSEO';
         }
 

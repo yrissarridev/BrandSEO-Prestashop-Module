@@ -34,7 +34,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'landing' => $landing,
             'manufacturer' => $manufacturer,
             'id_lang' => $idLang,
-            'languages' => Language::getLanguages(false),
+            'languages' => Language::getLanguages(true),
             'back_url' => $this->context->link->getAdminLink('AdminBrandSeo'),
             'current_url' => self::$currentIndex.'&token='.$this->token.'&id_brandseo_landing='.(int)$landing->id,
         ));
@@ -63,7 +63,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
 
         $landing->active = ($landing->status === 'published') ? 1 : 0;
 
-        foreach (Language::getLanguages(false) as $lang) {
+        foreach (Language::getLanguages(true) as $lang) {
             $idLang = (int) $lang['id_lang'];
 
             $landing->title[$idLang] = Tools::getValue('title_'.$idLang);
