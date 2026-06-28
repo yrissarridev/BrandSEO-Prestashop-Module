@@ -1,40 +1,55 @@
 <?php
 
-require_once _PS_MODULE_DIR_.'brandseo/repositories/BrandSeoProductRepository.php';
+use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
+use PrestaShop\PrestaShop\Adapter\Product\PriceFormatter;
+use PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever;
+use PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductListingPresenter;
+use PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductPresenterFactory;
+use PrestaShop\PrestaShop\Adapter\Product\ProductAssembler;
 
 class BrandSeoProductService
 {
-    private $repository;
-
-    public function __construct()
-    {
-        $this->repository = new BrandSeoProductRepository();
-    }
-
     public function getLandingProducts($idManufacturer, $idLang)
     {
-        $products = $this->repository->getProductsByManufacturer($idManufacturer, $idLang, 12);
-        $link = Context::getContext()->link;
+        $context = Context::getContext();
 
-        foreach ($products as &$product) {
-            $idProduct = (int) $product['id_product'];
+        $assembler = new ProductAssembler($context);
+        $presenterFactory = new ProductPresenterFactory($context);
+        $presentationSettings = $presenterFactory->getPresentationSettings();
 
-            $product['url'] = $link->getProductLink($idProduct, $product['link_rewrite']);
-            $product['image_url'] = '';
+        $presenter = new ProductListingPresenter(
+            new ImageRetriever($context->link),
+            $context->link,
+            new PriceFormatter(),
+            new ProductColorsRetriever(),
+            $context->getTranslator()
+        );
 
-            if (!empty($product['id_image'])) {
-                $product['image_url'] = $link->getImageLink(
-                    $product['link_rewrite'],
-                    $idProduct.'-'.(int) $product['id_image'],
-                    ImageType::getFormattedName('home')
-                );
-            }
+        $rows = Db::getInstance()->executeS('
+            SELECT p.id_product
+            FROM `'._DB_PREFIX_.'product` p
+            INNER JOIN `'._DB_PREFIX_.'product_shop` ps
+                ON ps.id_product = p.id_product
+                AND ps.id_shop = '.(int) $context->shop->id.'
+            WHERE p.id_manufacturer = '.(int) $idManufacturer.'
+            AND ps.active = 1
+            ORDER BY p.date_add DESC
+            LIMIT 12
+        ');
 
-            $price = Product::getPriceStatic($idProduct, true);
-            $product['price_formatted'] = Tools::displayPrice($price);
+        $products = array();
+
+        foreach ($rows as $row) {
+            $assembledProduct = $assembler->assembleProduct(array(
+                'id_product' => (int) $row['id_product'],
+            ));
+
+            $products[] = $presenter->present(
+                $presentationSettings,
+                $assembledProduct,
+                $context->language
+            );
         }
-
-        unset($product);
 
         return $products;
     }

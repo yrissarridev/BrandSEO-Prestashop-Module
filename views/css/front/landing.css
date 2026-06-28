@@ -1276,3 +1276,47 @@ font-size:24px;
         grid-template-columns: 1fr !important;
     }
 }
+
+.brandseo-prestashop-products.products {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin-left: -10px !important;
+    margin-right: -10px !important;
+}
+
+.brandseo-prestashop-products.products .js-product,
+.brandseo-prestashop-products.products .product-miniature {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-bottom: 22px !important;
+    width: 25% !important;
+    flex: 0 0 25% !important;
+    max-width: 25% !important;
+}
+
+@media (max-width: 1180px) {
+    .brandseo-prestashop-products.products .js-product,
+    .brandseo-prestashop-products.products .product-miniature {
+        width: 33.333% !important;
+        flex: 0 0 33.333% !important;
+        max-width: 33.333% !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .brandseo-prestashop-products.products .js-product,
+    .brandseo-prestashop-products.products .product-miniature {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .brandseo-prestashop-products.products .js-product,
+    .brandseo-prestashop-products.products .product-miniature {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+}
