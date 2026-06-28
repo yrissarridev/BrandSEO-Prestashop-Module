@@ -6,6 +6,7 @@ if (!defined('_PS_VERSION_')) {
 require_once __DIR__.'/classes/BrandSeoLanding.php';
 require_once __DIR__.'/helpers/BrandSeoInstaller.php';
 require_once __DIR__.'/helpers/BrandSeoTabInstaller.php';
+require_once __DIR__.'/helpers/BrandSeoDirectoryInstaller.php';
 
 class Brandseo extends Module
 {
@@ -35,6 +36,7 @@ class Brandseo extends Module
         return parent::install()
             && BrandSeoInstaller::installDatabase()
             && BrandSeoTabInstaller::install($this->name)
+            && BrandSeoDirectoryInstaller::install(__DIR__)
             && $this->registerHook('displayBackOfficeHeader');
     }
 
