@@ -53,25 +53,33 @@
 
     {include file='module:brandseo/views/templates/front/partials/hero.tpl'}
 
-    <div class="brandseo-front-content">
+    <div class="brandseo-front-content brandseo-front-layout">
 
-        {if !$landing->history && !$landing->philosophy && !$landing->store_opinion && !$brand_products|count && !$brand_faqs|count}
-            {include file='module:brandseo/views/templates/front/partials/no-content.tpl'}
-        {/if}
+        <main class="brandseo-front-main">
 
-        {include file='module:brandseo/views/templates/front/partials/history.tpl'}
+            {if !$landing->history && !$landing->philosophy && !$landing->store_opinion && !$brand_products|count && !$brand_faqs|count}
+                {include file='module:brandseo/views/templates/front/partials/no-content.tpl'}
+            {/if}
 
-        {include file='module:brandseo/views/templates/front/partials/philosophy.tpl'}
+            {include file='module:brandseo/views/templates/front/partials/history.tpl'}
 
-        {include file='module:brandseo/views/templates/front/partials/opinion.tpl'}
+            {include file='module:brandseo/views/templates/front/partials/philosophy.tpl'}
 
-        {include file='module:brandseo/views/templates/front/partials/products.tpl'}
+            {include file='module:brandseo/views/templates/front/partials/opinion.tpl'}
 
-        {include file='module:brandseo/views/templates/front/partials/faq.tpl'}
+            {include file='module:brandseo/views/templates/front/partials/faq.tpl'}
 
-        {include file='module:brandseo/views/templates/front/partials/related.tpl'}
+        </main>
 
-        {include file='module:brandseo/views/templates/front/partials/cta.tpl'}
+        <aside class="brandseo-front-sidebar">
+
+            {include file='module:brandseo/views/templates/front/partials/products.tpl'}
+
+            {include file='module:brandseo/views/templates/front/partials/related.tpl'}
+
+            {include file='module:brandseo/views/templates/front/partials/cta.tpl'}
+
+        </aside>
 
     </div>
 

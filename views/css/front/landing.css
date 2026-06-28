@@ -764,3 +764,98 @@ font-size:24px;
     font-weight: 800;
     text-align: center;
 }
+
+.brandseo-front-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(340px, .85fr);
+    gap: 42px;
+    align-items: start;
+}
+
+.brandseo-front-main,
+.brandseo-front-sidebar {
+    min-width: 0;
+}
+
+.brandseo-front-sidebar {
+    position: sticky;
+    top: 24px;
+}
+
+.brandseo-front-sidebar .brandseo-front-section {
+    padding: 0 0 34px;
+    border-bottom: none;
+}
+
+.brandseo-front-sidebar .brandseo-front-section-header {
+    margin-bottom: 18px;
+}
+
+.brandseo-front-sidebar .brandseo-front-section-header h2 {
+    font-size: 24px;
+}
+
+.brandseo-front-sidebar .brandseo-front-products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+}
+
+.brandseo-front-sidebar .brandseo-front-product-card {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+}
+
+.brandseo-front-sidebar .brandseo-front-product-image {
+    height: 150px;
+    padding: 12px;
+}
+
+.brandseo-front-sidebar .brandseo-front-product-info {
+    padding: 14px;
+}
+
+.brandseo-front-sidebar .brandseo-front-product-button {
+    display: none;
+}
+
+.brandseo-front-sidebar .brandseo-front-related-grid {
+    grid-template-columns: 1fr;
+}
+
+.brandseo-front-sidebar .brandseo-front-cta-section {
+    padding: 0;
+}
+
+.brandseo-front-sidebar .brandseo-front-cta-card {
+    display: block;
+    padding: 26px;
+}
+
+.brandseo-front-sidebar .brandseo-front-cta-card h2 {
+    font-size: 22px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 1100px) {
+    .brandseo-front-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .brandseo-front-sidebar {
+        position: static;
+    }
+
+    .brandseo-front-sidebar .brandseo-front-products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
+    .brandseo-front-sidebar .brandseo-front-product-card {
+        display: flex;
+    }
+}
+
+@media (max-width: 560px) {
+    .brandseo-front-sidebar .brandseo-front-products-grid {
+        grid-template-columns: 1fr !important;
+    }
+}

@@ -17,22 +17,19 @@ class BrandSeoProductService
         $link = Context::getContext()->link;
 
         foreach ($products as &$product) {
-            $product['url'] = $link->getProductLink(
-                (int) $product['id_product'],
-                $product['link_rewrite']
-            );
-
+            $product['url'] = $link->getProductLink((int) $product['id_product'], $product['link_rewrite']);
             $product['image_url'] = '';
 
             if (!empty($product['id_image'])) {
                 $product['image_url'] = $link->getImageLink(
                     $product['link_rewrite'],
-                    (int) $product['id_image'],
+                    (int) $product['id_product'].'-'.(int) $product['id_image'],
                     ImageType::getFormattedName('home')
                 );
             }
 
-            $product['price_formatted'] = Tools::displayPrice((float) $product['price']);
+            $price = Product::getPriceStatic((int) $product['id_product'], true);
+            $product['price_formatted'] = Tools::displayPrice($price);
         }
 
         unset($product);
