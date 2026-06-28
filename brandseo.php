@@ -70,6 +70,16 @@ class Brandseo extends Module
     public function hookModuleRoutes($params)
     {
         return array(
+            'module-brandseo-robots' => array(
+                'controller' => 'robots',
+                'rule' => 'brandseo-robots.txt',
+                'keywords' => array(),
+                'params' => array(
+                    'fc' => 'module',
+                    'module' => 'brandseo',
+                ),
+            ),
+
             'module-brandseo-brands-index' => array(
                 'controller' => 'brands',
                 'rule' => 'marcas',
