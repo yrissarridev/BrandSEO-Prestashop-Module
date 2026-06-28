@@ -77,7 +77,8 @@
             <button type="button" class="brandseo-filter" data-brandseo-filter="published">Publicadas</button>
         </div>
 
-        <table class="brandseo-table">
+        <div class="brandseo-table-wrapper">
+            <table class="brandseo-table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -201,5 +202,6 @@
                 {/foreach}
             </tbody>
         </table>
+        </div>
     </div>
 </div>

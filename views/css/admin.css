@@ -445,3 +445,86 @@
     font-weight: 600;
     padding: 3px 8px;
 }
+
+/* Responsive hardening */
+
+.brandseo-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.brandseo-table {
+    min-width: 980px;
+}
+
+.brandseo-editor-main input,
+.brandseo-editor-main textarea,
+.brandseo-editor-main select {
+    max-width: 100%;
+}
+
+@media (max-width: 1200px) {
+    .brandseo-card {
+        flex: 1 1 calc(50% - 16px);
+    }
+}
+
+@media (max-width: 768px) {
+    .brandseo-header {
+        padding: 18px;
+    }
+
+    .brandseo-header-title {
+        font-size: 21px;
+    }
+
+    .brandseo-card {
+        flex: 1 1 100%;
+        min-width: 100%;
+    }
+
+    .brandseo-toolbar {
+        display: block;
+    }
+
+    .brandseo-search {
+        margin-bottom: 10px;
+    }
+
+    .brandseo-search input {
+        max-width: 100%;
+    }
+
+    .brandseo-filter {
+        margin: 0 6px 8px 0;
+    }
+
+    .brandseo-panel {
+        padding: 14px;
+    }
+
+    .brandseo-editor-sidebar {
+        padding: 12px;
+    }
+
+    .brandseo-editor-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .brandseo-editor-nav li {
+        margin: 0;
+    }
+
+    .brandseo-editor-nav a {
+        padding: 8px 10px;
+        background: #f4f7f9;
+    }
+
+    .brandseo-editor-section,
+    .brandseo-editor-footer {
+        padding: 14px;
+    }
+}
