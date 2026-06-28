@@ -577,3 +577,62 @@ font-size:24px;
 }
 
 }
+
+.brandseo-front-cta-section{
+    padding:70px 0 90px;
+}
+
+.brandseo-front-cta-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+    background:#263238;
+    color:#fff;
+    border-radius:22px;
+    padding:42px;
+}
+
+.brandseo-front-cta-card span{
+    display:block;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:12px;
+    font-weight:800;
+    opacity:.75;
+    margin-bottom:10px;
+}
+
+.brandseo-front-cta-card h2{
+    color:#fff;
+    font-size:32px;
+    line-height:1.2;
+    margin:0;
+}
+
+.brandseo-front-cta-card a{
+    white-space:nowrap;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 28px;
+    border-radius:999px;
+    background:#fff;
+    color:#263238!important;
+    text-decoration:none!important;
+    font-weight:800;
+}
+
+@media(max-width:768px){
+
+.brandseo-front-cta-card{
+    display:block;
+    padding:28px;
+}
+
+.brandseo-front-cta-card h2{
+    font-size:25px;
+    margin-bottom:22px;
+}
+
+}
