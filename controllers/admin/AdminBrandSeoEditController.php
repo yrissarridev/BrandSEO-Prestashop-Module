@@ -85,6 +85,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'history' => isset($landing->history[$idLang]) ? $landing->history[$idLang] : '',
             'philosophy' => isset($landing->philosophy[$idLang]) ? $landing->philosophy[$idLang] : '',
             'store_opinion' => isset($landing->store_opinion[$idLang]) ? $landing->store_opinion[$idLang] : '',
+            'has_hero_image' => !empty($heroImages) ? 1 : 0,
             'website' => $landing->website,
             'country' => $landing->country,
             'region' => $landing->region,

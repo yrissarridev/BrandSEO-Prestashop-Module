@@ -9,17 +9,22 @@ class BrandSeoHealthService
         $this->rules = array(
             'has_landing' => array(
                 'label' => 'Landing creada',
-                'points' => 15,
+                'points' => 10,
                 'group' => 'core',
+            ),
+            'has_hero_image' => array(
+                'label' => 'Imagen Hero',
+                'points' => 15,
+                'group' => 'media',
             ),
             'has_meta_title' => array(
                 'label' => 'Meta title',
-                'points' => 10,
+                'points' => 15,
                 'group' => 'seo',
             ),
             'has_meta_description' => array(
                 'label' => 'Meta description',
-                'points' => 10,
+                'points' => 15,
                 'group' => 'seo',
             ),
             'has_h1' => array(
@@ -28,33 +33,18 @@ class BrandSeoHealthService
                 'group' => 'seo',
             ),
             'has_excerpt' => array(
-                'label' => 'Resumen',
-                'points' => 10,
+                'label' => 'Introducción',
+                'points' => 15,
                 'group' => 'content',
             ),
             'has_history' => array(
                 'label' => 'Historia',
-                'points' => 20,
-                'group' => 'content',
-            ),
-            'has_philosophy' => array(
-                'label' => 'Filosofía',
-                'points' => 10,
-                'group' => 'content',
-            ),
-            'has_store_opinion' => array(
-                'label' => 'Opinión de la tienda',
-                'points' => 10,
+                'points' => 15,
                 'group' => 'content',
             ),
             'has_website' => array(
                 'label' => 'Web oficial',
                 'points' => 5,
-                'group' => 'trust',
-            ),
-            'has_location' => array(
-                'label' => 'Ubicación',
-                'points' => 10,
                 'group' => 'trust',
             ),
         );
@@ -69,8 +59,10 @@ class BrandSeoHealthService
                 'status' => 'empty',
                 'missing' => array('Landing creada'),
                 'groups' => array(
+                    'core' => 0,
                     'seo' => 0,
                     'content' => 0,
+                    'media' => 0,
                     'trust' => 0,
                 ),
             );
@@ -82,6 +74,7 @@ class BrandSeoHealthService
             'core' => array('earned' => 0, 'total' => 0),
             'seo' => array('earned' => 0, 'total' => 0),
             'content' => array('earned' => 0, 'total' => 0),
+            'media' => array('earned' => 0, 'total' => 0),
             'trust' => array('earned' => 0, 'total' => 0),
         );
 
@@ -127,36 +120,37 @@ class BrandSeoHealthService
             case 'has_landing':
                 return !empty($brand['id_brandseo_landing']);
 
+            case 'has_hero_image':
+                return !empty($brand['has_hero_image']);
+
             case 'has_meta_title':
-                return !empty($brand['meta_title']);
+                return $this->lengthBetween(isset($brand['meta_title']) ? $brand['meta_title'] : '', 50, 60);
 
             case 'has_meta_description':
-                return !empty($brand['meta_description']);
+                return $this->lengthBetween(isset($brand['meta_description']) ? $brand['meta_description'] : '', 140, 160);
 
             case 'has_h1':
                 return !empty($brand['h1']);
 
             case 'has_excerpt':
-                return !empty($brand['excerpt']);
+                return mb_strlen(trim(isset($brand['excerpt']) ? $brand['excerpt'] : ''), 'UTF-8') >= 120;
 
             case 'has_history':
                 return !empty($brand['history']);
 
-            case 'has_philosophy':
-                return !empty($brand['philosophy']);
-
-            case 'has_store_opinion':
-                return !empty($brand['store_opinion']);
-
             case 'has_website':
                 return !empty($brand['website']);
-
-            case 'has_location':
-                return !empty($brand['country']) || !empty($brand['region']);
 
             default:
                 return false;
         }
+    }
+
+    private function lengthBetween($value, $min, $max)
+    {
+        $length = mb_strlen(trim((string) $value), 'UTF-8');
+
+        return $length >= $min && $length <= $max;
     }
 
     private function getScoreLabel($score)
