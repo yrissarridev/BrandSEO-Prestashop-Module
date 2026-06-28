@@ -1,0 +1,91 @@
+.brandseo-front {
+    margin-bottom: 40px;
+}
+
+.brandseo-front-hero {
+    min-height: 460px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    padding: 54px 28px;
+}
+
+.brandseo-front-hero-inner {
+    max-width: 900px;
+}
+
+.brandseo-front-logo {
+    max-width: 190px;
+    max-height: 95px;
+    object-fit: contain;
+    margin-bottom: 22px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
+}
+
+.brandseo-front-hero h1 {
+    color: #fff;
+    font-size: 46px;
+    line-height: 1.12;
+    margin: 0 0 16px;
+}
+
+.brandseo-front-hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 780px;
+}
+
+.brandseo-front-content {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.brandseo-front-section {
+    margin-bottom: 42px;
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.brandseo-front-section h2 {
+    font-size: 30px;
+    line-height: 1.2;
+    margin: 0 0 16px;
+}
+
+.brandseo-front-section p {
+    margin-bottom: 14px;
+}
+
+.brandseo-front-opinion {
+    background: #f7f7f7;
+    border-radius: 16px;
+    padding: 28px;
+}
+
+@media (max-width: 768px) {
+    .brandseo-front-hero {
+        min-height: 380px;
+        border-radius: 12px;
+        padding: 38px 20px;
+    }
+
+    .brandseo-front-hero h1 {
+        font-size: 32px;
+    }
+
+    .brandseo-front-hero p {
+        font-size: 16px;
+    }
+
+    .brandseo-front-section h2 {
+        font-size: 25px;
+    }
+}

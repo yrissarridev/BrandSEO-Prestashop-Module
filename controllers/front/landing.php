@@ -5,6 +5,17 @@ require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
 
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
+
+    public function setMedia()
+    {
+        parent::setMedia();
+        $this->registerStylesheet(
+            'module-brandseo-landing',
+            'modules/'.$this->module->name.'/views/css/front/landing.css',
+            array('media' => 'all', 'priority' => 150)
+        );
+    }
+
     public function initContent()
     {
         parent::initContent();
