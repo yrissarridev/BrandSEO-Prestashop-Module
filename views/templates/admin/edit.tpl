@@ -12,11 +12,14 @@
             <p class="brandseo-editor-sidebar-title">BrandSEO Studio</p>
 
             <ul class="brandseo-editor-nav">
-                <li><a href="#brandseo-general">General</a></li>
-                <li><a href="#brandseo-contact">Contacto y redes</a></li>
-                <li><a href="#brandseo-location">Ubicación</a></li>
-                <li><a href="#brandseo-content">Contenido</a></li>
-                <li><a href="#brandseo-publish">Publicación</a></li>
+                {foreach from=$available_blocks item=block}
+                    <li>
+                        <a href="#brandseo-{$block.type|escape:'html':'UTF-8'}">
+                            <i class="{$block.icon|escape:'html':'UTF-8'}"></i>
+                            {$block.label|escape:'html':'UTF-8'}
+                        </a>
+                    </li>
+                {/foreach}
             </ul>
 
             <div class="brandseo-editor-health">
@@ -47,7 +50,7 @@
         </aside>
 
         <main class="brandseo-editor-main">
-            <section id="brandseo-general" class="brandseo-editor-section">
+            <section id="brandseo-hero" class="brandseo-editor-section">
                 <h3 class="brandseo-editor-section-title">General</h3>
 
                 <div class="form-group">
@@ -84,7 +87,7 @@
                 </div>
             </section>
 
-            <section id="brandseo-contact" class="brandseo-editor-section">
+            <section id="brandseo-media" class="brandseo-editor-section">
                 <h3 class="brandseo-editor-section-title">Contacto y redes</h3>
 
                 <div class="form-group">
@@ -108,7 +111,7 @@
                 </div>
             </section>
 
-            <section id="brandseo-location" class="brandseo-editor-section">
+            <section id="brandseo-map" class="brandseo-editor-section">
                 <h3 class="brandseo-editor-section-title">Ubicación</h3>
 
                 <div class="form-group">
