@@ -851,3 +851,102 @@
 .brandseo-completion-panel a:hover {
     text-decoration: underline;
 }
+
+.brandseo-editor-layout{
+    display:grid;
+    grid-template-columns:260px minmax(0,1fr);
+    gap:28px;
+    align-items:start;
+}
+
+.brandseo-builder{
+
+    position:sticky;
+
+    top:20px;
+
+    border:1px solid #dbe1e8;
+
+    border-radius:12px;
+
+    background:#fff;
+
+    padding:18px;
+
+}
+
+.brandseo-builder h3{
+
+    margin:0 0 16px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+}
+
+.brandseo-builder nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+}
+
+.brandseo-builder a{
+
+    display:block;
+
+    padding:10px 12px;
+
+    border-radius:8px;
+
+    text-decoration:none;
+
+    color:#455a64;
+
+    transition:.2s;
+
+}
+
+.brandseo-builder a:hover{
+
+    background:#f3f6f8;
+
+}
+
+.brandseo-builder a.active{
+
+    background:#1976d2;
+
+    color:#fff;
+
+    font-weight:700;
+
+}
+
+.brandseo-editor-main{
+
+    min-width:0;
+
+}
+
+@media(max-width:1100px){
+
+.brandseo-editor-layout{
+
+display:block;
+
+}
+
+.brandseo-builder{
+
+position:static;
+
+margin-bottom:20px;
+
+}
+
+}

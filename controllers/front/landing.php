@@ -2,6 +2,7 @@
 
 require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoProductService.php';
 
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
@@ -61,11 +62,15 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
 
         $canonical = $this->context->link->getBaseLink().'marcas/'.$landing->slug;
 
+        $productService = new BrandSeoProductService();
+        $brandProducts = $productService->getLandingProducts((int) $landing->id_manufacturer, $idLang);
+
         $this->context->smarty->assign(array(
             'landing' => $landing,
             'manufacturer' => $manufacturer,
             'hero_image' => $heroImage,
             'hero_logo' => $heroLogo,
+            'brand_products' => $brandProducts,
             'brandseo_canonical' => $canonical,
             'brandseo_meta_title' => $landing->meta_title ? $landing->meta_title : $landing->h1,
             'brandseo_meta_description' => $landing->meta_description,

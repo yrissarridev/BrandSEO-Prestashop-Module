@@ -112,6 +112,18 @@ class BrandSeoInstaller
             UNIQUE KEY `landing_block` (`id_brandseo_landing`, `block`)
         ) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
 
+
+        $queries[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'brandseo_blocks` (
+            `id_brandseo_block` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            `id_brandseo_landing` INT UNSIGNED NOT NULL,
+            `block` VARCHAR(64) NOT NULL,
+            `position` INT NOT NULL DEFAULT 0,
+            `active` TINYINT(1) NOT NULL DEFAULT 1,
+            PRIMARY KEY (`id_brandseo_block`),
+            KEY `idx_landing` (`id_brandseo_landing`),
+            KEY `idx_position` (`position`)
+        ) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
+
         foreach ($queries as $query) {
             if (!Db::getInstance()->execute($query)) {
                 return false;
@@ -123,6 +135,7 @@ class BrandSeoInstaller
 
     public static function uninstallDatabase()
     {
+        Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_blocks`');
         Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_block_settings`');
         Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_media_lang`');
         Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_media`');

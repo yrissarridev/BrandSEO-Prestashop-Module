@@ -283,3 +283,62 @@ document.addEventListener('DOMContentLoaded',seoAudit);
 
     document.addEventListener('DOMContentLoaded', initSeoAudit);
 })();
+
+(function(){
+
+const links=document.querySelectorAll('[data-builder-link]');
+
+if(!links.length){
+    return;
+}
+
+links.forEach(function(link){
+
+    link.addEventListener('click',function(e){
+
+        e.preventDefault();
+
+        const target=document.querySelector(this.getAttribute('href'));
+
+        if(target){
+
+            target.scrollIntoView({
+                behavior:'smooth',
+                block:'start'
+            });
+
+        }
+
+    });
+
+});
+
+const observer=new IntersectionObserver(function(entries){
+
+    entries.forEach(function(entry){
+
+        if(!entry.isIntersecting){
+            return;
+        }
+
+        links.forEach(function(a){
+            a.classList.remove('active');
+        });
+
+        const active=document.querySelector('[href="#'+entry.target.id+'"]');
+
+        if(active){
+            active.classList.add('active');
+        }
+
+    });
+
+},{
+    threshold:.35
+});
+
+document.querySelectorAll('.brandseo-editor-section').forEach(function(section){
+    observer.observe(section);
+});
+
+})();
