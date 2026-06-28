@@ -732,3 +732,26 @@
     font-size: 28px;
     color: #2e7d32;
 }
+
+.brandseo-health-groups {
+    margin-top: 12px;
+    border-top: 1px solid #edf1f5;
+    padding-top: 10px;
+}
+
+.brandseo-health-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    padding: 4px 0;
+    color: #607d8b;
+}
+
+.brandseo-health-group span {
+    text-transform: capitalize;
+}
+
+.brandseo-health-group strong {
+    color: #263238;
+}

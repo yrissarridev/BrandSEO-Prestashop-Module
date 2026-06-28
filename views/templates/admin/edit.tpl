@@ -38,6 +38,17 @@
                 <p class="brandseo-editor-health-score">{$health.score|intval}%</p>
                 <p class="brandseo-editor-health-label">Brand Health · {$health.label|escape:'html':'UTF-8'}</p>
 
+                {if $health.groups}
+                    <div class="brandseo-health-groups">
+                        {foreach from=$health.groups key=group item=value}
+                            <div class="brandseo-health-group">
+                                <span>{$group|escape:'html':'UTF-8'}</span>
+                                <strong>{$value|intval}%</strong>
+                            </div>
+                        {/foreach}
+                    </div>
+                {/if}
+
                 {if $health.missing|count}
                     <strong>Pendiente</strong>
                     <ul class="brandseo-editor-health-list">
