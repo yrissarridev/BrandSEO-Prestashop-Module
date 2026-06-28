@@ -354,3 +354,48 @@ font-size:24px;
         grid-template-columns: 1fr !important;
     }
 }
+
+.brandseo-front-faq-list {
+    max-width: 920px;
+}
+
+.brandseo-front-faq-item {
+    border: 1px solid #e6e8eb;
+    border-radius: 14px;
+    background: #fff;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.brandseo-front-faq-item summary {
+    cursor: pointer;
+    padding: 18px 22px;
+    font-weight: 800;
+    color: #263238;
+    list-style: none;
+}
+
+.brandseo-front-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.brandseo-front-faq-item summary:after {
+    content: "+";
+    float: right;
+    font-size: 22px;
+    line-height: 1;
+}
+
+.brandseo-front-faq-item[open] summary:after {
+    content: "–";
+}
+
+.brandseo-front-faq-answer {
+    padding: 0 22px 20px;
+    color: #455a64;
+    line-height: 1.7;
+}
+
+.brandseo-front-faq-answer p:last-child {
+    margin-bottom: 0;
+}

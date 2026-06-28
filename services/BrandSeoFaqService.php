@@ -15,4 +15,18 @@ class BrandSeoFaqService
     {
         return $this->repository->getByLanding($idLanding, $idLang);
     }
+
+    public function getFaqsForFront($idLanding, $idLang)
+    {
+        $faqs = $this->repository->getByLanding($idLanding, $idLang);
+        $filtered = array();
+
+        foreach ($faqs as $faq) {
+            if (!empty($faq['active']) && !empty($faq['question']) && !empty($faq['answer'])) {
+                $filtered[] = $faq;
+            }
+        }
+
+        return $filtered;
+    }
 }

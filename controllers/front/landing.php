@@ -3,6 +3,7 @@
 require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoProductService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
 
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
@@ -64,6 +65,9 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
 
         $productService = new BrandSeoProductService();
         $brandProducts = $productService->getLandingProducts((int) $landing->id_manufacturer, $idLang);
+
+        $faqService = new BrandSeoFaqService();
+        $brandFaqs = $faqService->getFaqsForFront((int) $landing->id, $idLang);
 
         $this->context->smarty->assign(array(
             'landing' => $landing,
