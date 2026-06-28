@@ -56,6 +56,9 @@ class Brandseo extends Module
         $this->context->controller->addCSS($this->_path.'views/css/admin.css');
         $this->context->controller->addJS($this->_path.'views/js/admin.js');
 
+        $this->context->controller->addCSS($this->_path.'views/css/blocks/hero.css');
+        $this->context->controller->addJS($this->_path.'views/js/blocks/hero.js');
+
         $this->context->controller->addCSS($this->_path.'views/css/blocks/faq.css');
         $this->context->controller->addJS($this->_path.'views/js/blocks/faq.js');
     }
