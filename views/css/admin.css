@@ -209,3 +209,94 @@
     font-weight: 600;
     font-size: 13px;
 }
+
+/* BrandSEO Editor Studio */
+
+.brandseo-editor {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+}
+
+.brandseo-editor-sidebar {
+    width: 230px;
+    flex: 0 0 230px;
+    background: #ffffff;
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+    padding: 14px;
+    position: sticky;
+    top: 80px;
+}
+
+.brandseo-editor-sidebar-title {
+    margin: 0 0 12px;
+    color: #263238;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.brandseo-editor-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.brandseo-editor-nav li {
+    margin-bottom: 6px;
+}
+
+.brandseo-editor-nav a {
+    display: block;
+    padding: 9px 10px;
+    border-radius: 8px;
+    color: #455a64;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.brandseo-editor-nav a:hover {
+    background: #f4f7f9;
+    color: #263238;
+    text-decoration: none;
+}
+
+.brandseo-editor-main {
+    flex: 1;
+    min-width: 0;
+}
+
+.brandseo-editor-section {
+    background: #ffffff;
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+}
+
+.brandseo-editor-section-title {
+    margin: 0 0 16px;
+    color: #263238;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.brandseo-editor-footer {
+    background: #ffffff;
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+}
+
+@media (max-width: 1100px) {
+    .brandseo-editor {
+        display: block;
+    }
+
+    .brandseo-editor-sidebar {
+        width: auto;
+        position: static;
+        margin-bottom: 18px;
+    }
+}
