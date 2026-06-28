@@ -39,7 +39,7 @@
             </div>
 
             <div class="brandseo-google-preview">
-                <span class="brandseo-google-url">
+                <span class="brandseo-google-url" id="brandseo-google-url">
                     tienda.vinofilos.es/brand/{$landing->slug|escape:'html':'UTF-8'}
                 </span>
 

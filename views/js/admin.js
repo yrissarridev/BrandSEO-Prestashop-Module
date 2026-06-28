@@ -128,3 +128,24 @@
 
     document.addEventListener('DOMContentLoaded', bindOpenGraphPreview);
 })();
+
+(function () {
+    function bindSlugPreview() {
+        var slugInput = document.getElementById('brandseo-slug');
+        var googleUrl = document.getElementById('brandseo-google-url');
+
+        if (!slugInput || !googleUrl) {
+            return;
+        }
+
+        function update() {
+            var slug = slugInput.value.trim() || 'nueva-marca';
+            googleUrl.textContent = 'tienda.vinofilos.es/brand/' + slug;
+        }
+
+        slugInput.addEventListener('input', update);
+        update();
+    }
+
+    document.addEventListener('DOMContentLoaded', bindSlugPreview);
+})();
