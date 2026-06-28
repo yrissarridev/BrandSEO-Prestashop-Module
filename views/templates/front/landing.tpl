@@ -4,6 +4,35 @@
 {$landing->h1|escape:'html':'UTF-8'}
 {/block}
 
+{block name='head_seo'}
+    {$smarty.block.parent}
+
+    {if $brandseo_canonical}
+        <link rel="canonical" href="{$brandseo_canonical|escape:'html':'UTF-8'}">
+    {/if}
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{$brandseo_meta_title|escape:'html':'UTF-8'}">
+    <meta property="og:description" content="{$brandseo_meta_description|escape:'html':'UTF-8'}">
+    <meta property="og:url" content="{$brandseo_canonical|escape:'html':'UTF-8'}">
+
+    {if $brandseo_og_image}
+        <meta property="og:image" content="{$brandseo_og_image|escape:'html':'UTF-8'}">
+    {/if}
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{$brandseo_meta_title|escape:'html':'UTF-8'}">
+    <meta name="twitter:description" content="{$brandseo_meta_description|escape:'html':'UTF-8'}">
+
+    {if $brandseo_og_image}
+        <meta name="twitter:image" content="{$brandseo_og_image|escape:'html':'UTF-8'}">
+    {/if}
+
+    {if $brandseo_jsonld}
+        <script type="application/ld+json">{$brandseo_jsonld nofilter}</script>
+    {/if}
+{/block}
+
 {block name='page_content'}
 
 <div class="brandseo-front">

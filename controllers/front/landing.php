@@ -7,10 +7,12 @@ require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
 
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
+    private $currentLandingSeo = null;
 
     public function setMedia()
     {
         parent::setMedia();
+
         $this->registerStylesheet(
             'module-brandseo-landing',
             'modules/'.$this->module->name.'/views/css/front/landing.css',
@@ -61,13 +63,31 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             }
         }
 
-        $canonical = $this->context->link->getBaseLink().'marcas/'.$landing->slug;
-
         $productService = new BrandSeoProductService();
         $brandProducts = $productService->getLandingProducts((int) $landing->id_manufacturer, $idLang);
 
         $faqService = new BrandSeoFaqService();
         $brandFaqs = $faqService->getFaqsForFront((int) $landing->id, $idLang);
+
+        $canonical = $this->context->link->getBaseLink().'marcas/'.$landing->slug;
+        $metaTitle = $landing->meta_title ? $landing->meta_title : $landing->h1;
+        $metaDescription = $landing->meta_description ? $landing->meta_description : $landing->excerpt;
+
+        $jsonLd = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'Brand',
+            'name' => $manufacturer->name,
+            'url' => $canonical,
+            'description' => $metaDescription,
+        );
+
+        if ($heroImage) {
+            $jsonLd['image'] = $heroImage;
+        }
+
+        if ($landing->website) {
+            $jsonLd['sameAs'] = array($landing->website);
+        }
 
         $this->context->smarty->assign(array(
             'landing' => $landing,
@@ -75,10 +95,20 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             'hero_image' => $heroImage,
             'hero_logo' => $heroLogo,
             'brand_products' => $brandProducts,
+            'brand_products_count' => count($brandProducts),
+            'brand_faqs' => $brandFaqs,
             'brandseo_canonical' => $canonical,
-            'brandseo_meta_title' => $landing->meta_title ? $landing->meta_title : $landing->h1,
-            'brandseo_meta_description' => $landing->meta_description,
+            'brandseo_meta_title' => $metaTitle,
+            'brandseo_meta_description' => $metaDescription,
+            'brandseo_og_image' => $heroImage,
+            'brandseo_jsonld' => json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
         ));
+
+        $this->currentLandingSeo = array(
+            'title' => $metaTitle,
+            'description' => $metaDescription,
+            'canonical' => $canonical,
+        );
 
         $this->setTemplate('module:brandseo/views/templates/front/landing.tpl');
     }
@@ -93,9 +123,11 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         $row = Db::getInstance()->getRow('
             SELECT 
                 l.slug,
+                l.noindex,
                 ll.h1,
                 ll.meta_title,
-                ll.meta_description
+                ll.meta_description,
+                ll.excerpt
             FROM `'._DB_PREFIX_.'brandseo_landing` l
             LEFT JOIN `'._DB_PREFIX_.'brandseo_landing_lang` ll
                 ON ll.id_brandseo_landing = l.id_brandseo_landing
@@ -107,9 +139,9 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
 
         if ($row) {
             $page['meta']['title'] = !empty($row['meta_title']) ? $row['meta_title'] : $row['h1'];
-            $page['meta']['description'] = !empty($row['meta_description']) ? $row['meta_description'] : '';
+            $page['meta']['description'] = !empty($row['meta_description']) ? $row['meta_description'] : $row['excerpt'];
             $page['canonical'] = $this->context->link->getBaseLink().'marcas/'.$row['slug'];
-            $page['robots'] = 'index,follow';
+            $page['robots'] = !empty($row['noindex']) ? 'noindex,follow' : 'index,follow';
         }
 
         return $page;
