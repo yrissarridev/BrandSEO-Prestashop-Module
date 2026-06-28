@@ -1,128 +1,115 @@
-<div class="panel">
-    <h3>
-        <i class="icon-star"></i>
-        BrandSEO
-    </h3>
+<div class="brandseo-dashboard">
+    <div class="brandseo-header">
+        <h2 class="brandseo-header-title">BrandSEO</h2>
+        <p class="brandseo-header-text">
+            Dashboard de marcas/fabricantes para crear landings SEO conectadas al catálogo.
+            Las landings nuevas se crean como <strong>borrador</strong>, con <strong>noindex</strong> y sin 301.
+            Versión: <strong>{$module_version|escape:'html':'UTF-8'}</strong>
+        </p>
+    </div>
 
-    <p>
-        Dashboard de marcas/fabricantes para crear landings SEO conectadas al catálogo.
-        Las landings nuevas se crean como <strong>borrador</strong>, con <strong>noindex</strong> y sin 301.
-    </p>
+    <div class="brandseo-cards">
+        <div class="brandseo-card">
+            <p class="brandseo-card-label">Brands</p>
+            <p class="brandseo-card-value">{$stats.brands_total|intval}</p>
+            <p class="brandseo-card-help">Marcas detectadas</p>
+        </div>
 
-    <p>
-        Versión: <strong>{$module_version|escape:'html':'UTF-8'}</strong>
-    </p>
-</div>
+        <div class="brandseo-card">
+            <p class="brandseo-card-label">Sin landing</p>
+            <p class="brandseo-card-value">{$stats.without_landing|intval}</p>
+            <p class="brandseo-card-help">Pendientes de crear</p>
+        </div>
 
-<div class="row">
-    <div class="col-lg-3">
-        <div class="panel">
-            <h3>Brands</h3>
-            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.brands_total|intval}</p>
-            <p class="help-block">Marcas detectadas</p>
+        <div class="brandseo-card">
+            <p class="brandseo-card-label">Borradores</p>
+            <p class="brandseo-card-value">{$stats.draft|intval}</p>
+            <p class="brandseo-card-help">Creadas pero no publicadas</p>
+        </div>
+
+        <div class="brandseo-card">
+            <p class="brandseo-card-label">Publicadas</p>
+            <p class="brandseo-card-value">{$stats.published|intval}</p>
+            <p class="brandseo-card-help">Landings activas</p>
         </div>
     </div>
 
-    <div class="col-lg-3">
-        <div class="panel">
-            <h3>Sin landing</h3>
-            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.without_landing|intval}</p>
-            <p class="help-block">Pendientes de crear</p>
-        </div>
-    </div>
+    <div class="brandseo-panel">
+        <h3 class="brandseo-panel-title">Brands / Fabricantes</h3>
 
-    <div class="col-lg-3">
-        <div class="panel">
-            <h3>Borradores</h3>
-            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.draft|intval}</p>
-            <p class="help-block">Creadas pero no publicadas</p>
-        </div>
-    </div>
-
-    <div class="col-lg-3">
-        <div class="panel">
-            <h3>Publicadas</h3>
-            <p style="font-size:28px;font-weight:bold;margin:0;">{$stats.published|intval}</p>
-            <p class="help-block">Landings activas</p>
-        </div>
-    </div>
-</div>
-
-<div class="panel">
-    <h3>Brands / Fabricantes</h3>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Brand</th>
-                <th>Productos</th>
-                <th>Estado landing</th>
-                <th>Noindex</th>
-                <th>301</th>
-                <th class="text-right">Acción</th>
-            </tr>
-        </thead>
-        <tbody>
-            {foreach from=$brands item=b}
+        <table class="brandseo-table">
+            <thead>
                 <tr>
-                    <td>{$b.id_manufacturer|intval}</td>
-                    <td><strong>{$b.name|escape:'html':'UTF-8'}</strong></td>
-                    <td>{$b.total_products|intval}</td>
-
-                    <td>
-                        {if $b.id_brandseo_landing}
-                            {if $b.status == 'published'}
-                                <span class="label label-success">Publicada</span>
-                            {else}
-                                <span class="label label-warning">Borrador</span>
-                            {/if}
-                        {else}
-                            <span class="label label-danger">Sin landing</span>
-                        {/if}
-                    </td>
-
-                    <td>
-                        {if $b.id_brandseo_landing}
-                            {if $b.noindex}
-                                <span class="label label-warning">Sí</span>
-                            {else}
-                                <span class="label label-success">No</span>
-                            {/if}
-                        {else}
-                            —
-                        {/if}
-                    </td>
-
-                    <td>
-                        {if $b.id_brandseo_landing}
-                            {if $b.redirect_enabled}
-                                <span class="label label-success">Activo</span>
-                            {else}
-                                <span class="label label-default">Inactivo</span>
-                            {/if}
-                        {else}
-                            —
-                        {/if}
-                    </td>
-
-                    <td class="text-right">
-                        {if !$b.id_brandseo_landing}
-                            <a class="btn btn-default"
-                               href="{$current_url|escape:'html':'UTF-8'}&generateLanding=1&id_manufacturer={$b.id_manufacturer|intval}">
-                                <i class="icon-plus"></i>
-                                Generar landing
-                            </a>
-                        {else}
-                            <a class="btn btn-default"
-                               href="{$link->getAdminLink('AdminBrandSeoEdit')|escape:'html':'UTF-8'}&id_brandseo_landing={$b.id_brandseo_landing|intval}">
-                                <i class="icon-pencil"></i>
-                                Editar
-                            </a>
-                        {/if}
-                    </td>
+                    <th>ID</th>
+                    <th>Brand</th>
+                    <th>Productos</th>
+                    <th>Estado landing</th>
+                    <th>Noindex</th>
+                    <th>301</th>
+                    <th class="brandseo-actions">Acción</th>
                 </tr>
-            {/foreach}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {foreach from=$brands item=b}
+                    <tr>
+                        <td>{$b.id_manufacturer|intval}</td>
+                        <td><strong>{$b.name|escape:'html':'UTF-8'}</strong></td>
+                        <td>{$b.total_products|intval}</td>
+
+                        <td>
+                            {if $b.id_brandseo_landing}
+                                {if $b.status == 'published'}
+                                    <span class="label label-success">Publicada</span>
+                                {else}
+                                    <span class="label label-warning">Borrador</span>
+                                {/if}
+                            {else}
+                                <span class="label label-danger">Sin landing</span>
+                            {/if}
+                        </td>
+
+                        <td>
+                            {if $b.id_brandseo_landing}
+                                {if $b.noindex}
+                                    <span class="label label-warning">Sí</span>
+                                {else}
+                                    <span class="label label-success">No</span>
+                                {/if}
+                            {else}
+                                —
+                            {/if}
+                        </td>
+
+                        <td>
+                            {if $b.id_brandseo_landing}
+                                {if $b.redirect_enabled}
+                                    <span class="label label-success">Activo</span>
+                                {else}
+                                    <span class="label label-default">Inactivo</span>
+                                {/if}
+                            {else}
+                                —
+                            {/if}
+                        </td>
+
+                        <td class="brandseo-actions">
+                            {if !$b.id_brandseo_landing}
+                                <a class="btn btn-default"
+                                   href="{$current_url|escape:'html':'UTF-8'}&generateLanding=1&id_manufacturer={$b.id_manufacturer|intval}">
+                                    <i class="icon-plus"></i>
+                                    Generar landing
+                                </a>
+                            {else}
+                                <a class="btn btn-default"
+                                   href="{$link->getAdminLink('AdminBrandSeoEdit')|escape:'html':'UTF-8'}&id_brandseo_landing={$b.id_brandseo_landing|intval}">
+                                    <i class="icon-pencil"></i>
+                                    Editar
+                                </a>
+                            {/if}
+                        </td>
+                    </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
 </div>

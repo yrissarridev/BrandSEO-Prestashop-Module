@@ -32,7 +32,8 @@ class Brandseo extends Module
     {
         return parent::install()
             && $this->installSql()
-            && $this->installAdminTab();
+            && $this->installAdminTab()
+            && $this->registerHook('displayBackOfficeHeader');
     }
 
     public function uninstall()
@@ -40,6 +41,18 @@ class Brandseo extends Module
         return $this->uninstallAdminTab()
             && $this->uninstallSql()
             && parent::uninstall();
+    }
+
+    public function hookDisplayBackOfficeHeader()
+    {
+        $controller = Tools::getValue('controller');
+
+        if (!in_array($controller, array('AdminBrandSeo', 'AdminBrandSeoEdit'))) {
+            return;
+        }
+
+        $this->context->controller->addCSS($this->_path.'views/css/admin.css');
+        $this->context->controller->addJS($this->_path.'views/js/admin.js');
     }
 
     private function installSql()
