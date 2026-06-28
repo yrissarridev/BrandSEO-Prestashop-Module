@@ -841,3 +841,13 @@
 .brandseo-check-missing {
     color: #c62828;
 }
+
+.brandseo-completion-panel a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+}
+
+.brandseo-completion-panel a:hover {
+    text-decoration: underline;
+}

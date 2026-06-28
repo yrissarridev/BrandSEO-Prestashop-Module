@@ -8,42 +8,42 @@ class BrandSeoHealthService
     {
         $this->rules = array(
             'has_landing' => array(
-                'label' => 'Landing creada',
+                'label' => 'Landing creada', 'target' => 'brandseo-publish',
                 'points' => 10,
                 'group' => 'core',
             ),
             'has_hero_image' => array(
-                'label' => 'Imagen Hero',
+                'label' => 'Imagen Hero', 'target' => 'brandseo-hero',
                 'points' => 15,
                 'group' => 'media',
             ),
             'has_meta_title' => array(
-                'label' => 'Meta title',
+                'label' => 'Meta title', 'target' => 'brandseo-seo',
                 'points' => 15,
                 'group' => 'seo',
             ),
             'has_meta_description' => array(
-                'label' => 'Meta description',
+                'label' => 'Meta description', 'target' => 'brandseo-seo',
                 'points' => 15,
                 'group' => 'seo',
             ),
             'has_h1' => array(
-                'label' => 'H1',
+                'label' => 'H1', 'target' => 'brandseo-content',
                 'points' => 10,
                 'group' => 'seo',
             ),
             'has_excerpt' => array(
-                'label' => 'Introducción',
+                'label' => 'Introducción', 'target' => 'brandseo-hero',
                 'points' => 15,
                 'group' => 'content',
             ),
             'has_history' => array(
-                'label' => 'Historia',
+                'label' => 'Historia', 'target' => 'brandseo-content',
                 'points' => 15,
                 'group' => 'content',
             ),
             'has_website' => array(
-                'label' => 'Web oficial',
+                'label' => 'Web oficial', 'target' => 'brandseo-media',
                 'points' => 5,
                 'group' => 'trust',
             ),
@@ -59,7 +59,7 @@ class BrandSeoHealthService
                 'status' => 'empty',
                 'missing' => array('Landing creada'),
                 'checklist' => array(
-                    array('label' => 'Landing creada', 'status' => 'missing', 'icon' => '✗'),
+                    array('label' => 'Landing creada', 'target' => 'brandseo-publish', 'status' => 'missing', 'icon' => '✗'),
                 ),
                 'groups' => array(
                     'core' => 0,

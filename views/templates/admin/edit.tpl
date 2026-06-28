@@ -45,8 +45,10 @@
                         <ul>
                             {foreach from=$health.checklist item=item}
                                 <li class="brandseo-check-{$item.status|escape:'html':'UTF-8'}">
-                                    <span>{$item.icon|escape:'html':'UTF-8'}</span>
-                                    {$item.label|escape:'html':'UTF-8'}
+                                    <a href="#{$item.target|escape:'html':'UTF-8'}">
+                                        <span>{$item.icon|escape:'html':'UTF-8'}</span>
+                                        {$item.label|escape:'html':'UTF-8'}
+                                    </a>
                                 </li>
                             {/foreach}
                         </ul>

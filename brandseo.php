@@ -37,7 +37,8 @@ class Brandseo extends Module
             && BrandSeoInstaller::installDatabase()
             && BrandSeoTabInstaller::install($this->name)
             && BrandSeoDirectoryInstaller::install(__DIR__)
-            && $this->registerHook('displayBackOfficeHeader');
+            && $this->registerHook('displayBackOfficeHeader')
+            && $this->registerHook('moduleRoutes');
     }
 
     public function uninstall()
@@ -63,6 +64,27 @@ class Brandseo extends Module
 
         $this->context->controller->addCSS($this->_path.'views/css/blocks/faq.css');
         $this->context->controller->addJS($this->_path.'views/js/blocks/faq.js');
+    }
+
+
+    public function hookModuleRoutes($params)
+    {
+        return array(
+            'module-brandseo-landing-seo' => array(
+                'controller' => 'landing',
+                'rule' => 'marcas/{slug}',
+                'keywords' => array(
+                    'slug' => array(
+                        'regexp' => '[_a-zA-Z0-9\\pL\\pS-]+',
+                        'param' => 'slug',
+                    ),
+                ),
+                'params' => array(
+                    'fc' => 'module',
+                    'module' => 'brandseo',
+                ),
+            ),
+        );
     }
 
     public function getContent()
