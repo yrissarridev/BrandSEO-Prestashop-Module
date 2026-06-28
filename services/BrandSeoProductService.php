@@ -1,11 +1,11 @@
 <?php
 
-use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
-use PrestaShop\PrestaShop\Adapter\Product\PriceFormatter;
-use PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever;
-use PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductListingPresenter;
-use PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductPresenterFactory;
-use PrestaShop\PrestaShop\Adapter\Product\ProductAssembler;
+require_once _PS_ROOT_DIR_.'/src/Adapter/Image/ImageRetriever.php';
+require_once _PS_ROOT_DIR_.'/src/Adapter/Product/PriceFormatter.php';
+require_once _PS_ROOT_DIR_.'/src/Adapter/Product/ProductColorsRetriever.php';
+require_once _PS_ROOT_DIR_.'/src/Adapter/Presenter/Product/ProductListingPresenter.php';
+require_once _PS_ROOT_DIR_.'/src/Adapter/Presenter/Product/ProductPresenterFactory.php';
+require_once _PS_ROOT_DIR_.'/src/Adapter/Product/ProductAssembler.php';
 
 class BrandSeoProductService
 {
@@ -13,15 +13,15 @@ class BrandSeoProductService
     {
         $context = Context::getContext();
 
-        $assembler = new ProductAssembler($context);
-        $presenterFactory = new ProductPresenterFactory($context);
+        $assembler = new PrestaShop\PrestaShop\Adapter\Product\ProductAssembler($context);
+        $presenterFactory = new PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductPresenterFactory($context);
         $presentationSettings = $presenterFactory->getPresentationSettings();
 
-        $presenter = new ProductListingPresenter(
-            new ImageRetriever($context->link),
+        $presenter = new PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductListingPresenter(
+            new PrestaShop\PrestaShop\Adapter\Image\ImageRetriever($context->link),
             $context->link,
-            new PriceFormatter(),
-            new ProductColorsRetriever(),
+            new PrestaShop\PrestaShop\Adapter\Product\PriceFormatter(),
+            new PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever(),
             $context->getTranslator()
         );
 
