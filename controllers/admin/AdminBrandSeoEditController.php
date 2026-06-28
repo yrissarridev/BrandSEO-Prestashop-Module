@@ -6,6 +6,7 @@ require_once _PS_MODULE_DIR_.'brandseo/services/Block/BrandSeoBlockRegistry.php'
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/Media/BrandSeoUploader.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoBlockSettingsService.php';
 
 class AdminBrandSeoEditController extends ModuleAdminController
 {
@@ -52,6 +53,9 @@ class AdminBrandSeoEditController extends ModuleAdminController
         $faqService = new BrandSeoFaqService();
         $faqs = $faqService->getFaqsForEditor((int) $landing->id, $idLang);
 
+        $blockSettingsService = new BrandSeoBlockSettingsService();
+        $heroSettings = $blockSettingsService->getSettings((int) $landing->id, 'hero');
+
         $mediaService = new BrandSeoMediaService();
         $heroMedia = $mediaService->getMediaForBlock((int) $landing->id, 'hero', $idLang);
         $heroImages = array();
@@ -87,6 +91,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'health' => $health,
             'available_blocks' => $availableBlocks,
             'faqs' => $faqs,
+            'hero_settings' => $heroSettings,
             'hero_media' => $heroMedia,
             'hero_images' => $heroImages,
             'hero_logos' => $heroLogos,
@@ -168,6 +173,14 @@ class AdminBrandSeoEditController extends ModuleAdminController
             $landing->philosophy[$idLang] = Tools::getValue('philosophy_'.$idLang);
             $landing->store_opinion[$idLang] = Tools::getValue('store_opinion_'.$idLang);
         }
+
+
+        $blockSettingsService = new BrandSeoBlockSettingsService();
+        $blockSettingsService->saveSettings((int) $landing->id, 'hero', array(
+            'height' => Tools::getValue('hero_height', 'medium'),
+            'align' => Tools::getValue('hero_align', 'center'),
+            'overlay' => (int) Tools::getValue('hero_overlay', 48),
+        ));
 
         if ($landing->update()) {
             $this->confirmations[] = 'Landing guardada correctamente.';

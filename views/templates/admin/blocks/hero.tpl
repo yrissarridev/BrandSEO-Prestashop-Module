@@ -76,24 +76,24 @@
             <div class="brandseo-hero-option-group">
                 <label>Altura</label>
                 <div class="brandseo-hero-radio-group">
-                    <label><input type="radio" name="hero_height" value="small"> Pequeña</label>
-                    <label><input type="radio" name="hero_height" value="medium" checked> Media</label>
-                    <label><input type="radio" name="hero_height" value="large"> Grande</label>
+                    <label><input type="radio" name="hero_height" value="small" {if $hero_settings.height == "small"}checked{/if}> Pequeña</label>
+                    <label><input type="radio" name="hero_height" value="medium" {if $hero_settings.height == "medium"}checked{/if}> Media</label>
+                    <label><input type="radio" name="hero_height" value="large" {if $hero_settings.height == "large"}checked{/if}> Grande</label>
                 </div>
             </div>
 
             <div class="brandseo-hero-option-group">
                 <label>Alineación</label>
                 <div class="brandseo-hero-radio-group">
-                    <label><input type="radio" name="hero_align" value="left"> Izquierda</label>
-                    <label><input type="radio" name="hero_align" value="center" checked> Centro</label>
-                    <label><input type="radio" name="hero_align" value="right"> Derecha</label>
+                    <label><input type="radio" name="hero_align" value="left" {if $hero_settings.align == "left"}checked{/if}> Izquierda</label>
+                    <label><input type="radio" name="hero_align" value="center" {if $hero_settings.align == "center"}checked{/if}> Centro</label>
+                    <label><input type="radio" name="hero_align" value="right" {if $hero_settings.align == "right"}checked{/if}> Derecha</label>
                 </div>
             </div>
 
             <div class="brandseo-hero-option-group">
                 <label>Oscurecer fondo</label>
-                <input type="range" name="hero_overlay" min="0" max="80" value="48" data-brandseo-hero-overlay>
+                <input type="range" name="hero_overlay" min="0" max="80" value="{$hero_settings.overlay|intval}" data-brandseo-hero-overlay>
                 <p class="help-block">Ajusta la legibilidad del texto sobre la imagen.</p>
             </div>
         </div>
