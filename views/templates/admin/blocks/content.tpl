@@ -23,11 +23,6 @@
             </div>
 
             <div class="form-group">
-                <label>Meta description</label>
-                <textarea name="meta_description_{$id_lang|intval}" rows="2">{$landing->meta_description[$id_lang]|escape:'html':'UTF-8'}</textarea>
-            </div>
-
-            <div class="form-group">
                 <label>Historia</label>
                 <textarea name="history_{$id_lang|intval}" rows="7">{$landing->history[$id_lang]|escape:'html':'UTF-8'}</textarea>
             </div>

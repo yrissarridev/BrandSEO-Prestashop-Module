@@ -41,3 +41,26 @@
 
     document.addEventListener('DOMContentLoaded', initDashboardFilters);
 })();
+
+(function () {
+    function bindSeoPreview() {
+        var titleInput = document.querySelector('[id^="brandseo-meta-title-"]');
+        var descriptionInput = document.querySelector('[id^="brandseo-meta-description-"]');
+        var previewTitle = document.getElementById('brandseo-google-title');
+        var previewDescription = document.getElementById('brandseo-google-description');
+
+        if (titleInput && previewTitle) {
+            titleInput.addEventListener('input', function () {
+                previewTitle.textContent = titleInput.value.trim() || 'Título SEO de la landing';
+            });
+        }
+
+        if (descriptionInput && previewDescription) {
+            descriptionInput.addEventListener('input', function () {
+                previewDescription.textContent = descriptionInput.value.trim() || 'Descripción SEO de la landing.';
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', bindSeoPreview);
+})();
