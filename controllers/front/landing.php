@@ -28,6 +28,10 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         $slug = pSQL(Tools::getValue('slug'));
         $idLang = (int) $this->context->language->id;
 
+        if (!$slug) {
+            Tools::redirect('index.php?controller=404');
+        }
+
         $whereStatus = $this->previewMode ? '' : 'AND status = "published" AND active = 1';
 
         $idLanding = (int) Db::getInstance()->getValue('
@@ -38,19 +42,19 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         ');
 
         if (!$idLanding) {
-            Tools::redirect('404');
+            Tools::redirect('index.php?controller=404');
         }
 
         $landing = new BrandSeoLanding($idLanding, $idLang);
 
         if (!Validate::isLoadedObject($landing)) {
-            Tools::redirect('404');
+            Tools::redirect('index.php?controller=404');
         }
 
         $manufacturer = new Manufacturer((int) $landing->id_manufacturer, $idLang);
 
         if (!Validate::isLoadedObject($manufacturer)) {
-            Tools::redirect('404');
+            Tools::redirect('index.php?controller=404');
         }
 
         $mediaService = new BrandSeoMediaService();
