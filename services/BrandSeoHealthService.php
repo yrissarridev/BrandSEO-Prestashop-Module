@@ -58,6 +58,9 @@ class BrandSeoHealthService
                 'label' => 'Sin iniciar',
                 'status' => 'empty',
                 'missing' => array('Landing creada'),
+                'checklist' => array(
+                    array('label' => 'Landing creada', 'status' => 'missing', 'icon' => '✗'),
+                ),
                 'groups' => array(
                     'core' => 0,
                     'seo' => 0,
@@ -70,6 +73,7 @@ class BrandSeoHealthService
 
         $score = 0;
         $missing = array();
+        $checklist = array();
         $groups = array(
             'core' => array('earned' => 0, 'total' => 0),
             'seo' => array('earned' => 0, 'total' => 0),
@@ -92,8 +96,18 @@ class BrandSeoHealthService
             if ($passed) {
                 $score += $points;
                 $groups[$group]['earned'] += $points;
+                $checklist[] = array(
+                    'label' => $rule['label'],
+                    'status' => 'ok',
+                    'icon' => '✓',
+                );
             } else {
                 $missing[] = $rule['label'];
+                $checklist[] = array(
+                    'label' => $rule['label'],
+                    'status' => 'missing',
+                    'icon' => '✗',
+                );
             }
         }
 
@@ -110,6 +124,7 @@ class BrandSeoHealthService
             'label' => $this->getScoreLabel($score),
             'status' => $this->getScoreStatus($score),
             'missing' => $missing,
+            'checklist' => $checklist,
             'groups' => $normalizedGroups,
         );
     }

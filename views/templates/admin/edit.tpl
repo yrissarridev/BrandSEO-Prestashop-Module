@@ -38,7 +38,43 @@
                 <p class="brandseo-editor-health-score">{$health.score|intval}%</p>
                 <p class="brandseo-editor-health-label">Brand Health · {$health.label|escape:'html':'UTF-8'}</p>
 
-                {if $health.groups}
+                {if $health.checklist|count}
+                    <div class="brandseo-completion-panel">
+                        <h4>Checklist</h4>
+
+                        <ul>
+                            {foreach from=$health.checklist item=item}
+                                <li class="brandseo-check-{$item.status|escape:'html':'UTF-8'}">
+                                    <span>{$item.icon|escape:'html':'UTF-8'}</span>
+                                    {$item.label|escape:'html':'UTF-8'}
+                                </li>
+                            {/foreach}
+                        </ul>
+                    </div>
+                {/if}
+
+                
+<div class="brandseo-completion-panel">
+
+    <h4>Checklist</h4>
+
+    <ul>
+
+        {foreach from=$health.checklist item=item}
+
+            <li class="brandseo-check-{$item.status|escape:'html':'UTF-8'}">
+
+                {$item.icon|escape:'html':'UTF-8'} {$item.label|escape:'html':'UTF-8'}
+
+            </li>
+
+        {/foreach}
+
+    </ul>
+
+</div>
+
+{if $health.groups}
                     <div class="brandseo-health-groups">
                         {foreach from=$health.groups key=group item=value}
                             <div class="brandseo-health-group">
