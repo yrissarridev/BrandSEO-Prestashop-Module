@@ -401,3 +401,30 @@
 .brandseo-editor-health-list li {
     margin-bottom: 4px;
 }
+
+.brandseo-action-complete {
+    font-weight: 700;
+}
+
+.brandseo-actions-head {
+    text-align: center;
+}
+
+.brandseo-table td.brandseo-actions {
+    text-align: center;
+}
+
+.brandseo-table th.brandseo-actions,
+.brandseo-table td.brandseo-actions {
+    width: 170px;
+    min-width: 170px;
+    max-width: 170px;
+    text-align: center !important;
+}
+
+.brandseo-table td.brandseo-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 135px;
+}

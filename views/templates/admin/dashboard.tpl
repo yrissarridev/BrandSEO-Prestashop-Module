@@ -88,7 +88,7 @@
                     <th>Estado landing</th>
                     <th>Noindex</th>
                     <th>301</th>
-                    <th class="brandseo-actions">Acción</th>
+                    <th class="brandseo-actions brandseo-actions-head">Acción</th>
                 </tr>
             </thead>
             <tbody>
@@ -104,7 +104,11 @@
 
                     <tr data-brandseo-row data-brand-name="{$b.name|escape:'html':'UTF-8'}" data-brand-status="{$row_status|escape:'html':'UTF-8'}">
                         <td>{$b.id_manufacturer|intval}</td>
-                        <td><strong>{$b.name|escape:'html':'UTF-8'}</strong></td>
+
+                        <td>
+                            <strong>{$b.name|escape:'html':'UTF-8'}</strong>
+                        </td>
+
                         <td>
                             <div class="brandseo-health brandseo-health-{$b.health.status|escape:'html':'UTF-8'}" title="{$b.health.label|escape:'html':'UTF-8'}">
                                 <span class="brandseo-health-score">{$b.health.score|intval}%</span>
@@ -113,6 +117,14 @@
                                 </span>
                             </div>
                         </td>
+
+                        <td>
+                            <div class="brandseo-priority brandseo-priority-{$b.priority.status|escape:'html':'UTF-8'}" title="{$b.priority.score|intval}">
+                                <span class="brandseo-priority-dot"></span>
+                                <span>{$b.priority.label|escape:'html':'UTF-8'}</span>
+                            </div>
+                        </td>
+
                         <td>{$b.total_products|intval}</td>
 
                         <td>
@@ -159,10 +171,14 @@
                                     Generar landing
                                 </a>
                             {else}
-                                <a class="btn btn-default"
+                                <a class="btn btn-default brandseo-action-complete"
                                    href="{$link->getAdminLink('AdminBrandSeoEdit')|escape:'html':'UTF-8'}&id_brandseo_landing={$b.id_brandseo_landing|intval}">
                                     <i class="icon-pencil"></i>
-                                    Editar
+                                    {if $b.health.score >= 85}
+                                        Gestionar
+                                    {else}
+                                        Completar
+                                    {/if}
                                 </a>
                             {/if}
                         </td>
@@ -172,35 +188,3 @@
         </table>
     </div>
 </div>
-
-<style>
-.brandseo-health {
-    display: inline-flex !important;
-    align-items: center;
-    gap: 8px;
-    min-width: 130px;
-}
-.brandseo-health-score {
-    font-weight: 700;
-    min-width: 42px;
-    display: inline-block;
-}
-.brandseo-health-bar {
-    width: 86px;
-    height: 8px;
-    background: #edf1f5;
-    border-radius: 99px;
-    overflow: hidden;
-    display: inline-block;
-}
-.brandseo-health-bar-fill {
-    display: block;
-    height: 100%;
-    border-radius: 99px;
-    background: #90a4ae;
-}
-.brandseo-health-success .brandseo-health-bar-fill { background: #2e7d32; }
-.brandseo-health-warning .brandseo-health-bar-fill { background: #f9a825; }
-.brandseo-health-danger .brandseo-health-bar-fill { background: #c62828; }
-.brandseo-health-empty .brandseo-health-bar-fill { background: #90a4ae; }
-</style>
