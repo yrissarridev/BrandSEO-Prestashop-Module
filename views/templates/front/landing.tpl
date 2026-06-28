@@ -41,6 +41,10 @@
 
 <div class="brandseo-front">
 
+    {if $brandseo_preview_mode}
+        <div class="brandseo-preview-banner">Vista previa · Esta landing no está publicada</div>
+    {/if}
+
     {include file='module:brandseo/views/templates/front/partials/breadcrumb.tpl'}
 
     {include file='module:brandseo/views/templates/front/partials/hero.tpl'}

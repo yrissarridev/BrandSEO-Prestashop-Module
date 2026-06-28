@@ -8,6 +8,8 @@ require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoRelatedBrandService.php'
 
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
+    protected $previewMode = false;
+
     public function setMedia()
     {
         parent::setMedia();
@@ -26,12 +28,13 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         $slug = pSQL(Tools::getValue('slug'));
         $idLang = (int) $this->context->language->id;
 
+        $whereStatus = $this->previewMode ? '' : 'AND status = "published" AND active = 1';
+
         $idLanding = (int) Db::getInstance()->getValue('
             SELECT id_brandseo_landing
             FROM `'._DB_PREFIX_.'brandseo_landing`
             WHERE slug = "'.$slug.'"
-            AND status = "published"
-            AND active = 1
+            '.$whereStatus.'
         ');
 
         if (!$idLanding) {
@@ -141,6 +144,7 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             'brand_products_count' => count($brandProducts),
             'brand_faqs' => $brandFaqs,
             'related_brands' => $relatedBrands,
+            'brandseo_preview_mode' => $this->previewMode,
             'brandseo_canonical' => $canonical,
             'brandseo_meta_title' => $metaTitle,
             'brandseo_meta_description' => $metaDescription,
@@ -158,6 +162,7 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
 
         $slug = pSQL(Tools::getValue('slug'));
         $idLang = (int) $this->context->language->id;
+        $whereStatus = $this->previewMode ? '' : 'AND l.status = "published" AND l.active = 1';
 
         $row = Db::getInstance()->getRow('
             SELECT 
@@ -172,15 +177,14 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
                 ON ll.id_brandseo_landing = l.id_brandseo_landing
                 AND ll.id_lang = '.(int) $idLang.'
             WHERE l.slug = "'.$slug.'"
-            AND l.status = "published"
-            AND l.active = 1
+            '.$whereStatus.'
         ');
 
         if ($row) {
             $page['meta']['title'] = !empty($row['meta_title']) ? $row['meta_title'] : $row['h1'];
             $page['meta']['description'] = !empty($row['meta_description']) ? $row['meta_description'] : $row['excerpt'];
             $page['canonical'] = $this->context->link->getBaseLink().'marcas/'.$row['slug'];
-            $page['robots'] = !empty($row['noindex']) ? 'noindex,follow' : 'index,follow';
+            $page['robots'] = (!empty($row['noindex']) || $this->previewMode) ? 'noindex,follow' : 'index,follow';
         }
 
         return $page;
