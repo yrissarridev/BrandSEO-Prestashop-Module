@@ -1,0 +1,18 @@
+.brandseo-faq-list {
+    margin-bottom: 14px;
+}
+
+.brandseo-faq-item,
+.brandseo-faq-empty {
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    background: #fafafa;
+}
+
+.brandseo-faq-empty p,
+.brandseo-faq-item p {
+    margin: 6px 0 0;
+    color: #607d8b;
+}
