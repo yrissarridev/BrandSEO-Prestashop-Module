@@ -1,22 +1,14 @@
 <?php
 
-use PrestaShop\PrestaShop\Core\Product\Search\ProductSearchQuery;
-use PrestaShop\PrestaShop\Core\Product\Search\SortOrder;
-use PrestaShop\PrestaShop\Adapter\Manufacturer\ManufacturerProductSearchProvider;
-
 require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoProductService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoRelatedBrandService.php';
 
-class BrandseoLandingModuleFrontController extends ProductListingFrontController
+class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
-    public $php_self = 'brandseo';
-
     protected $previewMode = false;
-    protected $landing = null;
-    protected $manufacturer = null;
-    protected $label = '';
 
     public function setMedia()
     {
@@ -24,7 +16,7 @@ class BrandseoLandingModuleFrontController extends ProductListingFrontController
 
         $this->registerStylesheet(
             'module-brandseo-landing',
-            'modules/'.$this->module->name.'/views/css/front/landing.css',
+            'modules/brandseo/views/css/front/landing.css',
             array('media' => 'all', 'priority' => 150)
         );
     }
@@ -61,30 +53,25 @@ class BrandseoLandingModuleFrontController extends ProductListingFrontController
             Tools::redirect('404');
         }
 
-        $this->landing = $landing;
-        $this->manufacturer = $manufacturer;
-        $this->label = 'Vinos de '.$manufacturer->name;
-
-        $_GET['resultsPerPage'] = 12;
-
-        $listing = $this->getProductSearchVariables();
-        $brandProducts = isset($listing['products']) ? $listing['products'] : array();
-
         $mediaService = new BrandSeoMediaService();
         $heroMedia = $mediaService->getMediaForBlock((int) $landing->id, 'hero', $idLang);
 
         $heroImage = '';
         $heroLogo = '';
+        $moduleBaseUrl = $this->context->link->getBaseLink().'modules/brandseo/';
 
         foreach ($heroMedia as $media) {
             if ($media['type'] === 'logo' && !$heroLogo) {
-                $heroLogo = $this->context->link->getBaseLink().'modules/brandseo/'.$media['path'];
+                $heroLogo = $moduleBaseUrl.ltrim($media['path'], '/');
             }
 
             if ($media['type'] === 'image' && !$heroImage) {
-                $heroImage = $this->context->link->getBaseLink().'modules/brandseo/'.$media['path'];
+                $heroImage = $moduleBaseUrl.ltrim($media['path'], '/');
             }
         }
+
+        $productService = new BrandSeoProductService();
+        $brandProducts = $productService->getLandingProducts((int) $landing->id_manufacturer, $idLang);
 
         $faqService = new BrandSeoFaqService();
         $brandFaqs = $faqService->getFaqsForFront((int) $landing->id, $idLang);
@@ -182,7 +169,6 @@ class BrandseoLandingModuleFrontController extends ProductListingFrontController
             'manufacturer' => $manufacturer,
             'hero_image' => $heroImage,
             'hero_logo' => $heroLogo,
-            'listing' => $listing,
             'brand_products' => $brandProducts,
             'brand_products_count' => count($brandProducts),
             'brand_faqs' => $brandFaqs,
@@ -198,30 +184,6 @@ class BrandseoLandingModuleFrontController extends ProductListingFrontController
         ));
 
         $this->setTemplate('module:brandseo/views/templates/front/landing.tpl');
-    }
-
-    protected function getProductSearchQuery()
-    {
-        $query = new ProductSearchQuery();
-
-        $query
-            ->setIdManufacturer((int) $this->manufacturer->id)
-            ->setSortOrder(new SortOrder('product', Tools::getProductsOrder('by'), Tools::getProductsOrder('way')));
-
-        return $query;
-    }
-
-    protected function getDefaultProductSearchProvider()
-    {
-        return new ManufacturerProductSearchProvider(
-            $this->getTranslator(),
-            $this->manufacturer
-        );
-    }
-
-    public function getListingLabel()
-    {
-        return $this->label;
     }
 
     public function getTemplateVarPage()
