@@ -18,6 +18,20 @@
                 <li><a href="#brandseo-content">Contenido</a></li>
                 <li><a href="#brandseo-publish">Publicación</a></li>
             </ul>
+
+            <div class="brandseo-editor-health">
+                <p class="brandseo-editor-health-score">{$health.score|intval}%</p>
+                <p class="brandseo-editor-health-label">Brand Health · {$health.label|escape:'html':'UTF-8'}</p>
+
+                {if $health.missing|count}
+                    <strong>Pendiente</strong>
+                    <ul class="brandseo-editor-health-list">
+                        {foreach from=$health.missing item=item}
+                            <li>{$item|escape:'html':'UTF-8'}</li>
+                        {/foreach}
+                    </ul>
+                {/if}
+            </div>
         </aside>
 
         <main class="brandseo-editor-main">

@@ -1,6 +1,7 @@
 <?php
 
 require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoHealthService.php';
 
 class AdminBrandSeoEditController extends ModuleAdminController
 {
@@ -33,9 +34,25 @@ class AdminBrandSeoEditController extends ModuleAdminController
         $idLang = (int) $this->context->language->id;
         $manufacturer = new Manufacturer((int) $landing->id_manufacturer, $idLang);
 
+        $healthService = new BrandSeoHealthService();
+        $health = $healthService->calculateFromDashboardRow(array(
+            'id_brandseo_landing' => (int) $landing->id,
+            'meta_title' => isset($landing->meta_title[$idLang]) ? $landing->meta_title[$idLang] : '',
+            'meta_description' => isset($landing->meta_description[$idLang]) ? $landing->meta_description[$idLang] : '',
+            'h1' => isset($landing->h1[$idLang]) ? $landing->h1[$idLang] : '',
+            'excerpt' => isset($landing->excerpt[$idLang]) ? $landing->excerpt[$idLang] : '',
+            'history' => isset($landing->history[$idLang]) ? $landing->history[$idLang] : '',
+            'philosophy' => isset($landing->philosophy[$idLang]) ? $landing->philosophy[$idLang] : '',
+            'store_opinion' => isset($landing->store_opinion[$idLang]) ? $landing->store_opinion[$idLang] : '',
+            'website' => $landing->website,
+            'country' => $landing->country,
+            'region' => $landing->region,
+        ));
+
         $this->context->smarty->assign(array(
             'landing' => $landing,
             'manufacturer' => $manufacturer,
+            'health' => $health,
             'id_lang' => $idLang,
             'languages' => Language::getLanguages(true),
             'back_url' => $this->context->link->getAdminLink('AdminBrandSeo'),
