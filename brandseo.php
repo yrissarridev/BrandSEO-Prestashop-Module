@@ -70,6 +70,16 @@ class Brandseo extends Module
     public function hookModuleRoutes($params)
     {
         return array(
+            'module-brandseo-ping' => array(
+                'controller' => 'ping',
+                'rule' => 'brandseo-ping',
+                'keywords' => array(),
+                'params' => array(
+                    'fc' => 'module',
+                    'module' => 'brandseo',
+                ),
+            ),
+
             'module-brandseo-preview' => array(
                 'controller' => 'preview',
                 'rule' => 'brandseo-preview/{slug}',
