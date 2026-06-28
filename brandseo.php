@@ -32,13 +32,13 @@ class Brandseo extends Module
     {
         return parent::install()
             && $this->installSql()
-            && $this->installAdminTab()
+            && $this->installAdminTabs()
             && $this->registerHook('displayBackOfficeHeader');
     }
 
     public function uninstall()
     {
-        return $this->uninstallAdminTab()
+        return $this->uninstallAdminTabs()
             && $this->uninstallSql()
             && parent::uninstall();
     }
@@ -118,30 +118,62 @@ class Brandseo extends Module
         return true;
     }
 
-    private function installAdminTab()
+    private function installAdminTabs()
     {
         $idParent = (int) Tab::getIdFromClassName('AdminCatalog');
 
+        if (!$this->installTab('AdminBrandSeo', 'BrandSEO', $idParent, 1)) {
+            return false;
+        }
+
+        $idBrandSeoTab = (int) Tab::getIdFromClassName('AdminBrandSeo');
+
+        return $this->installTab('AdminBrandSeoEdit', 'Editar BrandSEO', $idBrandSeoTab, 1);
+    }
+
+    private function installTab($className, $name, $idParent, $active)
+    {
+        $idExisting = (int) Tab::getIdFromClassName($className);
+
+        if ($idExisting) {
+            $tab = new Tab($idExisting);
+            $tab->active = (int) $active;
+            $tab->module = $this->name;
+            $tab->id_parent = (int) $idParent;
+
+            foreach (Language::getLanguages(true) as $lang) {
+                $tab->name[(int) $lang['id_lang']] = $name;
+            }
+
+            return $tab->update();
+        }
+
         $tab = new Tab();
-        $tab->active = 1;
-        $tab->class_name = 'AdminBrandSeo';
+        $tab->active = (int) $active;
+        $tab->class_name = $className;
         $tab->module = $this->name;
-        $tab->id_parent = $idParent;
+        $tab->id_parent = (int) $idParent;
 
         foreach (Language::getLanguages(true) as $lang) {
-            $tab->name[(int) $lang['id_lang']] = 'BrandSEO';
+            $tab->name[(int) $lang['id_lang']] = $name;
         }
 
         return $tab->add();
     }
 
-    private function uninstallAdminTab()
+    private function uninstallAdminTabs()
     {
-        $idTab = (int) Tab::getIdFromClassName('AdminBrandSeo');
+        $classes = array('AdminBrandSeoEdit', 'AdminBrandSeo');
 
-        if ($idTab) {
-            $tab = new Tab($idTab);
-            return $tab->delete();
+        foreach ($classes as $className) {
+            $idTab = (int) Tab::getIdFromClassName($className);
+
+            if ($idTab) {
+                $tab = new Tab($idTab);
+                if (!$tab->delete()) {
+                    return false;
+                }
+            }
         }
 
         return true;
