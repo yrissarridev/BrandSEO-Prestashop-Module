@@ -43,7 +43,7 @@
 
 {block name='page_content'}
 
-<div class="brandseo-front">
+<div class="brandseo-front brandseo-v2">
 
     {if $brandseo_preview_mode}
         <div class="brandseo-preview-banner">Vista previa · Esta landing no está publicada</div>
@@ -53,26 +53,28 @@
 
     {include file='module:brandseo/views/templates/front/partials/hero.tpl'}
 
-    <div class="brandseo-front-content">
+    <div class="brandseo-v2-container">
 
         {if !$landing->history && !$landing->philosophy && !$landing->store_opinion && !$brand_products|count && !$brand_faqs|count}
             {include file='module:brandseo/views/templates/front/partials/no-content.tpl'}
         {/if}
 
-        <div class="brandseo-brand-content-grid">
-            <div>
-                {include file='module:brandseo/views/templates/front/partials/history.tpl'}
-            </div>
+        <div class="brandseo-v2-main-grid">
 
-            <div>
+            <aside class="brandseo-v2-left">
+                {include file='module:brandseo/views/templates/front/partials/history.tpl'}
                 {include file='module:brandseo/views/templates/front/partials/philosophy.tpl'}
-                {include file='module:brandseo/views/templates/front/partials/opinion.tpl'}
-            </div>
+            </aside>
+
+            <main class="brandseo-v2-right">
+                {include file='module:brandseo/views/templates/front/partials/products.tpl'}
+            </main>
+
         </div>
 
-        {include file='module:brandseo/views/templates/front/partials/products.tpl'}
+        {include file='module:brandseo/views/templates/front/partials/opinion.tpl'}
 
-        <div class="brandseo-brand-bottom-grid">
+        <div class="brandseo-v2-bottom-grid">
             {include file='module:brandseo/views/templates/front/partials/faq.tpl'}
             {include file='module:brandseo/views/templates/front/partials/related.tpl'}
         </div>

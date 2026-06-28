@@ -1,13 +1,8 @@
 {if $landing->history}
-<section class="brandseo-front-section">
-
-    <div class="brandseo-front-section-header">
-        <h2>Historia</h2>
-    </div>
-
-    <div class="brandseo-front-section-body">
+<section class="brandseo-side-card">
+    <h2>Historia</h2>
+    <div>
         {$landing->history nofilter}
     </div>
-
 </section>
 {/if}

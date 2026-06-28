@@ -969,3 +969,280 @@ font-size:24px;
         margin-top: 34px !important;
     }
 }
+
+/* BrandSEO v2 professional brand landing */
+
+.brandseo-v2-container {
+    width: 100% !important;
+    max-width: 1280px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+}
+
+.brandseo-v2-main-grid {
+    display: grid !important;
+    grid-template-columns: 25% minmax(0, 75%) !important;
+    gap: 28px !important;
+    align-items: start !important;
+    padding: 48px 0 32px !important;
+}
+
+.brandseo-v2-left,
+.brandseo-v2-right {
+    min-width: 0 !important;
+}
+
+.brandseo-side-card {
+    background: #f7f3ee !important;
+    border: 1px solid #eee4dc !important;
+    border-radius: 8px !important;
+    padding: 28px 24px !important;
+    margin: 0 0 14px !important;
+}
+
+.brandseo-side-card h2 {
+    font-size: 27px !important;
+    line-height: 1.15 !important;
+    margin: 0 0 22px !important;
+    color: #1f1f1f !important;
+}
+
+.brandseo-side-card h2:after {
+    content: "" !important;
+    display: block !important;
+    width: 32px !important;
+    height: 2px !important;
+    background: #b98245 !important;
+    margin-top: 14px !important;
+}
+
+.brandseo-side-card div {
+    font-size: 14px !important;
+    line-height: 1.72 !important;
+    color: #263238 !important;
+}
+
+.brandseo-side-card p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.brandseo-products-v2 {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+.brandseo-products-v2-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 18px !important;
+    margin-bottom: 22px !important;
+}
+
+.brandseo-products-v2-header h2 {
+    font-size: 30px !important;
+    line-height: 1.15 !important;
+    margin: 0 !important;
+    color: #1f1f1f !important;
+}
+
+.brandseo-products-v2-header a {
+    color: #1f1f1f !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+}
+
+.brandseo-products-v2-header a:after {
+    content: " →" !important;
+    margin-left: 6px !important;
+}
+
+.brandseo-products-v2-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+}
+
+.brandseo-product-v2-card {
+    background: #fff !important;
+    border: 1px solid #eadfd6 !important;
+    border-radius: 7px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+    transition: box-shadow .18s ease, transform .18s ease !important;
+}
+
+.brandseo-product-v2-card:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.08) !important;
+}
+
+.brandseo-product-v2-image {
+    height: 230px !important;
+    padding: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fff !important;
+    text-decoration: none !important;
+}
+
+.brandseo-product-v2-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+
+.brandseo-product-v2-body {
+    padding: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+}
+
+.brandseo-product-v2-body h3 {
+    margin: 0 0 10px !important;
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+    min-height: 38px !important;
+}
+
+.brandseo-product-v2-body h3 a {
+    color: #1f1f1f !important;
+    text-decoration: none !important;
+}
+
+.brandseo-product-v2-price {
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    color: #1f1f1f !important;
+    margin: auto 0 12px !important;
+}
+
+.brandseo-product-v2-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 38px !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+.brandseo-product-v2-cart {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 38px !important;
+    border-radius: 4px !important;
+    background: #9e1426 !important;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    padding: 0 10px !important;
+}
+
+.brandseo-product-v2-more {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 38px !important;
+    border-radius: 4px !important;
+    border: 1px solid #d9c8c8 !important;
+    color: #9e1426 !important;
+    background: #fff !important;
+    text-decoration: none !important;
+    font-size: 18px !important;
+}
+
+.brandseo-v2 .brandseo-front-opinion-section {
+    padding: 28px 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+.brandseo-v2 .brandseo-front-opinion-card {
+    max-width: 100% !important;
+    background: #f7f3ee !important;
+    border-left: 0 !important;
+    border-radius: 8px !important;
+    padding: 34px 42px !important;
+}
+
+.brandseo-v2-bottom-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) !important;
+    gap: 34px !important;
+    align-items: start !important;
+    padding: 24px 0 28px !important;
+}
+
+.brandseo-v2-bottom-grid .brandseo-front-section {
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+}
+
+.brandseo-v2-bottom-grid .brandseo-front-section-header h2 {
+    font-size: 26px !important;
+}
+
+.brandseo-v2-bottom-grid .brandseo-front-related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.brandseo-v2 .brandseo-front-cta-section {
+    padding: 24px 0 80px !important;
+}
+
+@media (max-width: 1180px) {
+    .brandseo-products-v2-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+    .brandseo-product-v2-image {
+        height: 220px !important;
+    }
+}
+
+@media (max-width: 980px) {
+    .brandseo-v2-main-grid,
+    .brandseo-v2-bottom-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .brandseo-products-v2-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .brandseo-v2-container {
+        padding: 0 16px !important;
+    }
+
+    .brandseo-v2-main-grid {
+        padding-top: 30px !important;
+    }
+
+    .brandseo-products-v2-header {
+        display: block !important;
+    }
+
+    .brandseo-products-v2-header h2 {
+        margin-bottom: 10px !important;
+    }
+
+    .brandseo-products-v2-grid,
+    .brandseo-v2-bottom-grid .brandseo-front-related-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .brandseo-product-v2-image {
+        height: 240px !important;
+    }
+}

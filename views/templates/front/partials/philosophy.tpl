@@ -1,15 +1,8 @@
 {if $landing->philosophy}
-<section class="brandseo-front-section">
-
-    <div class="brandseo-front-section-header">
-        <h2>Filosofía</h2>
-    </div>
-
-    <div class="brandseo-front-philosophy">
-
+<section class="brandseo-side-card">
+    <h2>Filosofía</h2>
+    <div>
         {$landing->philosophy nofilter}
-
     </div>
-
 </section>
 {/if}
