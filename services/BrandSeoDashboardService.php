@@ -68,12 +68,27 @@ class BrandSeoDashboardService
             $stats['health_average'] = (int) round($stats['health_total'] / $stats['brands_total']);
         }
 
+        usort($brands, array($this, 'sortBrandsByPriority'));
+
         return array(
             'brands' => $brands,
             'stats' => $stats,
             'insights' => $this->insightService->getInsights($stats, $brands),
         );
     }
+
+    private function sortBrandsByPriority($a, $b)
+    {
+        $priorityA = isset($a['priority']['score']) ? (int) $a['priority']['score'] : 0;
+        $priorityB = isset($b['priority']['score']) ? (int) $b['priority']['score'] : 0;
+
+        if ($priorityA === $priorityB) {
+            return (int) $b['total_products'] - (int) $a['total_products'];
+        }
+
+        return $priorityB - $priorityA;
+    }
+
     private function calculatePriority(array $brand)
     {
         $products = (int) $brand['total_products'];
