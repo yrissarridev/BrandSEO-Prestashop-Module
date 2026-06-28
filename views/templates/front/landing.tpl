@@ -35,6 +35,10 @@
     {if $brandseo_jsonld_faq}
         <script type="application/ld+json">{$brandseo_jsonld_faq nofilter}</script>
     {/if}
+
+    {if $brandseo_jsonld_breadcrumbs}
+        <script type="application/ld+json">{$brandseo_jsonld_breadcrumbs nofilter}</script>
+    {/if}
 {/block}
 
 {block name='page_content'}

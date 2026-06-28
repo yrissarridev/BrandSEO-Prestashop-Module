@@ -135,6 +135,31 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             $jsonLdFaq = null;
         }
 
+        $breadcrumbsJsonLd = array(
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => array(
+                array(
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Inicio',
+                    'item' => $this->context->link->getBaseLink(),
+                ),
+                array(
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'Marcas',
+                    'item' => $this->context->link->getBaseLink().'marcas',
+                ),
+                array(
+                    '@type' => 'ListItem',
+                    'position' => 3,
+                    'name' => $manufacturer->name,
+                    'item' => $canonical,
+                ),
+            ),
+        );
+
         $this->context->smarty->assign(array(
             'landing' => $landing,
             'manufacturer' => $manufacturer,
@@ -151,6 +176,7 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             'brandseo_og_image' => $heroImage,
             'brandseo_jsonld' => json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             'brandseo_jsonld_faq' => $jsonLdFaq ? json_encode($jsonLdFaq, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : '',
+            'brandseo_jsonld_breadcrumbs' => json_encode($breadcrumbsJsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
         ));
 
         $this->setTemplate('module:brandseo/views/templates/front/landing.tpl');
