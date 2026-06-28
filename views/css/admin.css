@@ -950,3 +950,9 @@ margin-bottom:20px;
 }
 
 }
+
+.brandseo-dashboard-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+}
