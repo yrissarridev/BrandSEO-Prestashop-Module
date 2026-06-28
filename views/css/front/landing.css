@@ -662,3 +662,42 @@ font-size:24px;
 .brandseo-front-breadcrumb strong {
     color: #263238;
 }
+
+.brandseo-front-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.brandseo-front-related-card {
+    display: block;
+    padding: 22px;
+    border: 1px solid #e6e8eb;
+    border-radius: 16px;
+    background: #fff;
+    text-decoration: none !important;
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.brandseo-front-related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0,0,0,.08);
+}
+
+.brandseo-front-related-card strong {
+    display: block;
+    color: #263238;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.brandseo-front-related-card span {
+    color: #78909c;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .brandseo-front-related-grid {
+        grid-template-columns: 1fr;
+    }
+}

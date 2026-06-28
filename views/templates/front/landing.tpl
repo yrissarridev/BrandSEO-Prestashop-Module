@@ -53,6 +53,8 @@
 
         {include file='module:brandseo/views/templates/front/partials/faq.tpl'}
 
+        {include file='module:brandseo/views/templates/front/partials/related.tpl'}
+
         {include file='module:brandseo/views/templates/front/partials/cta.tpl'}
 
     </div>

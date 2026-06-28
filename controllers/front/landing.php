@@ -4,11 +4,10 @@ require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoProductService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoRelatedBrandService.php';
 
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
-    private $currentLandingSeo = null;
-
     public function setMedia()
     {
         parent::setMedia();
@@ -69,6 +68,9 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         $faqService = new BrandSeoFaqService();
         $brandFaqs = $faqService->getFaqsForFront((int) $landing->id, $idLang);
 
+        $relatedService = new BrandSeoRelatedBrandService();
+        $relatedBrands = $relatedService->getRelatedBrands((int) $landing->id_manufacturer, $idLang);
+
         $canonical = $this->context->link->getBaseLink().'marcas/'.$landing->slug;
         $metaTitle = $landing->meta_title ? $landing->meta_title : $landing->h1;
         $metaDescription = $landing->meta_description ? $landing->meta_description : $landing->excerpt;
@@ -97,18 +99,13 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             'brand_products' => $brandProducts,
             'brand_products_count' => count($brandProducts),
             'brand_faqs' => $brandFaqs,
+            'related_brands' => $relatedBrands,
             'brandseo_canonical' => $canonical,
             'brandseo_meta_title' => $metaTitle,
             'brandseo_meta_description' => $metaDescription,
             'brandseo_og_image' => $heroImage,
             'brandseo_jsonld' => json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
         ));
-
-        $this->currentLandingSeo = array(
-            'title' => $metaTitle,
-            'description' => $metaDescription,
-            'canonical' => $canonical,
-        );
 
         $this->setTemplate('module:brandseo/views/templates/front/landing.tpl');
     }
