@@ -49,6 +49,37 @@ class BrandSeoInstaller
         ) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
 
 
+
+        $queries[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'brandseo_media` (
+            `id_brandseo_media` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            `id_brandseo_landing` INT UNSIGNED NOT NULL,
+            `block` VARCHAR(64) NOT NULL,
+            `type` VARCHAR(64) NOT NULL DEFAULT "image",
+            `path` VARCHAR(255) DEFAULT NULL,
+            `mime` VARCHAR(128) DEFAULT NULL,
+            `width` INT UNSIGNED DEFAULT NULL,
+            `height` INT UNSIGNED DEFAULT NULL,
+            `filesize` INT UNSIGNED DEFAULT NULL,
+            `position` INT UNSIGNED NOT NULL DEFAULT 0,
+            `active` TINYINT(1) NOT NULL DEFAULT 1,
+            `date_add` DATETIME NOT NULL,
+            `date_upd` DATETIME NOT NULL,
+            PRIMARY KEY (`id_brandseo_media`),
+            KEY `idx_landing` (`id_brandseo_landing`),
+            KEY `idx_block` (`block`),
+            KEY `idx_type` (`type`),
+            KEY `idx_position` (`position`)
+        ) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
+
+        $queries[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'brandseo_media_lang` (
+            `id_brandseo_media` INT UNSIGNED NOT NULL,
+            `id_lang` INT UNSIGNED NOT NULL,
+            `title` VARCHAR(255) DEFAULT NULL,
+            `alt` VARCHAR(255) DEFAULT NULL,
+            `description` TEXT DEFAULT NULL,
+            PRIMARY KEY (`id_brandseo_media`, `id_lang`)
+        ) ENGINE='._MYSQL_ENGINE_.' DEFAULT CHARSET=utf8;';
+
         $queries[] = 'CREATE TABLE IF NOT EXISTS `'._DB_PREFIX_.'brandseo_faq` (
             `id_brandseo_faq` INT UNSIGNED NOT NULL AUTO_INCREMENT,
             `id_brandseo_landing` INT UNSIGNED NOT NULL,
@@ -80,6 +111,8 @@ class BrandSeoInstaller
 
     public static function uninstallDatabase()
     {
+        Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_media_lang`');
+        Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_media`');
         Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_faq_lang`');
         Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_faq`');
         Db::getInstance()->execute('DROP TABLE IF EXISTS `'._DB_PREFIX_.'brandseo_landing_lang`');

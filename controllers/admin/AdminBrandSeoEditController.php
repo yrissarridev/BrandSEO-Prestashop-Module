@@ -4,6 +4,7 @@ require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoHealthService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/Block/BrandSeoBlockRegistry.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
 
 class AdminBrandSeoEditController extends ModuleAdminController
 {
@@ -42,6 +43,10 @@ class AdminBrandSeoEditController extends ModuleAdminController
         $faqService = new BrandSeoFaqService();
         $faqs = $faqService->getFaqsForEditor((int) $landing->id, $idLang);
 
+        $mediaService = new BrandSeoMediaService();
+        $heroMedia = $mediaService->getMediaForBlock((int) $landing->id, 'hero', $idLang);
+        $galleryMedia = $mediaService->getMediaForBlock((int) $landing->id, 'gallery', $idLang);
+
         $healthService = new BrandSeoHealthService();
         $health = $healthService->calculateFromDashboardRow(array(
             'id_brandseo_landing' => (int) $landing->id,
@@ -63,6 +68,8 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'health' => $health,
             'available_blocks' => $availableBlocks,
             'faqs' => $faqs,
+            'hero_media' => $heroMedia,
+            'gallery_media' => $galleryMedia,
             'id_lang' => $idLang,
             'languages' => Language::getLanguages(true),
             'back_url' => $this->context->link->getAdminLink('AdminBrandSeo'),
