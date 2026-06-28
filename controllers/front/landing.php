@@ -78,11 +78,11 @@ class BrandseoLandingModuleFrontController extends ProductListingFrontController
 
         foreach ($heroMedia as $media) {
             if ($media['type'] === 'logo' && !$heroLogo) {
-                $heroLogo = Module::getInstanceByName('brandseo')->getPathUri().$media['path'];
+                $heroLogo = $this->context->link->getBaseLink().'modules/brandseo/'.$media['path'];
             }
 
             if ($media['type'] === 'image' && !$heroImage) {
-                $heroImage = Module::getInstanceByName('brandseo')->getPathUri().$media['path'];
+                $heroImage = $this->context->link->getBaseLink().'modules/brandseo/'.$media['path'];
             }
         }
 
