@@ -37,6 +37,8 @@
 
 <div class="brandseo-front">
 
+    {include file='module:brandseo/views/templates/front/partials/breadcrumb.tpl'}
+
     {include file='module:brandseo/views/templates/front/partials/hero.tpl'}
 
     <div class="brandseo-front-content">
