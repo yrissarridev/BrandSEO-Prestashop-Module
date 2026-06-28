@@ -9,7 +9,7 @@
 
             <div class="form-group">
                 <label>Título</label>
-                <input type="text" name="title_{$id_lang|intval}" value="{$landing->title[$id_lang]|escape:'html':'UTF-8'}">
+                <input type="text" id="brandseo-title-{$id_lang|intval}" name="title_{$id_lang|intval}" value="{$landing->title[$id_lang]|escape:'html':'UTF-8'}">
             </div>
 
             <div class="form-group">
@@ -25,11 +25,6 @@
             <div class="form-group">
                 <label>Meta description</label>
                 <textarea name="meta_description_{$id_lang|intval}" rows="2">{$landing->meta_description[$id_lang]|escape:'html':'UTF-8'}</textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Resumen</label>
-                <textarea name="excerpt_{$id_lang|intval}" rows="3">{$landing->excerpt[$id_lang]|escape:'html':'UTF-8'}</textarea>
             </div>
 
             <div class="form-group">

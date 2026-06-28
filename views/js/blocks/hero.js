@@ -3,11 +3,12 @@
     window.BrandSEO.Hero = window.BrandSEO.Hero || {};
 
     function removeClassPrefix(element, prefix) {
-        var classes = element.className.split(/\s+/).filter(function (className) {
-            return className.indexOf(prefix) !== 0;
-        });
-
-        element.className = classes.join(' ');
+        element.className = element.className
+            .split(/\s+/)
+            .filter(function (className) {
+                return className.indexOf(prefix) !== 0;
+            })
+            .join(' ');
     }
 
     function setClassByPrefix(element, prefix, value) {
@@ -40,10 +41,7 @@
             return;
         }
 
-        var heightInputs = document.querySelectorAll('[name="hero_height"]');
-        var alignInputs = document.querySelectorAll('[name="hero_align"]');
-
-        heightInputs.forEach(function (input) {
+        document.querySelectorAll('[name="hero_height"]').forEach(function (input) {
             input.addEventListener('change', function () {
                 if (input.checked) {
                     setClassByPrefix(frame, 'hero-', input.value);
@@ -55,7 +53,7 @@
             }
         });
 
-        alignInputs.forEach(function (input) {
+        document.querySelectorAll('[name="hero_align"]').forEach(function (input) {
             input.addEventListener('change', function () {
                 if (input.checked) {
                     setClassByPrefix(frame, 'align-', input.value);
@@ -68,8 +66,28 @@
         });
     }
 
+    function initHeroLivePreview() {
+        var titleInput = document.querySelector('[id^="brandseo-title-"]');
+        var excerptInput = document.querySelector('[id^="brandseo-excerpt-"]');
+        var previewTitle = document.getElementById('brandseo-preview-title');
+        var previewExcerpt = document.getElementById('brandseo-preview-excerpt');
+
+        if (titleInput && previewTitle) {
+            titleInput.addEventListener('input', function () {
+                previewTitle.textContent = titleInput.value.trim() || 'Nueva marca';
+            });
+        }
+
+        if (excerptInput && previewExcerpt) {
+            excerptInput.addEventListener('input', function () {
+                previewExcerpt.textContent = excerptInput.value.trim() || 'Descubre esta marca y su filosofía.';
+            });
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         initHeroPreviewTabs();
         initHeroControls();
+        initHeroLivePreview();
     });
 })();

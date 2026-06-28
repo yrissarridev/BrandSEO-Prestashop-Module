@@ -2,6 +2,21 @@
     <h3 class="brandseo-editor-section-title">Publicación</h3>
 
     <div class="form-group">
+        <label>Slug</label>
+        <input type="text" name="slug" value="{$landing->slug|escape:'html':'UTF-8'}">
+        <p class="help-block">URL futura: /brand/{$landing->slug|escape:'html':'UTF-8'}</p>
+    </div>
+
+    <div class="form-group">
+        <label>Estado</label>
+        <select name="status">
+            <option value="draft" {if $landing->status == 'draft'}selected{/if}>Borrador</option>
+            <option value="published" {if $landing->status == 'published'}selected{/if}>Publicada</option>
+            <option value="archived" {if $landing->status == 'archived'}selected{/if}>Archivada</option>
+        </select>
+    </div>
+
+    <div class="form-group">
         <label>Noindex</label>
         <select name="noindex">
             <option value="1" {if $landing->noindex}selected{/if}>Sí</option>
