@@ -39,6 +39,18 @@
         Guardar landing
     </button>
 
+    <a href="{$front_preview_url|escape:'html':'UTF-8'}" target="_blank" class="btn btn-default">
+        <i class="icon-eye-open"></i>
+        Vista previa
+    </a>
+
+    {if $landing->status == 'published'}
+        <a href="{$front_public_url|escape:'html':'UTF-8'}" target="_blank" class="btn btn-success">
+            <i class="icon-external-link"></i>
+            Ver pública
+        </a>
+    {/if}
+
     <a href="{$back_url|escape:'html':'UTF-8'}" class="btn btn-default">
         Volver
     </a>

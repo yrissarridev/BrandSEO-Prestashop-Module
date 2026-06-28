@@ -107,6 +107,8 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'id_lang' => $idLang,
             'languages' => Language::getLanguages(true),
             'back_url' => $this->context->link->getAdminLink('AdminBrandSeo'),
+            'front_preview_url' => $this->context->link->getBaseLink().'brandseo-preview/'.$landing->slug,
+            'front_public_url' => $this->context->link->getBaseLink().'marcas/'.$landing->slug,
             'current_url' => self::$currentIndex.'&token='.$this->token.'&id_brandseo_landing='.(int) $landing->id,
         ));
 
