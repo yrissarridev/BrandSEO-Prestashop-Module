@@ -149,3 +149,137 @@
 
     document.addEventListener('DOMContentLoaded', bindSlugPreview);
 })();
+
+(function(){
+
+function seoAudit(){
+
+    var title=document.querySelector('[id^="brandseo-meta-title-"]');
+    var description=document.querySelector('[id^="brandseo-meta-description-"]');
+    var excerpt=document.querySelector('[id^="brandseo-excerpt-"]');
+
+    var score=0;
+
+    function update(){
+
+        score=0;
+
+        if(title && title.value.length>=50 && title.value.length<=60){
+            document.getElementById('audit-title').textContent='🟢 Meta title';
+            score+=25;
+        }else{
+            document.getElementById('audit-title').textContent='🟠 Meta title';
+        }
+
+        if(description && description.value.length>=140 && description.value.length<=160){
+            document.getElementById('audit-description').textContent='🟢 Meta description';
+            score+=25;
+        }else{
+            document.getElementById('audit-description').textContent='🟠 Meta description';
+        }
+
+        var hero=document.querySelector('.brandseo-hero-preview-image');
+
+        if(hero){
+            document.getElementById('audit-hero').textContent='🟢 Imagen Hero';
+            score+=25;
+        }else{
+            document.getElementById('audit-hero').textContent='🔴 Imagen Hero';
+        }
+
+        if(excerpt && excerpt.value.length>=120){
+            document.getElementById('audit-excerpt').textContent='🟢 Introducción';
+            score+=25;
+        }else{
+            document.getElementById('audit-excerpt').textContent='🟠 Introducción';
+        }
+
+        document.getElementById('brandseo-seo-score').textContent=score+'%';
+
+    }
+
+    if(title) title.addEventListener('input',update);
+    if(description) description.addEventListener('input',update);
+    if(excerpt) excerpt.addEventListener('input',update);
+
+    update();
+
+}
+
+document.addEventListener('DOMContentLoaded',seoAudit);
+
+})();
+
+(function () {
+    function initSeoAudit() {
+        var title = document.querySelector('[id^="brandseo-meta-title-"]');
+        var description = document.querySelector('[id^="brandseo-meta-description-"]');
+        var excerpt = document.querySelector('[id^="brandseo-excerpt-"]');
+
+        var titleAudit = document.getElementById('audit-title');
+        var descriptionAudit = document.getElementById('audit-description');
+        var heroAudit = document.getElementById('audit-hero');
+        var excerptAudit = document.getElementById('audit-excerpt');
+        var scoreNode = document.getElementById('brandseo-seo-score');
+
+        if (!scoreNode) {
+            return;
+        }
+
+        function setText(node, text) {
+            if (node) {
+                node.textContent = text;
+            }
+        }
+
+        function update() {
+            var score = 0;
+
+            if (title && title.value.length >= 50 && title.value.length <= 60) {
+                setText(titleAudit, '🟢 Meta title');
+                score += 25;
+            } else {
+                setText(titleAudit, '🟠 Meta title');
+            }
+
+            if (description && description.value.length >= 140 && description.value.length <= 160) {
+                setText(descriptionAudit, '🟢 Meta description');
+                score += 25;
+            } else {
+                setText(descriptionAudit, '🟠 Meta description');
+            }
+
+            if (document.querySelector('.brandseo-hero-preview-image')) {
+                setText(heroAudit, '🟢 Imagen Hero');
+                score += 25;
+            } else {
+                setText(heroAudit, '🔴 Imagen Hero');
+            }
+
+            if (excerpt && excerpt.value.length >= 120) {
+                setText(excerptAudit, '🟢 Introducción');
+                score += 25;
+            } else {
+                setText(excerptAudit, '🟠 Introducción');
+            }
+
+            scoreNode.textContent = score + '%';
+        }
+
+        if (title) {
+            title.addEventListener('input', update);
+        }
+
+        if (description) {
+            description.addEventListener('input', update);
+        }
+
+        if (excerpt) {
+            excerpt.addEventListener('input', update);
+        }
+
+        update();
+    }
+
+    document.addEventListener('DOMContentLoaded', initSeoAudit);
+})();

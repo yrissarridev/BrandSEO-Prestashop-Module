@@ -663,3 +663,72 @@
     font-size: 13px;
     line-height: 1.35;
 }
+
+.brandseo-seo-audit{
+    margin-top:20px;
+    border:1px solid #dbe1e8;
+    border-radius:10px;
+    background:#fff;
+    padding:16px;
+}
+
+.brandseo-seo-audit h4{
+    margin:0 0 14px;
+}
+
+.brandseo-seo-audit ul{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.brandseo-seo-audit li{
+    padding:7px 0;
+    border-bottom:1px solid #eef2f5;
+}
+
+.brandseo-seo-score{
+    margin-top:16px;
+    text-align:center;
+}
+
+.brandseo-seo-score strong{
+    font-size:28px;
+    color:#2e7d32;
+}
+
+.brandseo-seo-audit {
+    margin-top: 20px;
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+    background: #fff;
+    padding: 16px;
+}
+
+.brandseo-seo-audit h4 {
+    margin: 0 0 14px;
+    color: #263238;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.brandseo-seo-audit ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.brandseo-seo-audit li {
+    padding: 7px 0;
+    border-bottom: 1px solid #eef2f5;
+}
+
+.brandseo-seo-score {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.brandseo-seo-score strong {
+    font-size: 28px;
+    color: #2e7d32;
+}

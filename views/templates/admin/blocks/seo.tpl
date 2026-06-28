@@ -89,7 +89,32 @@
                         {/if}
                     </p>
                 </div>
-            </div>
+            
+<div class="brandseo-seo-audit">
+
+    <h4>SEO Audit</h4>
+
+    <ul>
+
+        <li id="audit-title">⚪ Meta title</li>
+
+        <li id="audit-description">⚪ Meta description</li>
+
+        <li id="audit-hero">⚪ Imagen Hero</li>
+
+        <li id="audit-excerpt">⚪ Introducción</li>
+
+    </ul>
+
+    <div class="brandseo-seo-score">
+
+        <strong id="brandseo-seo-score">0%</strong>
+
+    </div>
+
+</div>
+
+</div>
         </div>
     {/foreach}
 </section>
