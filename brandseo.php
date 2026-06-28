@@ -70,6 +70,16 @@ class Brandseo extends Module
     public function hookModuleRoutes($params)
     {
         return array(
+            'module-brandseo-brands-index' => array(
+                'controller' => 'brands',
+                'rule' => 'marcas',
+                'keywords' => array(),
+                'params' => array(
+                    'fc' => 'module',
+                    'module' => 'brandseo',
+                ),
+            ),
+
             'module-brandseo-sitemap' => array(
                 'controller' => 'sitemap',
                 'rule' => 'brandseo-sitemap.xml',

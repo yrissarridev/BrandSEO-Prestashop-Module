@@ -701,3 +701,21 @@ font-size:24px;
         grid-template-columns: 1fr;
     }
 }
+
+.brandseo-brands-page .brandseo-front-section-header h1 {
+    font-size: 42px;
+    line-height: 1.15;
+    margin: 0 0 14px;
+}
+
+.brandseo-brands-page .brandseo-front-section-header p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #607d8b;
+}
+
+.brandseo-front-related-card p {
+    margin: 12px 0 0;
+    color: #607d8b;
+    line-height: 1.55;
+}
