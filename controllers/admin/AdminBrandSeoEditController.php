@@ -60,12 +60,17 @@ class AdminBrandSeoEditController extends ModuleAdminController
         $heroMedia = $mediaService->getMediaForBlock((int) $landing->id, 'hero', $idLang);
         $heroImages = array();
         $heroLogos = array();
+        $heroBackgroundUrl = '';
 
         foreach ($heroMedia as $mediaItem) {
             if ($mediaItem['type'] === 'logo') {
                 $heroLogos[] = $mediaItem;
             } else {
                 $heroImages[] = $mediaItem;
+
+                if (!$heroBackgroundUrl && !empty($mediaItem['path'])) {
+                    $heroBackgroundUrl = $this->module->getPathUri().$mediaItem['path'];
+                }
             }
         }
         $galleryMedia = $mediaService->getMediaForBlock((int) $landing->id, 'gallery', $idLang);
@@ -94,6 +99,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'hero_settings' => $heroSettings,
             'hero_media' => $heroMedia,
             'hero_images' => $heroImages,
+            'hero_background_url' => $heroBackgroundUrl,
             'hero_logos' => $heroLogos,
             'module_dir_url' => $this->module->getPathUri(),
             'gallery_media' => $galleryMedia,

@@ -59,6 +59,37 @@
                     {/if}
                 </p>
             </div>
+
+
+            <div class="brandseo-og-preview">
+                <div class="brandseo-og-image">
+                    {if $hero_background_url}
+                        <img src="{$hero_background_url|escape:'html':'UTF-8'}" alt="">
+                    {else}
+                        <span>Imagen Open Graph</span>
+                    {/if}
+                </div>
+
+                <div class="brandseo-og-content">
+                    <span class="brandseo-og-domain">tienda.vinofilos.es</span>
+
+                    <h4 id="brandseo-og-title">
+                        {if $landing->meta_title[$id_lang]}
+                            {$landing->meta_title[$id_lang]|escape:'html':'UTF-8'}
+                        {else}
+                            {$landing->title[$id_lang]|escape:'html':'UTF-8'}
+                        {/if}
+                    </h4>
+
+                    <p id="brandseo-og-description">
+                        {if $landing->meta_description[$id_lang]}
+                            {$landing->meta_description[$id_lang]|escape:'html':'UTF-8'}
+                        {else}
+                            {$landing->excerpt[$id_lang]|escape:'html':'UTF-8'}
+                        {/if}
+                    </p>
+                </div>
+            </div>
         </div>
     {/foreach}
 </section>

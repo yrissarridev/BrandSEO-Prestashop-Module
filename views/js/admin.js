@@ -105,3 +105,26 @@
 
     document.addEventListener('DOMContentLoaded', initMetaCounters);
 })();
+
+(function () {
+    function bindOpenGraphPreview() {
+        var titleInput = document.querySelector('[id^="brandseo-meta-title-"]');
+        var descriptionInput = document.querySelector('[id^="brandseo-meta-description-"]');
+        var ogTitle = document.getElementById('brandseo-og-title');
+        var ogDescription = document.getElementById('brandseo-og-description');
+
+        if (titleInput && ogTitle) {
+            titleInput.addEventListener('input', function () {
+                ogTitle.textContent = titleInput.value.trim() || 'Título Open Graph';
+            });
+        }
+
+        if (descriptionInput && ogDescription) {
+            descriptionInput.addEventListener('input', function () {
+                ogDescription.textContent = descriptionInput.value.trim() || 'Descripción Open Graph.';
+            });
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', bindOpenGraphPreview);
+})();

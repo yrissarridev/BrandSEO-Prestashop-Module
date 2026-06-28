@@ -611,3 +611,55 @@
     background: #ffebee;
     color: #c62828;
 }
+
+.brandseo-og-preview {
+    margin-top: 14px;
+    border: 1px solid #dbe1e8;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    max-width: 520px;
+}
+
+.brandseo-og-image {
+    height: 230px;
+    background: #263238;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #cfd8dc;
+    font-weight: 700;
+}
+
+.brandseo-og-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.brandseo-og-content {
+    padding: 12px 14px;
+}
+
+.brandseo-og-domain {
+    display: block;
+    color: #606770;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.brandseo-og-content h4 {
+    margin: 0 0 4px;
+    color: #1d2129;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 700;
+}
+
+.brandseo-og-content p {
+    margin: 0;
+    color: #606770;
+    font-size: 13px;
+    line-height: 1.35;
+}
