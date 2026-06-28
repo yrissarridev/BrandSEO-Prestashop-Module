@@ -1,45 +1,40 @@
 <?php
 
+require_once _PS_MODULE_DIR_.'brandseo/repositories/BrandSeoProductRepository.php';
+
 class BrandSeoProductService
 {
+    private $repository;
+
+    public function __construct()
+    {
+        $this->repository = new BrandSeoProductRepository();
+    }
+
     public function getLandingProducts($idManufacturer, $idLang)
     {
-        $assembler = new ProductAssembler(Context::getContext());
-        $presenterFactory = new ProductPresenterFactory(Context::getContext());
-        $presentationSettings = $presenterFactory->getPresentationSettings();
+        $products = $this->repository->getProductsByManufacturer($idManufacturer, $idLang, 12);
+        $link = Context::getContext()->link;
 
-        $presenter = new ProductListingPresenter(
-            new ImageRetriever(Context::getContext()->link),
-            Context::getContext()->link,
-            new PriceFormatter(),
-            new ProductColorsRetriever(),
-            Context::getContext()->getTranslator()
-        );
+        foreach ($products as &$product) {
+            $idProduct = (int) $product['id_product'];
 
-        $rows = Db::getInstance()->executeS('
-            SELECT p.id_product
-            FROM `'._DB_PREFIX_.'product` p
-            INNER JOIN `'._DB_PREFIX_.'product_shop` ps
-                ON ps.id_product = p.id_product
-                AND ps.id_shop = '.(int) Context::getContext()->shop->id.'
-            WHERE p.id_manufacturer = '.(int) $idManufacturer.'
-            AND ps.active = 1
-            ORDER BY p.date_add DESC
-            LIMIT 12
-        ');
+            $product['url'] = $link->getProductLink($idProduct, $product['link_rewrite']);
+            $product['image_url'] = '';
 
-        $products = array();
+            if (!empty($product['id_image'])) {
+                $product['image_url'] = $link->getImageLink(
+                    $product['link_rewrite'],
+                    $idProduct.'-'.(int) $product['id_image'],
+                    ImageType::getFormattedName('home')
+                );
+            }
 
-        foreach ($rows as $row) {
-            $rawProduct = array('id_product' => (int) $row['id_product']);
-            $assembledProduct = $assembler->assembleProduct($rawProduct);
-
-            $products[] = $presenter->present(
-                $presentationSettings,
-                $assembledProduct,
-                Context::getContext()->language
-            );
+            $price = Product::getPriceStatic($idProduct, true);
+            $product['price_formatted'] = Tools::displayPrice($price);
         }
+
+        unset($product);
 
         return $products;
     }
