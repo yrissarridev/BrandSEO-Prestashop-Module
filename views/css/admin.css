@@ -300,3 +300,37 @@
         margin-bottom: 18px;
     }
 }
+
+.brandseo-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.brandseo-search {
+    flex: 1 1 260px;
+}
+
+.brandseo-search input {
+    width: 100%;
+    max-width: 420px;
+}
+
+.brandseo-filter {
+    border: 1px solid #dbe1e8;
+    background: #fff;
+    color: #455a64;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.brandseo-filter:hover,
+.brandseo-filter.active {
+    background: #263238;
+    color: #fff;
+    border-color: #263238;
+}

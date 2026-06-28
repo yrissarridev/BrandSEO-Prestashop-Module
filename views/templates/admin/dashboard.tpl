@@ -66,6 +66,17 @@
     <div class="brandseo-panel">
         <h3 class="brandseo-panel-title">Brands / Fabricantes</h3>
 
+        <div class="brandseo-toolbar">
+            <div class="brandseo-search">
+                <input type="text" data-brandseo-search placeholder="Buscar marca..." class="form-control">
+            </div>
+
+            <button type="button" class="brandseo-filter active" data-brandseo-filter="all">Todas</button>
+            <button type="button" class="brandseo-filter" data-brandseo-filter="without_landing">Sin landing</button>
+            <button type="button" class="brandseo-filter" data-brandseo-filter="draft">Borradores</button>
+            <button type="button" class="brandseo-filter" data-brandseo-filter="published">Publicadas</button>
+        </div>
+
         <table class="brandseo-table">
             <thead>
                 <tr>
@@ -81,7 +92,16 @@
             </thead>
             <tbody>
                 {foreach from=$brands item=b}
-                    <tr>
+                    {assign var=row_status value='without_landing'}
+                    {if $b.id_brandseo_landing}
+                        {if $b.status == 'published'}
+                            {assign var=row_status value='published'}
+                        {else}
+                            {assign var=row_status value='draft'}
+                        {/if}
+                    {/if}
+
+                    <tr data-brandseo-row data-brand-name="{$b.name|escape:'html':'UTF-8'}" data-brand-status="{$row_status|escape:'html':'UTF-8'}">
                         <td>{$b.id_manufacturer|intval}</td>
                         <td><strong>{$b.name|escape:'html':'UTF-8'}</strong></td>
                         <td>
