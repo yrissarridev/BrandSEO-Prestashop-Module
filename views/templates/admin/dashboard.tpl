@@ -32,6 +32,12 @@
             <p class="brandseo-card-value">{$stats.published|intval}</p>
             <p class="brandseo-card-help">Landings activas</p>
         </div>
+
+        <div class="brandseo-card">
+            <p class="brandseo-card-label">Health medio</p>
+            <p class="brandseo-card-value">{$stats.health_average|intval}%</p>
+            <p class="brandseo-card-help">Calidad media global</p>
+        </div>
     </div>
 
     <div class="brandseo-panel">
@@ -42,6 +48,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Brand</th>
+                    <th>Health</th>
                     <th>Productos</th>
                     <th>Estado landing</th>
                     <th>Noindex</th>
@@ -54,6 +61,14 @@
                     <tr>
                         <td>{$b.id_manufacturer|intval}</td>
                         <td><strong>{$b.name|escape:'html':'UTF-8'}</strong></td>
+                        <td>
+                            <div class="brandseo-health brandseo-health-{$b.health.status|escape:'html':'UTF-8'}" title="{$b.health.label|escape:'html':'UTF-8'}">
+                                <span class="brandseo-health-score">{$b.health.score|intval}%</span>
+                                <span class="brandseo-health-bar">
+                                    <span class="brandseo-health-bar-fill" style="width: {$b.health.score|intval}%;"></span>
+                                </span>
+                            </div>
+                        </td>
                         <td>{$b.total_products|intval}</td>
 
                         <td>

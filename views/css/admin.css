@@ -123,3 +123,43 @@
         margin-bottom: 12px;
     }
 }
+
+.brandseo-health {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brandseo-health-score {
+    font-weight: 700;
+    min-width: 38px;
+}
+
+.brandseo-health-bar {
+    width: 80px;
+    height: 7px;
+    background: #edf1f5;
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.brandseo-health-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+}
+
+.brandseo-health-success .brandseo-health-bar-fill {
+    background: #2e7d32;
+}
+
+.brandseo-health-warning .brandseo-health-bar-fill {
+    background: #f9a825;
+}
+
+.brandseo-health-danger .brandseo-health-bar-fill {
+    background: #c62828;
+}
+
+.brandseo-health-empty .brandseo-health-bar-fill {
+    background: #90a4ae;
+}
