@@ -128,3 +128,36 @@
         font-size: 24px;
     }
 }
+
+.brandseo-hero-preview-frame.hero-small {
+    min-height: 190px;
+}
+
+.brandseo-hero-preview-frame.hero-medium {
+    min-height: 260px;
+}
+
+.brandseo-hero-preview-frame.hero-large {
+    min-height: 360px;
+}
+
+.brandseo-hero-preview-frame.align-left {
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.brandseo-hero-preview-frame.align-center {
+    justify-content: center;
+    text-align: center;
+}
+
+.brandseo-hero-preview-frame.align-right {
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.brandseo-hero-preview-frame.align-left .brandseo-hero-preview-text,
+.brandseo-hero-preview-frame.align-right .brandseo-hero-preview-text {
+    margin-left: 0;
+    margin-right: 0;
+}
