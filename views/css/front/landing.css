@@ -859,3 +859,113 @@ font-size:24px;
         grid-template-columns: 1fr !important;
     }
 }
+
+/* BrandSEO v1 final landing layout */
+
+.brandseo-front-content {
+    max-width: 1240px !important;
+    margin: 0 auto !important;
+    padding: 0 22px !important;
+}
+
+.brandseo-brand-content-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr) !important;
+    gap: 34px !important;
+    align-items: start !important;
+    margin: 48px 0 18px !important;
+}
+
+.brandseo-brand-content-grid .brandseo-front-section {
+    padding: 0 !important;
+    border-bottom: 0 !important;
+    margin: 0 0 34px !important;
+}
+
+.brandseo-brand-content-grid .brandseo-front-section-header {
+    margin-bottom: 20px !important;
+}
+
+.brandseo-brand-content-grid .brandseo-front-section-header h2 {
+    font-size: 30px !important;
+    line-height: 1.2 !important;
+}
+
+.brandseo-front-products-section {
+    padding: 54px 0 !important;
+    border-top: 1px solid #ececec !important;
+    border-bottom: 1px solid #ececec !important;
+    margin-top: 30px !important;
+}
+
+.brandseo-front-products-section .brandseo-front-section-header {
+    max-width: 100% !important;
+    margin-bottom: 26px !important;
+}
+
+.brandseo-front-products-section .brandseo-front-section-header h2 {
+    font-size: 34px !important;
+}
+
+.brandseo-front-products-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 22px !important;
+}
+
+.brandseo-front-product-card {
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
+}
+
+.brandseo-front-product-image {
+    height: 260px !important;
+}
+
+.brandseo-brand-bottom-grid {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, .8fr) !important;
+    gap: 34px !important;
+    align-items: start !important;
+}
+
+.brandseo-brand-bottom-grid .brandseo-front-section {
+    padding: 54px 0 0 !important;
+    border-bottom: 0 !important;
+}
+
+.brandseo-brand-bottom-grid .brandseo-front-related-grid {
+    grid-template-columns: 1fr !important;
+}
+
+.brandseo-front-cta-section {
+    padding: 54px 0 84px !important;
+}
+
+@media (max-width: 1100px) {
+    .brandseo-brand-content-grid,
+    .brandseo-brand-bottom-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .brandseo-front-products-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .brandseo-front-products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+@media (max-width: 560px) {
+    .brandseo-front-products-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .brandseo-brand-content-grid {
+        margin-top: 34px !important;
+    }
+}

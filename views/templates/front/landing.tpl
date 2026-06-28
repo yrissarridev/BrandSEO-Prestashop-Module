@@ -53,33 +53,31 @@
 
     {include file='module:brandseo/views/templates/front/partials/hero.tpl'}
 
-    <div class="brandseo-front-content brandseo-front-layout">
+    <div class="brandseo-front-content">
 
-        <main class="brandseo-front-main">
+        {if !$landing->history && !$landing->philosophy && !$landing->store_opinion && !$brand_products|count && !$brand_faqs|count}
+            {include file='module:brandseo/views/templates/front/partials/no-content.tpl'}
+        {/if}
 
-            {if !$landing->history && !$landing->philosophy && !$landing->store_opinion && !$brand_products|count && !$brand_faqs|count}
-                {include file='module:brandseo/views/templates/front/partials/no-content.tpl'}
-            {/if}
+        <div class="brandseo-brand-content-grid">
+            <div>
+                {include file='module:brandseo/views/templates/front/partials/history.tpl'}
+            </div>
 
-            {include file='module:brandseo/views/templates/front/partials/history.tpl'}
+            <div>
+                {include file='module:brandseo/views/templates/front/partials/philosophy.tpl'}
+                {include file='module:brandseo/views/templates/front/partials/opinion.tpl'}
+            </div>
+        </div>
 
-            {include file='module:brandseo/views/templates/front/partials/philosophy.tpl'}
+        {include file='module:brandseo/views/templates/front/partials/products.tpl'}
 
-            {include file='module:brandseo/views/templates/front/partials/opinion.tpl'}
-
+        <div class="brandseo-brand-bottom-grid">
             {include file='module:brandseo/views/templates/front/partials/faq.tpl'}
-
-        </main>
-
-        <aside class="brandseo-front-sidebar">
-
-            {include file='module:brandseo/views/templates/front/partials/products.tpl'}
-
             {include file='module:brandseo/views/templates/front/partials/related.tpl'}
+        </div>
 
-            {include file='module:brandseo/views/templates/front/partials/cta.tpl'}
-
-        </aside>
+        {include file='module:brandseo/views/templates/front/partials/cta.tpl'}
 
     </div>
 
