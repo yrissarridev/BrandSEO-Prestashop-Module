@@ -47,6 +47,10 @@
 
     <div class="brandseo-front-content">
 
+        {if !$landing->history && !$landing->philosophy && !$landing->store_opinion && !$brand_products|count && !$brand_faqs|count}
+            {include file='module:brandseo/views/templates/front/partials/no-content.tpl'}
+        {/if}
+
         {include file='module:brandseo/views/templates/front/partials/history.tpl'}
 
         {include file='module:brandseo/views/templates/front/partials/philosophy.tpl'}

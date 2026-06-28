@@ -719,3 +719,37 @@ font-size:24px;
     color: #607d8b;
     line-height: 1.55;
 }
+
+.brandseo-front-empty-card {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+    background: #fafafa;
+    border: 1px solid #ececec;
+    border-radius: 18px;
+    padding: 44px 28px;
+}
+
+.brandseo-front-empty-card h2 {
+    font-size: 34px;
+    margin: 0 0 12px;
+}
+
+.brandseo-front-empty-card p {
+    color: #607d8b;
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0 0 24px;
+}
+
+.brandseo-front-empty-card a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 26px;
+    border-radius: 999px;
+    background: #263238;
+    color: #fff !important;
+    text-decoration: none !important;
+    font-weight: 800;
+}
