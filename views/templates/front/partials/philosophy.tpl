@@ -5,8 +5,10 @@
         <h2>Filosofía</h2>
     </div>
 
-    <div class="brandseo-front-section-body">
+    <div class="brandseo-front-philosophy">
+
         {$landing->philosophy nofilter}
+
     </div>
 
 </section>

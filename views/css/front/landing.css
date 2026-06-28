@@ -399,3 +399,64 @@ font-size:24px;
 .brandseo-front-faq-answer p:last-child {
     margin-bottom: 0;
 }
+
+.brandseo-front-opinion-section{
+    padding-top:30px;
+}
+
+.brandseo-front-opinion-card{
+    max-width:960px;
+    margin:0 auto;
+    background:#f7f8fa;
+    border-left:6px solid #7b1e28;
+    border-radius:14px;
+    padding:42px;
+}
+
+.brandseo-front-opinion-label{
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:12px;
+    font-weight:800;
+    color:#7b1e28;
+    margin-bottom:16px;
+}
+
+.brandseo-front-opinion-card blockquote{
+    margin:0;
+    padding:0;
+    font-size:22px;
+    line-height:1.7;
+    color:#263238;
+    font-style:normal;
+}
+
+.brandseo-front-opinion-card p:last-child{
+    margin-bottom:0;
+}
+
+@media(max-width:768px){
+
+.brandseo-front-opinion-card{
+    padding:24px;
+}
+
+.brandseo-front-opinion-card blockquote{
+    font-size:18px;
+}
+
+}
+
+.brandseo-front-philosophy{
+    max-width:900px;
+    padding:36px;
+    border-radius:16px;
+    background:#fcfcfc;
+    border:1px solid #ececec;
+    font-size:18px;
+    line-height:1.8;
+}
+
+.brandseo-front-philosophy p:last-child{
+    margin-bottom:0;
+}
