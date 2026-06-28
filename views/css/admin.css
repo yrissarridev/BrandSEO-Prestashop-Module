@@ -428,3 +428,20 @@
     justify-content: center;
     min-width: 135px;
 }
+
+.brandseo-missing-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.brandseo-missing-list span {
+    background: #fff8e1;
+    border: 1px solid #ffe082;
+    border-radius: 999px;
+    color: #795548;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 8px;
+}

@@ -84,6 +84,7 @@
                     <th>Brand</th>
                     <th>Health</th>
                     <th>Prioridad</th>
+                    <th>Pendiente</th>
                     <th>Productos</th>
                     <th>Estado landing</th>
                     <th>Noindex</th>
@@ -123,6 +124,20 @@
                                 <span class="brandseo-priority-dot"></span>
                                 <span>{$b.priority.label|escape:'html':'UTF-8'}</span>
                             </div>
+                        </td>
+
+                        <td>
+                            {if $b.health.missing|count}
+                                <div class="brandseo-missing-list">
+                                    {foreach from=$b.health.missing item=missing name=missing_loop}
+                                        {if $smarty.foreach.missing_loop.index < 2}
+                                            <span>{$missing|escape:'html':'UTF-8'}</span>
+                                        {/if}
+                                    {/foreach}
+                                </div>
+                            {else}
+                                <span class="label label-success">Completa</span>
+                            {/if}
                         </td>
 
                         <td>{$b.total_products|intval}</td>
