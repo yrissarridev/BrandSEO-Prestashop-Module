@@ -128,3 +128,35 @@
         </table>
     </div>
 </div>
+
+<style>
+.brandseo-health {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    min-width: 130px;
+}
+.brandseo-health-score {
+    font-weight: 700;
+    min-width: 42px;
+    display: inline-block;
+}
+.brandseo-health-bar {
+    width: 86px;
+    height: 8px;
+    background: #edf1f5;
+    border-radius: 99px;
+    overflow: hidden;
+    display: inline-block;
+}
+.brandseo-health-bar-fill {
+    display: block;
+    height: 100%;
+    border-radius: 99px;
+    background: #90a4ae;
+}
+.brandseo-health-success .brandseo-health-bar-fill { background: #2e7d32; }
+.brandseo-health-warning .brandseo-health-bar-fill { background: #f9a825; }
+.brandseo-health-danger .brandseo-health-bar-fill { background: #c62828; }
+.brandseo-health-empty .brandseo-health-bar-fill { background: #90a4ae; }
+</style>
