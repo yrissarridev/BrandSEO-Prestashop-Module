@@ -21,6 +21,7 @@
                         value="{$landing->meta_title[$id_lang]|escape:'html':'UTF-8'}">
                     <p class="help-block">
                         Recomendado: 50–60 caracteres.
+                        <span class="brandseo-meta-count" data-meta-count-for="brandseo-meta-title-{$id_lang|intval}">0</span>
                     </p>
                 </div>
 
@@ -32,6 +33,7 @@
                         rows="3">{$landing->meta_description[$id_lang]|escape:'html':'UTF-8'}</textarea>
                     <p class="help-block">
                         Recomendado: 140–160 caracteres.
+                        <span class="brandseo-meta-count" data-meta-count-for="brandseo-meta-description-{$id_lang|intval}">0</span>
                     </p>
                 </div>
             </div>

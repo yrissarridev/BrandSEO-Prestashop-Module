@@ -64,3 +64,44 @@
 
     document.addEventListener('DOMContentLoaded', bindSeoPreview);
 })();
+
+(function () {
+    function scoreLength(length, min, max) {
+        if (length >= min && length <= max) {
+            return 'ok';
+        }
+
+        if (length > 0 && length < min) {
+            return 'warn';
+        }
+
+        return 'bad';
+    }
+
+    function initMetaCounters() {
+        document.querySelectorAll('[data-meta-count-for]').forEach(function (counter) {
+            var inputId = counter.getAttribute('data-meta-count-for');
+            var input = document.getElementById(inputId);
+
+            if (!input) {
+                return;
+            }
+
+            var isDescription = inputId.indexOf('description') !== -1;
+            var min = isDescription ? 140 : 50;
+            var max = isDescription ? 160 : 60;
+
+            function update() {
+                var length = input.value.length;
+                counter.textContent = length + '/' + max;
+                counter.classList.remove('ok', 'warn', 'bad');
+                counter.classList.add(scoreLength(length, min, max));
+            }
+
+            input.addEventListener('input', update);
+            update();
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initMetaCounters);
+})();

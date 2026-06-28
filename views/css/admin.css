@@ -585,3 +585,29 @@
         margin-bottom: 14px;
     }
 }
+
+.brandseo-meta-count {
+    display: inline-block;
+    margin-left: 8px;
+    border-radius: 999px;
+    padding: 2px 8px;
+    background: #edf1f5;
+    color: #607d8b;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.brandseo-meta-count.ok {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.brandseo-meta-count.warn {
+    background: #fff8e1;
+    color: #795548;
+}
+
+.brandseo-meta-count.bad {
+    background: #ffebee;
+    color: #c62828;
+}
