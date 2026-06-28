@@ -12,6 +12,16 @@ class BrandSeoUploader
 
     public function uploadHeroImage($fileInputName, $idLanding, $idLang)
     {
+        return $this->uploadImage($fileInputName, $idLanding, $idLang, 'hero', 'image');
+    }
+
+    public function uploadHeroLogo($fileInputName, $idLanding, $idLang)
+    {
+        return $this->uploadImage($fileInputName, $idLanding, $idLang, 'hero', 'logo');
+    }
+
+    private function uploadImage($fileInputName, $idLanding, $idLang, $block, $type)
+    {
         if (empty($_FILES[$fileInputName]) || empty($_FILES[$fileInputName]['tmp_name'])) {
             return array(false, 'No se recibió ninguna imagen.');
         }
@@ -39,7 +49,7 @@ class BrandSeoUploader
         }
 
         $extension = $this->getExtensionFromMime($mime);
-        $fileName = 'hero_'.(int)$idLanding.'_'.date('YmdHis').'_'.mt_rand(1000, 9999).'.'.$extension;
+        $fileName = pSQL($type).'_'.(int)$idLanding.'_'.date('YmdHis').'_'.mt_rand(1000, 9999).'.'.$extension;
 
         $relativePath = 'uploads/hero/'.$fileName;
         $absolutePath = _PS_MODULE_DIR_.'brandseo/'.$relativePath;
@@ -50,8 +60,8 @@ class BrandSeoUploader
 
         $media = new BrandSeoMedia();
         $media->id_brandseo_landing = (int) $idLanding;
-        $media->block = 'hero';
-        $media->type = 'image';
+        $media->block = pSQL($block);
+        $media->type = pSQL($type);
         $media->path = $relativePath;
         $media->mime = $mime;
         $media->width = (int) $imageInfo[0];

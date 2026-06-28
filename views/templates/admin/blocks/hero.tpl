@@ -6,10 +6,19 @@
     </p>
 
     {assign var=hero_background value=''}
-    {if $hero_media|count}
-        {foreach from=$hero_media item=media name=hero_media_bg}
+    {if $hero_images|count}
+        {foreach from=$hero_images item=media name=hero_media_bg}
             {if $smarty.foreach.hero_media_bg.first}
                 {assign var=hero_background value=$module_dir_url|cat:$media.path}
+            {/if}
+        {/foreach}
+    {/if}
+
+    {assign var=hero_logo value=''}
+    {if $hero_logos|count}
+        {foreach from=$hero_logos item=logo name=hero_logo_loop}
+            {if $smarty.foreach.hero_logo_loop.first}
+                {assign var=hero_logo value=$module_dir_url|cat:$logo.path}
             {/if}
         {/foreach}
     {/if}
@@ -36,8 +45,17 @@
                 <label>Logo</label>
                 <div class="brandseo-dropzone">
                     <strong>Logo de la marca</strong>
-                    <span>La subida de logo se añadirá en el siguiente paso.</span>
+                    <span>JPG, PNG o WebP</span>
+                    <input type="file" name="hero_logo_file" accept="image/jpeg,image/png,image/webp">
+                    <button type="submit" name="submitBrandSeoHeroLogo" class="btn btn-default" style="margin-top:10px;">
+                        <i class="icon-upload"></i>
+                        Subir logo
+                    </button>
                 </div>
+
+                {if $hero_logo}
+                    <p class="help-block">Logo actual: {$hero_logo|escape:'html':'UTF-8'}</p>
+                {/if}
             </div>
 
             {foreach from=$languages item=lang}
@@ -89,7 +107,11 @@
                 <div class="brandseo-hero-preview-overlay"></div>
 
                 <div class="brandseo-hero-preview-content brandseo-hero-preview-content-fixed">
-                    <div class="brandseo-hero-preview-logo">LOGO</div>
+                    {if $hero_logo}
+                        <img class="brandseo-hero-preview-logo-img" src="{$hero_logo|escape:'html':'UTF-8'}" alt="">
+                    {else}
+                        <div class="brandseo-hero-preview-logo">LOGO</div>
+                    {/if}
                     <h2 id="brandseo-preview-title" class="brandseo-hero-preview-title">
                         {if $landing->title[$id_lang]}
                             {$landing->title[$id_lang]|escape:'html':'UTF-8'}

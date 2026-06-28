@@ -39,6 +39,10 @@ class AdminBrandSeoEditController extends ModuleAdminController
             $this->processUploadHeroImage($landing);
         }
 
+        if (Tools::isSubmit('submitBrandSeoHeroLogo')) {
+            $this->processUploadHeroLogo($landing);
+        }
+
         $idLang = (int) $this->context->language->id;
         $manufacturer = new Manufacturer((int) $landing->id_manufacturer, $idLang);
 
@@ -50,6 +54,16 @@ class AdminBrandSeoEditController extends ModuleAdminController
 
         $mediaService = new BrandSeoMediaService();
         $heroMedia = $mediaService->getMediaForBlock((int) $landing->id, 'hero', $idLang);
+        $heroImages = array();
+        $heroLogos = array();
+
+        foreach ($heroMedia as $mediaItem) {
+            if ($mediaItem['type'] === 'logo') {
+                $heroLogos[] = $mediaItem;
+            } else {
+                $heroImages[] = $mediaItem;
+            }
+        }
         $galleryMedia = $mediaService->getMediaForBlock((int) $landing->id, 'gallery', $idLang);
 
         $healthService = new BrandSeoHealthService();
@@ -74,6 +88,8 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'available_blocks' => $availableBlocks,
             'faqs' => $faqs,
             'hero_media' => $heroMedia,
+            'hero_images' => $heroImages,
+            'hero_logos' => $heroLogos,
             'module_dir_url' => $this->module->getPathUri(),
             'gallery_media' => $galleryMedia,
             'id_lang' => $idLang,
@@ -97,6 +113,23 @@ class AdminBrandSeoEditController extends ModuleAdminController
         $uploader = new BrandSeoUploader();
         list($success, $message) = $uploader->uploadHeroImage(
             'hero_image_file',
+            (int) $landing->id,
+            (int) $this->context->language->id
+        );
+
+        if ($success) {
+            $this->confirmations[] = $message;
+        } else {
+            $this->errors[] = $message;
+        }
+    }
+
+
+    private function processUploadHeroLogo(BrandSeoLanding $landing)
+    {
+        $uploader = new BrandSeoUploader();
+        list($success, $message) = $uploader->uploadHeroLogo(
+            'hero_logo_file',
             (int) $landing->id,
             (int) $this->context->language->id
         );
