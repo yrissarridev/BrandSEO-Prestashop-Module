@@ -334,3 +334,38 @@
     color: #fff;
     border-color: #263238;
 }
+
+.brandseo-priority {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-weight: 700;
+}
+
+.brandseo-priority-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #90a4ae;
+}
+
+.brandseo-priority-danger .brandseo-priority-dot {
+    background: #c62828;
+}
+
+.brandseo-priority-warning .brandseo-priority-dot {
+    background: #f9a825;
+}
+
+.brandseo-priority-info .brandseo-priority-dot {
+    background: #0277bd;
+}
+
+.brandseo-priority-success .brandseo-priority-dot {
+    background: #2e7d32;
+}
+
+.brandseo-priority-empty .brandseo-priority-dot {
+    background: #90a4ae;
+}

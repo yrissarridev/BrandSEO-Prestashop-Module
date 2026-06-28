@@ -83,6 +83,7 @@
                     <th>ID</th>
                     <th>Brand</th>
                     <th>Health</th>
+                    <th>Prioridad</th>
                     <th>Productos</th>
                     <th>Estado landing</th>
                     <th>Noindex</th>

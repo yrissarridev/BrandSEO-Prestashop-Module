@@ -36,6 +36,7 @@ class BrandSeoDashboardService
 
         foreach ($brands as &$brand) {
             $brand['health'] = $this->healthService->calculateFromDashboardRow($brand);
+            $brand['priority'] = $this->calculatePriority($brand);
 
             $stats['brands_total']++;
             $stats['products_total'] += (int) $brand['total_products'];
@@ -73,4 +74,42 @@ class BrandSeoDashboardService
             'insights' => $this->insightService->getInsights($stats, $brands),
         );
     }
+    private function calculatePriority(array $brand)
+    {
+        $products = (int) $brand['total_products'];
+        $health = isset($brand['health']['score']) ? (int) $brand['health']['score'] : 0;
+
+        if ($products <= 0) {
+            return array(
+                'score' => 0,
+                'label' => 'Sin prioridad',
+                'status' => 'empty',
+            );
+        }
+
+        $productWeight = min(100, $products);
+        $healthGap = 100 - $health;
+        $score = (int) round(($productWeight * 0.65) + ($healthGap * 0.35));
+
+        if ($score >= 75) {
+            $label = 'Muy alta';
+            $status = 'danger';
+        } elseif ($score >= 50) {
+            $label = 'Alta';
+            $status = 'warning';
+        } elseif ($score >= 25) {
+            $label = 'Media';
+            $status = 'info';
+        } else {
+            $label = 'Baja';
+            $status = 'success';
+        }
+
+        return array(
+            'score' => $score,
+            'label' => $label,
+            'status' => $status,
+        );
+    }
+
 }
