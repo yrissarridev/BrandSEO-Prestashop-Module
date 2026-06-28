@@ -1,7 +1,6 @@
-<section class="brandseo-front-hero"
-{if $hero_image}
-style="background-image:linear-gradient(rgba(38,50,56,.55),rgba(38,50,56,.55)),url('{$hero_image|escape:'html':'UTF-8'}');"
-{/if}>
+<section class="brandseo-front-hero"{if $hero_image} style="background-image:url('{$hero_image|escape:'html':'UTF-8'}');"{/if}>
+
+    <div class="brandseo-front-hero-overlay"></div>
 
     <div class="brandseo-front-hero-inner">
 
@@ -15,8 +14,37 @@ style="background-image:linear-gradient(rgba(38,50,56,.55),rgba(38,50,56,.55)),u
         <h1>{$landing->h1|escape:'html':'UTF-8'}</h1>
 
         {if $landing->excerpt}
-            <p>{$landing->excerpt|escape:'html':'UTF-8'}</p>
+            <p class="brandseo-front-hero-text">
+                {$landing->excerpt|escape:'html':'UTF-8'}
+            </p>
         {/if}
+
+        <div class="brandseo-front-hero-stats">
+
+            <div class="brandseo-front-hero-stat">
+                <strong>{$brand_products_count}</strong>
+                <span>Productos</span>
+            </div>
+
+            {if $landing->country}
+            <div class="brandseo-front-hero-stat">
+                <strong>{$landing->country|escape:'html':'UTF-8'}</strong>
+                <span>País</span>
+            </div>
+            {/if}
+
+            {if $landing->region}
+            <div class="brandseo-front-hero-stat">
+                <strong>{$landing->region|escape:'html':'UTF-8'}</strong>
+                <span>Región</span>
+            </div>
+            {/if}
+
+        </div>
+
+        <a class="brandseo-front-hero-button" href="#brand-products">
+            Descubrir vinos
+        </a>
 
     </div>
 
