@@ -50,14 +50,9 @@
         </aside>
 
         <main class="brandseo-editor-main">
-            {include file="./blocks/hero.tpl"}
-            {include file="./blocks/media.tpl"}
-            {include file="./blocks/map.tpl"}
-            {include file="./blocks/content.tpl"}
-            {include file="./blocks/seo.tpl"}
-            {include file="./blocks/products.tpl"}
-            {include file="./blocks/faq.tpl"}
-            {include file="./blocks/publish.tpl"}
+            {foreach from=$available_blocks item=block}
+                {include file=$block.template}
+            {/foreach}
         </main>
     </div>
 </form>
