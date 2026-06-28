@@ -2,13 +2,17 @@
     window.BrandSEO = window.BrandSEO || {};
     window.BrandSEO.Hero = window.BrandSEO.Hero || {};
 
-    function setClassByPrefix(element, prefix, value) {
+    function removeClassPrefix(element, prefix) {
         var classes = element.className.split(/\s+/).filter(function (className) {
             return className.indexOf(prefix) !== 0;
         });
 
-        classes.push(prefix + value);
         element.className = classes.join(' ');
+    }
+
+    function setClassByPrefix(element, prefix, value) {
+        removeClassPrefix(element, prefix);
+        element.classList.add(prefix + value);
     }
 
     function initHeroPreviewTabs() {

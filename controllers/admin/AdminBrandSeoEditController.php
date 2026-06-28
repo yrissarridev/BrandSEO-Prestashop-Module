@@ -5,6 +5,7 @@ require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoHealthService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/Block/BrandSeoBlockRegistry.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/Media/BrandSeoUploader.php';
 
 class AdminBrandSeoEditController extends ModuleAdminController
 {
@@ -32,6 +33,10 @@ class AdminBrandSeoEditController extends ModuleAdminController
 
         if (Tools::isSubmit('submitBrandSeoLanding')) {
             $this->processSaveBrandSeoLanding($landing);
+        }
+
+        if (Tools::isSubmit('submitBrandSeoHeroImage')) {
+            $this->processUploadHeroImage($landing);
         }
 
         $idLang = (int) $this->context->language->id;
@@ -69,6 +74,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'available_blocks' => $availableBlocks,
             'faqs' => $faqs,
             'hero_media' => $heroMedia,
+            'module_dir_url' => $this->module->getPathUri(),
             'gallery_media' => $galleryMedia,
             'id_lang' => $idLang,
             'languages' => Language::getLanguages(true),
@@ -83,6 +89,23 @@ class AdminBrandSeoEditController extends ModuleAdminController
         $this->context->smarty->assign(array(
             'content' => $this->content,
         ));
+    }
+
+
+    private function processUploadHeroImage(BrandSeoLanding $landing)
+    {
+        $uploader = new BrandSeoUploader();
+        list($success, $message) = $uploader->uploadHeroImage(
+            'hero_image_file',
+            (int) $landing->id,
+            (int) $this->context->language->id
+        );
+
+        if ($success) {
+            $this->confirmations[] = $message;
+        } else {
+            $this->errors[] = $message;
+        }
     }
 
     private function processSaveBrandSeoLanding(BrandSeoLanding $landing)

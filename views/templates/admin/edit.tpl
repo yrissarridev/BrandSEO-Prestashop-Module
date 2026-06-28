@@ -6,7 +6,7 @@
     </p>
 </div>
 
-<form method="post" action="{$current_url|escape:'html':'UTF-8'}">
+<form method="post" action="{$current_url|escape:'html':'UTF-8'}" enctype="multipart/form-data">
     <div class="brandseo-editor">
         <aside class="brandseo-editor-sidebar">
             <p class="brandseo-editor-sidebar-title">BrandSEO Studio</p>
