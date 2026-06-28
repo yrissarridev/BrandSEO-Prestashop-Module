@@ -2,16 +2,19 @@
 
 require_once _PS_MODULE_DIR_.'brandseo/repositories/BrandSeoBrandRepository.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoHealthService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoInsightService.php';
 
 class BrandSeoDashboardService
 {
     private $brandRepository;
     private $healthService;
+    private $insightService;
 
     public function __construct()
     {
         $this->brandRepository = new BrandSeoBrandRepository();
         $this->healthService = new BrandSeoHealthService();
+        $this->insightService = new BrandSeoInsightService();
     }
 
     public function getDashboard()
@@ -67,6 +70,7 @@ class BrandSeoDashboardService
         return array(
             'brands' => $brands,
             'stats' => $stats,
+            'insights' => $this->insightService->getInsights($stats, $brands),
         );
     }
 }

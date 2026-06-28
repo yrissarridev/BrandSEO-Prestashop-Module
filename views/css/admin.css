@@ -163,3 +163,49 @@
 .brandseo-health-empty .brandseo-health-bar-fill {
     background: #90a4ae;
 }
+
+.brandseo-insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.brandseo-insight {
+    background: #ffffff;
+    border: 1px solid #dbe1e8;
+    border-left: 4px solid #90a4ae;
+    border-radius: 10px;
+    padding: 16px 18px;
+}
+
+.brandseo-insight-danger {
+    border-left-color: #c62828;
+}
+
+.brandseo-insight-warning {
+    border-left-color: #f9a825;
+}
+
+.brandseo-insight-info {
+    border-left-color: #0277bd;
+}
+
+.brandseo-insight-title {
+    margin: 0 0 6px;
+    color: #263238;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.brandseo-insight-description {
+    margin: 0 0 12px;
+    color: #607d8b;
+    font-size: 13px;
+}
+
+.brandseo-insight-action {
+    color: #0277bd;
+    font-weight: 600;
+    font-size: 13px;
+}

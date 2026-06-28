@@ -40,6 +40,29 @@
         </div>
     </div>
 
+    {if $insights|count}
+        <div class="brandseo-panel">
+            <h3 class="brandseo-panel-title">Acciones recomendadas</h3>
+
+            <div class="brandseo-insights">
+                {foreach from=$insights item=insight}
+                    <div class="brandseo-insight brandseo-insight-{$insight.type|escape:'html':'UTF-8'}">
+                        <p class="brandseo-insight-title">
+                            <i class="{$insight.icon|escape:'html':'UTF-8'}"></i>
+                            {$insight.title|escape:'html':'UTF-8'}
+                        </p>
+                        <p class="brandseo-insight-description">
+                            {$insight.description|escape:'html':'UTF-8'}
+                        </p>
+                        <span class="brandseo-insight-action">
+                            {$insight.action_label|escape:'html':'UTF-8'} →
+                        </span>
+                    </div>
+                {/foreach}
+            </div>
+        </div>
+    {/if}
+
     <div class="brandseo-panel">
         <h3 class="brandseo-panel-title">Brands / Fabricantes</h3>
 

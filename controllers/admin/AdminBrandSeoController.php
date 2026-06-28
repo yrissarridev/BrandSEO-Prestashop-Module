@@ -26,6 +26,7 @@ class AdminBrandSeoController extends ModuleAdminController
             'module_version' => $this->module->version,
             'brands' => $dashboard['brands'],
             'stats' => $dashboard['stats'],
+            'insights' => $dashboard['insights'],
             'current_url' => self::$currentIndex.'&token='.$this->token,
         ));
 
