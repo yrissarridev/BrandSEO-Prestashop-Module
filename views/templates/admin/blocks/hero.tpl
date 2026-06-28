@@ -90,6 +90,12 @@
                     <label><input type="radio" name="hero_align" value="right"> Derecha</label>
                 </div>
             </div>
+
+            <div class="brandseo-hero-option-group">
+                <label>Oscurecer fondo</label>
+                <input type="range" name="hero_overlay" min="0" max="80" value="48" data-brandseo-hero-overlay>
+                <p class="help-block">Ajusta la legibilidad del texto sobre la imagen.</p>
+            </div>
         </div>
 
         <div class="brandseo-hero-preview">
@@ -99,12 +105,12 @@
                 <button type="button" class="brandseo-hero-preview-tab" data-brandseo-hero-preview="mobile">Móvil</button>
             </div>
 
-            <div class="brandseo-hero-preview-frame desktop brandseo-hero-preview-fixed" data-brandseo-hero-frame>
+            <div class="brandseo-hero-preview-frame desktop brandseo-hero-preview-fixed" data-brandseo-hero-frame style="--brandseo-hero-overlay: .48;">
                 {if $hero_background}
                     <img class="brandseo-hero-preview-image" src="{$hero_background|escape:'html':'UTF-8'}" alt="">
                 {/if}
 
-                <div class="brandseo-hero-preview-overlay"></div>
+                <div class="brandseo-hero-preview-overlay" data-brandseo-hero-overlay-layer></div>
 
                 <div class="brandseo-hero-preview-content brandseo-hero-preview-content-fixed">
                     {if $hero_logo}

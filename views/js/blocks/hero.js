@@ -64,6 +64,24 @@
                 setClassByPrefix(frame, 'align-', input.value);
             }
         });
+
+        var overlayInput = document.querySelector('[data-brandseo-hero-overlay]');
+
+        if (overlayInput) {
+            function updateOverlay() {
+                var value = parseInt(overlayInput.value, 10);
+
+                if (isNaN(value)) {
+                    value = 48;
+                }
+
+                frame.style.setProperty('--brandseo-hero-overlay', String(value / 100));
+            }
+
+            overlayInput.addEventListener('input', updateOverlay);
+            overlayInput.addEventListener('change', updateOverlay);
+            updateOverlay();
+        }
     }
 
     function initHeroLivePreview() {

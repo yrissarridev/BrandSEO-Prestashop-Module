@@ -410,3 +410,20 @@
     max-height: 90px;
     filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
 }
+
+/* Sticky preview + robust overlay */
+
+.brandseo-hero-preview {
+    position: sticky;
+    top: 80px;
+    align-self: flex-start;
+}
+
+.brandseo-hero-preview-frame {
+    --brandseo-hero-overlay: .48;
+}
+
+.brandseo-hero-preview-overlay,
+[data-brandseo-hero-overlay-layer] {
+    background: rgba(38, 50, 56, var(--brandseo-hero-overlay)) !important;
+}
