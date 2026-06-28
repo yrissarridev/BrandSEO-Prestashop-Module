@@ -91,6 +91,47 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             $jsonLd['sameAs'] = array($landing->website);
         }
 
+        if (!empty($brandProducts)) {
+            $jsonLd['hasOfferCatalog'] = array(
+                '@type' => 'OfferCatalog',
+                'name' => 'Productos de '.$manufacturer->name,
+                'itemListElement' => array(),
+            );
+
+            foreach (array_slice($brandProducts, 0, 12) as $product) {
+                $jsonLd['hasOfferCatalog']['itemListElement'][] = array(
+                    '@type' => 'Offer',
+                    'url' => $product['url'],
+                    'itemOffered' => array(
+                        '@type' => 'Product',
+                        'name' => $product['name'],
+                        'image' => !empty($product['image_url']) ? $product['image_url'] : null,
+                    ),
+                );
+            }
+        }
+
+        if (!empty($brandFaqs)) {
+            $jsonLdFaq = array(
+                '@context' => 'https://schema.org',
+                '@type' => 'FAQPage',
+                'mainEntity' => array(),
+            );
+
+            foreach ($brandFaqs as $faq) {
+                $jsonLdFaq['mainEntity'][] = array(
+                    '@type' => 'Question',
+                    'name' => strip_tags($faq['question']),
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text' => strip_tags($faq['answer']),
+                    ),
+                );
+            }
+        } else {
+            $jsonLdFaq = null;
+        }
+
         $this->context->smarty->assign(array(
             'landing' => $landing,
             'manufacturer' => $manufacturer,
@@ -105,6 +146,7 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             'brandseo_meta_description' => $metaDescription,
             'brandseo_og_image' => $heroImage,
             'brandseo_jsonld' => json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            'brandseo_jsonld_faq' => $jsonLdFaq ? json_encode($jsonLdFaq, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) : '',
         ));
 
         $this->setTemplate('module:brandseo/views/templates/front/landing.tpl');

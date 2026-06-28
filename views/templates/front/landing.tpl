@@ -31,6 +31,10 @@
     {if $brandseo_jsonld}
         <script type="application/ld+json">{$brandseo_jsonld nofilter}</script>
     {/if}
+
+    {if $brandseo_jsonld_faq}
+        <script type="application/ld+json">{$brandseo_jsonld_faq nofilter}</script>
+    {/if}
 {/block}
 
 {block name='page_content'}
