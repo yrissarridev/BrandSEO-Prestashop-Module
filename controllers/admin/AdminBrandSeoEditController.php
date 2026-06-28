@@ -2,6 +2,7 @@
 
 require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoHealthService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/Block/BrandSeoBlockRegistry.php';
 
 class AdminBrandSeoEditController extends ModuleAdminController
 {
@@ -34,6 +35,9 @@ class AdminBrandSeoEditController extends ModuleAdminController
         $idLang = (int) $this->context->language->id;
         $manufacturer = new Manufacturer((int) $landing->id_manufacturer, $idLang);
 
+        $blockRegistry = new BrandSeoBlockRegistry();
+        $availableBlocks = $blockRegistry->getAvailableBlocks();
+
         $healthService = new BrandSeoHealthService();
         $health = $healthService->calculateFromDashboardRow(array(
             'id_brandseo_landing' => (int) $landing->id,
@@ -53,6 +57,7 @@ class AdminBrandSeoEditController extends ModuleAdminController
             'landing' => $landing,
             'manufacturer' => $manufacturer,
             'health' => $health,
+            'available_blocks' => $availableBlocks,
             'id_lang' => $idLang,
             'languages' => Language::getLanguages(true),
             'back_url' => $this->context->link->getAdminLink('AdminBrandSeo'),

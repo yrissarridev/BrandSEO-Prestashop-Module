@@ -20,6 +20,18 @@
             </ul>
 
             <div class="brandseo-editor-health">
+                <p class="brandseo-editor-sidebar-title">Bloques disponibles</p>
+                <ul class="brandseo-editor-health-list">
+                    {foreach from=$available_blocks item=block}
+                        <li>
+                            <i class="{$block.icon|escape:'html':'UTF-8'}"></i>
+                            {$block.label|escape:'html':'UTF-8'}
+                        </li>
+                    {/foreach}
+                </ul>
+            </div>
+
+            <div class="brandseo-editor-health">
                 <p class="brandseo-editor-health-score">{$health.score|intval}%</p>
                 <p class="brandseo-editor-health-label">Brand Health · {$health.label|escape:'html':'UTF-8'}</p>
 
