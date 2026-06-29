@@ -2,18 +2,9 @@
 
 require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoProductService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoRelatedBrandService.php';
-
-use PrestaShop\PrestaShop\Core\Product\Search\ProductSearchContext;
-use PrestaShop\PrestaShop\Core\Product\Search\ProductSearchQuery;
-use PrestaShop\PrestaShop\Core\Product\Search\SortOrder;
-use PrestaShop\PrestaShop\Adapter\Manufacturer\ManufacturerProductSearchProvider;
-use PrestaShop\PrestaShop\Adapter\Presenter\Product\ProductListingPresenter;
-use PrestaShop\PrestaShop\Core\Product\ProductPresentationSettings;
-use PrestaShop\PrestaShop\Adapter\Product\PriceFormatter;
-use PrestaShop\PrestaShop\Adapter\Product\ProductColorsRetriever;
-use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
 
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
@@ -83,8 +74,8 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             }
         }
 
-        $listing = $this->getBrandseoNativeListing($manufacturer);
-        $brandProducts = $listing['products'];
+        $productService = new BrandSeoProductService();
+        $brandProducts = $productService->getLandingProducts((int) $landing->id_manufacturer, $idLang);
 
         $faqService = new BrandSeoFaqService();
         $brandFaqs = $faqService->getFaqsForFront((int) $landing->id, $idLang);
@@ -182,7 +173,6 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             'manufacturer' => $manufacturer,
             'hero_image' => $heroImage,
             'hero_logo' => $heroLogo,
-            'listing' => $listing,
             'brand_products' => $brandProducts,
             'brand_products_count' => count($brandProducts),
             'brand_faqs' => $brandFaqs,
@@ -198,86 +188,6 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         ));
 
         $this->setTemplate('module:brandseo/views/templates/front/landing.tpl');
-    }
-
-    /**
-     * Replica el pipeline nativo de ManufacturerController
-     * (ProductSearchContext -> ManufacturerProductSearchProvider -> ProductAssembler -> ProductListingPresenter)
-     * para obtener los productos de la marca exactamente como los devuelve PrestaShop
-     * en /marcas/{id_manufacturer}, listos para 'catalog/_partials/products.tpl'.
-     *
-     * @param Manufacturer $manufacturer
-     *
-     * @return array ['products' => array, 'pagination' => array]
-     */
-    private function getBrandseoNativeListing(Manufacturer $manufacturer)
-    {
-        $context = (new ProductSearchContext())
-            ->setIdShop($this->context->shop->id)
-            ->setIdLang($this->context->language->id)
-            ->setIdCurrency($this->context->currency->id)
-            ->setIdCustomer($this->context->customer ? $this->context->customer->id : null);
-
-        $resultsPerPage = (int) Configuration::get('PS_PRODUCTS_PER_PAGE');
-        if ($resultsPerPage <= 0) {
-            $resultsPerPage = 24;
-        }
-
-        $query = (new ProductSearchQuery())
-            ->setIdManufacturer((int) $manufacturer->id)
-            ->setSortOrder(new SortOrder('product', Tools::getProductsOrder('by'), Tools::getProductsOrder('way')))
-            ->setResultsPerPage($resultsPerPage)
-            ->setPage(1);
-
-        $provider = new ManufacturerProductSearchProvider(
-            $this->getTranslator(),
-            $manufacturer
-        );
-
-        $result = $provider->runQuery($context, $query);
-        $rawProducts = $result->getProducts();
-
-        $assembler = new ProductAssembler($this->context);
-
-        $settings = new ProductPresentationSettings();
-        $settings->catalog_mode = Configuration::isCatalogMode();
-        $settings->include_taxes = (new TaxConfiguration())->includeTaxes();
-        $settings->allow_add_variant_to_cart_from_listing = (int) Configuration::get('PS_ATTRIBUTE_CATEGORY_DISPLAY');
-        $settings->stock_management_enabled = Configuration::get('PS_STOCK_MANAGEMENT');
-        $settings->showPrices = Configuration::showPrices();
-        $settings->lastRemainingItems = Configuration::get('PS_LAST_QTIES');
-
-        $presenter = new ProductListingPresenter(
-            new ImageRetriever($this->context->link),
-            $this->context->link,
-            new PriceFormatter(),
-            new ProductColorsRetriever(),
-            $this->getTranslator()
-        );
-
-        $products = array();
-
-        foreach ($rawProducts as $rawProduct) {
-            $assembledProduct = $assembler->assembleProduct($rawProduct);
-            $products[] = $presenter->present($settings, $assembledProduct, $this->context->language);
-        }
-
-        $totalItems = (int) $result->getTotalProductsCount();
-
-        $pagination = array(
-            'total_items' => $totalItems,
-            'items_shown_from' => $totalItems ? 1 : 0,
-            'items_shown_to' => count($products),
-            'current_page' => 1,
-            'pages_count' => 1,
-            'pages' => array(),
-            'should_be_displayed' => false,
-        );
-
-        return array(
-            'products' => $products,
-            'pagination' => $pagination,
-        );
     }
 
     public function getTemplateVarPage()

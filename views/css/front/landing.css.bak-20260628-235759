@@ -157,6 +157,7 @@
         grid-template-columns:1fr;
     }
 }
+}
 
 
 .brandseo-front-content{
@@ -1252,14 +1253,7 @@ font-size:24px;
     gap: 22px !important;
 }
 
-.brandseo-prestashop-products .js-product-miniature-wrapper {
-    width: 100% !important;
-    max-width: none !important;
-    flex: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
+.brandseo-prestashop-products .js-product,
 .brandseo-prestashop-products article.product-miniature {
     width: 100% !important;
     max-width: none !important;
@@ -1363,67 +1357,5 @@ font-size:24px;
         width: 100% !important;
         flex: 0 0 100% !important;
         max-width: 100% !important;
-    }
-}
-
-/* BrandSEO: forzar productos en 4 columnas dentro del área 75% */
-.brandseo-v2-right .brandseo-products-v2,
-.brandseo-products-v2 {
-    width: 100% !important;
-}
-
-.brandseo-v2-right .brandseo-products-v2-grid,
-.brandseo-products-v2-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-    align-items: stretch !important;
-    width: 100% !important;
-}
-
-.brandseo-v2-right .brandseo-products-v2-grid > *,
-.brandseo-products-v2-grid > * {
-    width: auto !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-}
-
-.brandseo-v2-right .brandseo-product-v2-card,
-.brandseo-product-v2-card {
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-.brandseo-v2-right .brandseo-product-v2-image,
-.brandseo-product-v2-image {
-    height: 260px !important;
-}
-
-.brandseo-v2-right .brandseo-product-v2-image img,
-.brandseo-product-v2-image img {
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important;
-}
-
-@media (max-width: 1200px) {
-    .brandseo-v2-right .brandseo-products-v2-grid,
-    .brandseo-products-v2-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (max-width: 900px) {
-    .brandseo-v2-right .brandseo-products-v2-grid,
-    .brandseo-products-v2-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (max-width: 560px) {
-    .brandseo-v2-right .brandseo-products-v2-grid,
-    .brandseo-products-v2-grid {
-        grid-template-columns: 1fr !important;
     }
 }
