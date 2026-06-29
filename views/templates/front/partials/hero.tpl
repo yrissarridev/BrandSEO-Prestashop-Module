@@ -19,28 +19,16 @@
             </p>
         {/if}
 
+        {if $landing->region}
         <div class="brandseo-front-hero-stats">
 
-            <div class="brandseo-front-hero-stat">
-                <strong>{$brand_products_count}</strong>
-                <span>Productos</span>
-            </div>
-
-            {if $landing->country}
-            <div class="brandseo-front-hero-stat">
-                <strong>{$landing->country|escape:'html':'UTF-8'}</strong>
-                <span>País</span>
-            </div>
-            {/if}
-
-            {if $landing->region}
             <div class="brandseo-front-hero-stat">
                 <strong>{$landing->region|escape:'html':'UTF-8'}</strong>
                 <span>Región</span>
             </div>
-            {/if}
 
         </div>
+        {/if}
 
         <a class="brandseo-front-hero-button" href="#brand-products">
             Descubrir vinos

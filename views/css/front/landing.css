@@ -37,9 +37,9 @@
 }
 
 .brandseo-front-hero p {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1.6;
-    margin: 0 auto;
+    margin: 20px auto;
     max-width: 780px;
 }
 
@@ -973,7 +973,7 @@ font-size:24px;
 
 .brandseo-v2-container {
     width: 100% !important;
-    max-width: 1280px !important;
+    max-width: 100%;
     margin: 0 auto !important;
     padding: 0 24px !important;
 }
@@ -1247,17 +1247,23 @@ font-size:24px;
 }
 
 .brandseo-prestashop-products {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 22px !important;
+    display: block !important;
+}
+
+.brandseo-prestashop-products .products.row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    margin-left: -11px !important;
+    margin-right: -11px !important;
 }
 
 .brandseo-prestashop-products .js-product-miniature-wrapper {
-    width: 100% !important;
-    max-width: none !important;
-    flex: none !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    width: 25% !important;
+    max-width: 25% !important;
+    flex: 0 0 25% !important;
+    padding-left: 11px !important;
+    padding-right: 11px !important;
+    margin-bottom: 22px !important;
 }
 
 .brandseo-prestashop-products article.product-miniature {
@@ -1266,20 +1272,26 @@ font-size:24px;
 }
 
 @media (max-width: 1180px) {
-    .brandseo-prestashop-products {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    .brandseo-prestashop-products .js-product-miniature-wrapper {
+        width: 33.333% !important;
+        max-width: 33.333% !important;
+        flex: 0 0 33.333% !important;
     }
 }
 
 @media (max-width: 800px) {
-    .brandseo-prestashop-products {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    .brandseo-prestashop-products .js-product-miniature-wrapper {
+        width: 50% !important;
+        max-width: 50% !important;
+        flex: 0 0 50% !important;
     }
 }
 
 @media (max-width: 560px) {
-    .brandseo-prestashop-products {
-        grid-template-columns: 1fr !important;
+    .brandseo-prestashop-products .js-product-miniature-wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
     }
 }
 
@@ -1363,67 +1375,5 @@ font-size:24px;
         width: 100% !important;
         flex: 0 0 100% !important;
         max-width: 100% !important;
-    }
-}
-
-/* BrandSEO: forzar productos en 4 columnas dentro del área 75% */
-.brandseo-v2-right .brandseo-products-v2,
-.brandseo-products-v2 {
-    width: 100% !important;
-}
-
-.brandseo-v2-right .brandseo-products-v2-grid,
-.brandseo-products-v2-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-    gap: 24px !important;
-    align-items: stretch !important;
-    width: 100% !important;
-}
-
-.brandseo-v2-right .brandseo-products-v2-grid > *,
-.brandseo-products-v2-grid > * {
-    width: auto !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-}
-
-.brandseo-v2-right .brandseo-product-v2-card,
-.brandseo-product-v2-card {
-    width: 100% !important;
-    max-width: 100% !important;
-}
-
-.brandseo-v2-right .brandseo-product-v2-image,
-.brandseo-product-v2-image {
-    height: 260px !important;
-}
-
-.brandseo-v2-right .brandseo-product-v2-image img,
-.brandseo-product-v2-image img {
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important;
-}
-
-@media (max-width: 1200px) {
-    .brandseo-v2-right .brandseo-products-v2-grid,
-    .brandseo-products-v2-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (max-width: 900px) {
-    .brandseo-v2-right .brandseo-products-v2-grid,
-    .brandseo-products-v2-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-@media (max-width: 560px) {
-    .brandseo-v2-right .brandseo-products-v2-grid,
-    .brandseo-products-v2-grid {
-        grid-template-columns: 1fr !important;
     }
 }
