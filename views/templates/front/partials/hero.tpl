@@ -35,7 +35,7 @@
         {/if}
 
         <a class="brandseo-front-hero-button" href="#brand-products">
-            Descubrir vinos
+            Ver productos
         </a>
 
     </div>
