@@ -51,6 +51,10 @@ class Brandseo extends Module
 
     public function hookDisplayBackOfficeHeader()
     {
+        if (!Hook::isModuleRegisteredOnHook($this, 'actionDispatcherBefore', $this->context->shop->id)) {
+            $this->registerHook('actionDispatcherBefore');
+        }
+
         $controller = Tools::getValue('controller');
 
         if (!in_array($controller, array('AdminBrandSeo', 'AdminBrandSeoEdit'))) {
@@ -150,11 +154,11 @@ class Brandseo extends Module
 
     public function hookActionDispatcherBefore($params)
     {
-        if (!isset($params['controller_class'])) {
+        if (empty($params['controller_type']) || $params['controller_type'] !== Dispatcher::FC_FRONT) {
             return;
         }
 
-        if (strtolower($params['controller_class']) !== 'manufacturer') {
+        if (!empty($params['is_module'])) {
             return;
         }
 
