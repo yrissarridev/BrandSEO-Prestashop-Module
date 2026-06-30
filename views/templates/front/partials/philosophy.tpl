@@ -9,7 +9,6 @@
 
 {if $landing->website || $landing->instagram || $landing->facebook || $landing->youtube}
 <section class="brandseo-side-card brandseo-side-social">
-    <h2>Encuéntranos en</h2>
     <div class="brandseo-social-links">
         {if $landing->website}
             <a href="{$landing->website|escape:'html':'UTF-8'}" target="_blank" rel="noopener noreferrer" class="brandseo-social-link">
