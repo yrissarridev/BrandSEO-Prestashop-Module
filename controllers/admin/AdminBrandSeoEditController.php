@@ -16,6 +16,37 @@ class AdminBrandSeoEditController extends ModuleAdminController
         parent::__construct();
     }
 
+    public function postProcess()
+    {
+        parent::postProcess();
+
+        if (!Tools::isSubmit('submitBrandSeoLanding')
+            && !Tools::isSubmit('submitBrandSeoHeroImage')
+            && !Tools::isSubmit('submitBrandSeoHeroLogo')
+        ) {
+            return;
+        }
+
+        $idLanding = (int) Tools::getValue('id_brandseo_landing');
+        $landing = new BrandSeoLanding($idLanding);
+
+        if (!Validate::isLoadedObject($landing)) {
+            return;
+        }
+
+        if (Tools::isSubmit('submitBrandSeoLanding')) {
+            $this->processSaveBrandSeoLanding($landing);
+        }
+
+        if (Tools::isSubmit('submitBrandSeoHeroImage')) {
+            $this->processUploadHeroImage($landing);
+        }
+
+        if (Tools::isSubmit('submitBrandSeoHeroLogo')) {
+            $this->processUploadHeroLogo($landing);
+        }
+    }
+
     public function initContent()
     {
         parent::initContent();
@@ -32,16 +63,18 @@ class AdminBrandSeoEditController extends ModuleAdminController
             Tools::redirectAdmin($this->context->link->getAdminLink('AdminBrandSeo'));
         }
 
-        if (Tools::isSubmit('submitBrandSeoLanding')) {
-            $this->processSaveBrandSeoLanding($landing);
-        }
-
-        if (Tools::isSubmit('submitBrandSeoHeroImage')) {
-            $this->processUploadHeroImage($landing);
-        }
-
-        if (Tools::isSubmit('submitBrandSeoHeroLogo')) {
-            $this->processUploadHeroLogo($landing);
+        // Verify the admin's current shop context has access to this landing's manufacturer.
+        // This prevents an admin from one shop accessing landings belonging to another shop.
+        $allowedShopIds = array_map('intval', Shop::getContextListShopID());
+        if (!empty($allowedShopIds)) {
+            $shopCheck = (int) Db::getInstance()->getValue(
+                'SELECT COUNT(*) FROM `'._DB_PREFIX_.'manufacturer_shop`
+                 WHERE id_manufacturer = '.(int) $landing->id_manufacturer.'
+                 AND id_shop IN ('.implode(',', $allowedShopIds).')'
+            );
+            if (!$shopCheck) {
+                Tools::redirectAdmin($this->context->link->getAdminLink('AdminBrandSeo'));
+            }
         }
 
         $idLang = (int) $this->context->language->id;

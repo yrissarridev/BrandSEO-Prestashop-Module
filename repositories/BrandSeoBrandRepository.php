@@ -6,8 +6,8 @@ class BrandSeoBrandRepository
     {
         $idLang = (int) Context::getContext()->language->id;
 
-        return Db::getInstance()->executeS('
-            SELECT 
+        $result = Db::getInstance()->executeS('
+            SELECT
                 m.id_manufacturer,
                 m.name,
                 m.active,
@@ -28,7 +28,7 @@ class BrandSeoBrandRepository
                 ll.store_opinion,
                 MAX(CASE WHEN media.id_brandseo_media IS NULL THEN 0 ELSE 1 END) AS has_hero_image
             FROM `'._DB_PREFIX_.'manufacturer` m
-            LEFT JOIN `'._DB_PREFIX_.'product` p 
+            LEFT JOIN `'._DB_PREFIX_.'product` p
                 ON p.id_manufacturer = m.id_manufacturer
             LEFT JOIN `'._DB_PREFIX_.'brandseo_landing` l
                 ON l.id_manufacturer = m.id_manufacturer
@@ -44,5 +44,6 @@ class BrandSeoBrandRepository
             GROUP BY m.id_manufacturer
             ORDER BY total_products DESC, m.name ASC
         ');
+        return ($result !== false) ? $result : array();
     }
 }

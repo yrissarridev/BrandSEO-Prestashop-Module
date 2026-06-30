@@ -54,6 +54,11 @@ class BrandSeoUploader
         $relativePath = 'uploads/hero/'.$fileName;
         $absolutePath = _PS_MODULE_DIR_.'brandseo/'.$relativePath;
 
+        $dir = dirname($absolutePath);
+        if (!is_dir($dir) || !is_writable($dir)) {
+            return array(false, 'El directorio de destino no existe o no tiene permisos de escritura.');
+        }
+
         if (!move_uploaded_file($file['tmp_name'], $absolutePath)) {
             return array(false, 'No se pudo guardar la imagen.');
         }
@@ -78,7 +83,9 @@ class BrandSeoUploader
         }
 
         if (!$media->add()) {
-            @unlink($absolutePath);
+            if (file_exists($absolutePath)) {
+                unlink($absolutePath);
+            }
             return array(false, 'No se pudo registrar la imagen.');
         }
 

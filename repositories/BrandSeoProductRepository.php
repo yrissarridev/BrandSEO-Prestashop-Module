@@ -4,8 +4,8 @@ class BrandSeoProductRepository
 {
     public function getProductsByManufacturer($idManufacturer, $idLang, $limit = 12)
     {
-        return Db::getInstance()->executeS('
-            SELECT 
+        $result = Db::getInstance()->executeS('
+            SELECT
                 p.id_product,
                 pl.name,
                 pl.link_rewrite,
@@ -23,5 +23,6 @@ class BrandSeoProductRepository
             ORDER BY p.date_add DESC
             LIMIT '.(int) $limit.'
         ');
+        return ($result !== false) ? $result : array();
     }
 }

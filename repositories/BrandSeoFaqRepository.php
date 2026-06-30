@@ -4,8 +4,8 @@ class BrandSeoFaqRepository
 {
     public function getByLanding($idLanding, $idLang)
     {
-        return Db::getInstance()->executeS('
-            SELECT 
+        $result = Db::getInstance()->executeS('
+            SELECT
                 f.id_brandseo_faq,
                 f.id_brandseo_landing,
                 f.position,
@@ -19,5 +19,6 @@ class BrandSeoFaqRepository
             WHERE f.id_brandseo_landing = '.(int) $idLanding.'
             ORDER BY f.position ASC, f.id_brandseo_faq ASC
         ');
+        return ($result !== false) ? $result : array();
     }
 }

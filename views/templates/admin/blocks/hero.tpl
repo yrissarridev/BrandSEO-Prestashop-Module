@@ -59,15 +59,15 @@
             </div>
 
             {foreach from=$languages item=lang}
-                {assign var=id_lang value=$lang.id_lang}
+                {assign var=loop_lang_id value=$lang.id_lang}
                 <div class="brandseo-hero-option-group">
                     <label>Título del Hero · {$lang.name|escape:'html':'UTF-8'}</label>
-                    <input type="text" id="brandseo-title-{$id_lang|intval}" name="title_{$id_lang|intval}" value="{$landing->title[$id_lang]|escape:'html':'UTF-8'}">
+                    <input type="text" id="brandseo-title-{$loop_lang_id|intval}" name="title_{$loop_lang_id|intval}" value="{$landing->title[$loop_lang_id]|escape:'html':'UTF-8'}">
                 </div>
 
                 <div class="brandseo-hero-option-group">
                     <label>Resumen / Introducción · {$lang.name|escape:'html':'UTF-8'}</label>
-                    <textarea id="brandseo-excerpt-{$id_lang|intval}" name="excerpt_{$id_lang|intval}" rows="4">{$landing->excerpt[$id_lang]|escape:'html':'UTF-8'}</textarea>
+                    <textarea id="brandseo-excerpt-{$loop_lang_id|intval}" name="excerpt_{$loop_lang_id|intval}" rows="4">{$landing->excerpt[$loop_lang_id]|escape:'html':'UTF-8'}</textarea>
                 </div>
             {/foreach}
 

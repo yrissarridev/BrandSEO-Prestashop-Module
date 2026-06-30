@@ -51,10 +51,6 @@ class Brandseo extends Module
 
     public function hookDisplayBackOfficeHeader()
     {
-        if (!Hook::isModuleRegisteredOnHook($this, 'actionDispatcherBefore', $this->context->shop->id)) {
-            $this->registerHook('actionDispatcherBefore');
-        }
-
         $controller = Tools::getValue('controller');
 
         if (!in_array($controller, array('AdminBrandSeo', 'AdminBrandSeoEdit'))) {

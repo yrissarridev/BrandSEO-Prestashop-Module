@@ -19,6 +19,7 @@ use PrestaShop\PrestaShop\Adapter\Image\ImageRetriever;
 class BrandseoLandingModuleFrontController extends ModuleFrontController
 {
     protected $previewMode = false;
+    protected $landing = null;
 
     public function setMedia()
     {
@@ -39,32 +40,42 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         $idLang = (int) $this->context->language->id;
 
         if (!$slug) {
-            Tools::redirect('index.php?controller=404');
+            header('HTTP/1.1 404 Not Found');
+            $this->setTemplate('errors/404');
+            return;
         }
 
-        $whereStatus = $this->previewMode ? '' : 'AND status = "published" AND active = 1';
+        $whereStatus = $this->previewMode ? '' : "AND status = 'published' AND active = 1";
 
         $idLanding = (int) Db::getInstance()->getValue('
             SELECT id_brandseo_landing
             FROM `'._DB_PREFIX_.'brandseo_landing`
-            WHERE slug = "'.$slug.'"
+            WHERE slug = \''.$slug.'\'
             '.$whereStatus.'
         ');
 
         if (!$idLanding) {
-            Tools::redirect('index.php?controller=404');
+            header('HTTP/1.1 404 Not Found');
+            $this->setTemplate('errors/404');
+            return;
         }
 
         $landing = new BrandSeoLanding($idLanding, $idLang);
 
         if (!Validate::isLoadedObject($landing)) {
-            Tools::redirect('index.php?controller=404');
+            header('HTTP/1.1 404 Not Found');
+            $this->setTemplate('errors/404');
+            return;
         }
+
+        $this->landing = $landing;
 
         $manufacturer = new Manufacturer((int) $landing->id_manufacturer, $idLang);
 
         if (!Validate::isLoadedObject($manufacturer)) {
-            Tools::redirect('index.php?controller=404');
+            header('HTTP/1.1 404 Not Found');
+            $this->setTemplate('errors/404');
+            return;
         }
 
         $blockSettingsService = new BrandSeoBlockSettingsService();
@@ -289,32 +300,15 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
     {
         $page = parent::getTemplateVarPage();
 
-        $slug = pSQL(Tools::getValue('slug'));
-        $idLang = (int) $this->context->language->id;
-        $whereStatus = $this->previewMode ? '' : 'AND l.status = "published" AND l.active = 1';
-
-        $row = Db::getInstance()->getRow('
-            SELECT 
-                l.slug,
-                l.noindex,
-                ll.h1,
-                ll.meta_title,
-                ll.meta_description,
-                ll.excerpt
-            FROM `'._DB_PREFIX_.'brandseo_landing` l
-            LEFT JOIN `'._DB_PREFIX_.'brandseo_landing_lang` ll
-                ON ll.id_brandseo_landing = l.id_brandseo_landing
-                AND ll.id_lang = '.(int) $idLang.'
-            WHERE l.slug = "'.$slug.'"
-            '.$whereStatus.'
-        ');
-
-        if ($row) {
-            $page['meta']['title'] = !empty($row['meta_title']) ? $row['meta_title'] : $row['h1'];
-            $page['meta']['description'] = !empty($row['meta_description']) ? $row['meta_description'] : $row['excerpt'];
-            $page['canonical'] = $this->context->link->getBaseLink().'marcas/'.$row['slug'];
-            $page['robots'] = (!empty($row['noindex']) || $this->previewMode) ? 'noindex,follow' : 'index,follow';
+        if (!isset($this->landing) || !Validate::isLoadedObject($this->landing)) {
+            return $page;
         }
+
+        $landing = $this->landing;
+        $page['meta']['title'] = !empty($landing->meta_title) ? $landing->meta_title : $landing->h1;
+        $page['meta']['description'] = !empty($landing->meta_description) ? $landing->meta_description : $landing->excerpt;
+        $page['canonical'] = $this->context->link->getBaseLink().'marcas/'.$landing->slug;
+        $page['robots'] = (!empty($landing->noindex) || $this->previewMode) ? 'noindex,follow' : 'index,follow';
 
         return $page;
     }

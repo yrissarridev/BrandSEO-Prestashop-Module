@@ -4,8 +4,8 @@ class BrandSeoRelatedBrandRepository
 {
     public function getRelatedBrands($excludeManufacturerId, $idLang, $limit = 6)
     {
-        return Db::getInstance()->executeS('
-            SELECT 
+        $result = Db::getInstance()->executeS('
+            SELECT
                 m.id_manufacturer,
                 m.name,
                 l.slug,
@@ -24,5 +24,6 @@ class BrandSeoRelatedBrandRepository
             ORDER BY total_products DESC, m.name ASC
             LIMIT '.(int) $limit.'
         ');
+        return ($result !== false) ? $result : array();
     }
 }

@@ -4,8 +4,8 @@ class BrandSeoMediaRepository
 {
     public function getByLandingAndBlock($idLanding, $block, $idLang)
     {
-        return Db::getInstance()->executeS('
-            SELECT 
+        $result = Db::getInstance()->executeS('
+            SELECT
                 m.id_brandseo_media,
                 m.id_brandseo_landing,
                 m.block,
@@ -28,5 +28,6 @@ class BrandSeoMediaRepository
             AND m.block = "'.pSQL($block).'"
             ORDER BY m.position ASC, m.id_brandseo_media ASC
         ');
+        return ($result !== false) ? $result : array();
     }
 }
