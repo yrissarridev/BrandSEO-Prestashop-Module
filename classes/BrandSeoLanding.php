@@ -81,4 +81,16 @@ class BrandSeoLanding extends ObjectModel
              AND type = "brand"'
         );
     }
+
+    public static function getRedirectSlug($idManufacturer)
+    {
+        return Db::getInstance()->getValue(
+            'SELECT slug
+             FROM `'._DB_PREFIX_.'brandseo_landing`
+             WHERE id_manufacturer = '.(int) $idManufacturer.'
+             AND status = "published"
+             AND active = 1
+             AND redirect_enabled = 1'
+        );
+    }
 }

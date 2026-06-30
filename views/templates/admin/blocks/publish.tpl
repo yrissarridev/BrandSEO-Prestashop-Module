@@ -4,7 +4,7 @@
     <div class="form-group">
         <label>Slug</label>
         <input type="text" id="brandseo-slug" name="slug" value="{$landing->slug|escape:'html':'UTF-8'}">
-        <p class="help-block">URL futura: /brand/{$landing->slug|escape:'html':'UTF-8'}</p>
+        <p class="help-block">URL futura: /marcas/{$landing->slug|escape:'html':'UTF-8'}</p>
     </div>
 
     <div class="form-group">

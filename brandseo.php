@@ -38,7 +38,8 @@ class Brandseo extends Module
             && BrandSeoTabInstaller::install($this->name)
             && BrandSeoDirectoryInstaller::install(__DIR__)
             && $this->registerHook('displayBackOfficeHeader')
-            && $this->registerHook('moduleRoutes');
+            && $this->registerHook('moduleRoutes')
+            && $this->registerHook('actionDispatcherBefore');
     }
 
     public function uninstall()
@@ -145,5 +146,33 @@ class Brandseo extends Module
     public function getContent()
     {
         Tools::redirectAdmin($this->context->link->getAdminLink('AdminBrandSeo'));
+    }
+
+    public function hookActionDispatcherBefore($params)
+    {
+        if (!isset($params['controller_class'])) {
+            return;
+        }
+
+        if (strtolower($params['controller_class']) !== 'manufacturer') {
+            return;
+        }
+
+        $idManufacturer = (int) Tools::getValue('id_manufacturer');
+
+        if (!$idManufacturer) {
+            return;
+        }
+
+        $slug = BrandSeoLanding::getRedirectSlug($idManufacturer);
+
+        if (!$slug) {
+            return;
+        }
+
+        $url = $this->context->link->getBaseLink().'marcas/'.$slug;
+        header('HTTP/1.1 301 Moved Permanently');
+        header('Location: '.$url);
+        exit;
     }
 }
