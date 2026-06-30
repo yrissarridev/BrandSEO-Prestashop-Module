@@ -40,7 +40,7 @@
 
             <div class="brandseo-google-preview">
                 <span class="brandseo-google-url" id="brandseo-google-url">
-                    tienda.vinofilos.es/brand/{$landing->slug|escape:'html':'UTF-8'}
+                    marcas/{$landing->slug|escape:'html':'UTF-8'}
                 </span>
 
                 <h4 id="brandseo-google-title">
@@ -60,7 +60,6 @@
                 </p>
             </div>
 
-
             <div class="brandseo-og-preview">
                 <div class="brandseo-og-image">
                     {if $hero_background_url}
@@ -71,7 +70,7 @@
                 </div>
 
                 <div class="brandseo-og-content">
-                    <span class="brandseo-og-domain">tienda.vinofilos.es</span>
+                    <span class="brandseo-og-domain">marcas/{$landing->slug|escape:'html':'UTF-8'}</span>
 
                     <h4 id="brandseo-og-title">
                         {if $landing->meta_title[$id_lang]}
@@ -89,32 +88,22 @@
                         {/if}
                     </p>
                 </div>
-            
-<div class="brandseo-seo-audit">
+            </div>
 
-    <h4>SEO Audit</h4>
+            <div class="brandseo-seo-audit">
+                <h4>SEO Audit</h4>
 
-    <ul>
+                <ul>
+                    <li id="audit-title">⚪ Meta title</li>
+                    <li id="audit-description">⚪ Meta description</li>
+                    <li id="audit-hero">⚪ Imagen Hero</li>
+                    <li id="audit-excerpt">⚪ Introducción</li>
+                </ul>
 
-        <li id="audit-title">⚪ Meta title</li>
-
-        <li id="audit-description">⚪ Meta description</li>
-
-        <li id="audit-hero">⚪ Imagen Hero</li>
-
-        <li id="audit-excerpt">⚪ Introducción</li>
-
-    </ul>
-
-    <div class="brandseo-seo-score">
-
-        <strong id="brandseo-seo-score">0%</strong>
-
-    </div>
-
-</div>
-
-</div>
+                <div class="brandseo-seo-score">
+                    <strong id="brandseo-seo-score">0%</strong>
+                </div>
+            </div>
         </div>
     {/foreach}
 </section>

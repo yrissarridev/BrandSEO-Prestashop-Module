@@ -60,17 +60,15 @@
 
             {foreach from=$languages item=lang}
                 {assign var=id_lang value=$lang.id_lang}
-                {if $id_lang == $id_lang}
-                    <div class="brandseo-hero-option-group">
-                        <label>Título del Hero</label>
-                        <input type="text" id="brandseo-title-{$id_lang|intval}" name="title_{$id_lang|intval}" value="{$landing->title[$id_lang]|escape:'html':'UTF-8'}">
-                    </div>
+                <div class="brandseo-hero-option-group">
+                    <label>Título del Hero · {$lang.name|escape:'html':'UTF-8'}</label>
+                    <input type="text" id="brandseo-title-{$id_lang|intval}" name="title_{$id_lang|intval}" value="{$landing->title[$id_lang]|escape:'html':'UTF-8'}">
+                </div>
 
-                    <div class="brandseo-hero-option-group">
-                        <label>Resumen / Introducción</label>
-                        <textarea id="brandseo-excerpt-{$id_lang|intval}" name="excerpt_{$id_lang|intval}" rows="4">{$landing->excerpt[$id_lang]|escape:'html':'UTF-8'}</textarea>
-                    </div>
-                {/if}
+                <div class="brandseo-hero-option-group">
+                    <label>Resumen / Introducción · {$lang.name|escape:'html':'UTF-8'}</label>
+                    <textarea id="brandseo-excerpt-{$id_lang|intval}" name="excerpt_{$id_lang|intval}" rows="4">{$landing->excerpt[$id_lang]|escape:'html':'UTF-8'}</textarea>
+                </div>
             {/foreach}
 
             <div class="brandseo-hero-option-group">

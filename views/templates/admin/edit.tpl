@@ -23,18 +23,6 @@
             </ul>
 
             <div class="brandseo-editor-health">
-                <p class="brandseo-editor-sidebar-title">Bloques disponibles</p>
-                <ul class="brandseo-editor-health-list">
-                    {foreach from=$available_blocks item=block}
-                        <li>
-                            <i class="{$block.icon|escape:'html':'UTF-8'}"></i>
-                            {$block.label|escape:'html':'UTF-8'}
-                        </li>
-                    {/foreach}
-                </ul>
-            </div>
-
-            <div class="brandseo-editor-health">
                 <p class="brandseo-editor-health-score">{$health.score|intval}%</p>
                 <p class="brandseo-editor-health-label">Brand Health · {$health.label|escape:'html':'UTF-8'}</p>
 
@@ -55,28 +43,7 @@
                     </div>
                 {/if}
 
-                
-<div class="brandseo-completion-panel">
-
-    <h4>Checklist</h4>
-
-    <ul>
-
-        {foreach from=$health.checklist item=item}
-
-            <li class="brandseo-check-{$item.status|escape:'html':'UTF-8'}">
-
-                {$item.icon|escape:'html':'UTF-8'} {$item.label|escape:'html':'UTF-8'}
-
-            </li>
-
-        {/foreach}
-
-    </ul>
-
-</div>
-
-{if $health.groups}
+                {if $health.groups}
                     <div class="brandseo-health-groups">
                         {foreach from=$health.groups key=group item=value}
                             <div class="brandseo-health-group">

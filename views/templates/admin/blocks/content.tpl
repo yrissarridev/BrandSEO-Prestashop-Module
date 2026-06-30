@@ -8,18 +8,8 @@
             <h4>Contenido · {$lang.name|escape:'html':'UTF-8'}</h4>
 
             <div class="form-group">
-                <label>Título</label>
-                <input type="text" id="brandseo-title-{$id_lang|intval}" name="title_{$id_lang|intval}" value="{$landing->title[$id_lang]|escape:'html':'UTF-8'}">
-            </div>
-
-            <div class="form-group">
                 <label>H1</label>
                 <input type="text" name="h1_{$id_lang|intval}" value="{$landing->h1[$id_lang]|escape:'html':'UTF-8'}">
-            </div>
-
-            <div class="form-group">
-                <label>Meta title</label>
-                <input type="text" name="meta_title_{$id_lang|intval}" value="{$landing->meta_title[$id_lang]|escape:'html':'UTF-8'}">
             </div>
 
             <div class="form-group">
