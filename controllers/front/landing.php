@@ -4,6 +4,7 @@ require_once _PS_MODULE_DIR_.'brandseo/classes/BrandSeoLanding.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoMediaService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoFaqService.php';
 require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoRelatedBrandService.php';
+require_once _PS_MODULE_DIR_.'brandseo/services/BrandSeoBlockSettingsService.php';
 
 use PrestaShop\PrestaShop\Core\Product\Search\ProductSearchContext;
 use PrestaShop\PrestaShop\Core\Product\Search\ProductSearchQuery;
@@ -65,6 +66,9 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
         if (!Validate::isLoadedObject($manufacturer)) {
             Tools::redirect('index.php?controller=404');
         }
+
+        $blockSettingsService = new BrandSeoBlockSettingsService();
+        $heroSettings = $blockSettingsService->getSettings((int) $landing->id, 'hero');
 
         $mediaService = new BrandSeoMediaService();
         $heroMedia = $mediaService->getMediaForBlock((int) $landing->id, 'hero', $idLang);
@@ -182,6 +186,7 @@ class BrandseoLandingModuleFrontController extends ModuleFrontController
             'manufacturer' => $manufacturer,
             'hero_image' => $heroImage,
             'hero_logo' => $heroLogo,
+            'hero_settings' => $heroSettings,
             'listing' => $listing,
             'brand_products' => $brandProducts,
             'brand_products_count' => count($brandProducts),

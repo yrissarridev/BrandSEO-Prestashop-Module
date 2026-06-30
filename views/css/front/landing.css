@@ -462,13 +462,26 @@ font-size:24px;
 
 .brandseo-front-hero{
     position:relative;
-    min-height:640px;
+    min-height:560px;
     background-position:center;
     background-size:cover;
     display:flex;
     align-items:center;
     justify-content:center;
 }
+
+/* Tamaños */
+.brandseo-front-hero--small  { min-height: 360px; }
+.brandseo-front-hero--medium { min-height: 560px; }
+.brandseo-front-hero--large  { min-height: 760px; }
+
+/* Alineación */
+.brandseo-front-hero--left   { justify-content: flex-start; text-align: left; }
+.brandseo-front-hero--center { justify-content: center;     text-align: center; }
+.brandseo-front-hero--right  { justify-content: flex-end;   text-align: right; }
+
+.brandseo-front-hero--left   .brandseo-front-hero-inner { padding-left: 48px; }
+.brandseo-front-hero--right  .brandseo-front-hero-inner { padding-right: 48px; }
 
 .brandseo-front-hero-overlay{
     position:absolute;
@@ -505,6 +518,7 @@ font-size:24px;
     margin:28px auto 0;
     font-size:20px;
     line-height:1.8;
+    color:#fff;
     opacity:.96;
 }
 

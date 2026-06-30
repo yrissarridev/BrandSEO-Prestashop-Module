@@ -1,6 +1,10 @@
-<section class="brandseo-front-hero"{if $hero_image} style="background-image:url('{$hero_image|escape:'html':'UTF-8'}');"{/if}>
+{assign var=hero_height value=$hero_settings.height|default:'medium'}
+{assign var=hero_align  value=$hero_settings.align|default:'center'}
+{assign var=hero_overlay value=$hero_settings.overlay|default:48}
 
-    <div class="brandseo-front-hero-overlay"></div>
+<section class="brandseo-front-hero brandseo-front-hero--{$hero_height|escape:'html':'UTF-8'} brandseo-front-hero--{$hero_align|escape:'html':'UTF-8'}"{if $hero_image} style="background-image:url('{$hero_image|escape:'html':'UTF-8'}');"{/if}>
+
+    <div class="brandseo-front-hero-overlay" style="opacity:{math equation='x/100' x=$hero_overlay};"></div>
 
     <div class="brandseo-front-hero-inner">
 
